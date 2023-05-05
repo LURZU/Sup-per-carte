@@ -11,12 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('matiere', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-            $table->string('name')->unique();
-            $table->foreignId('id_prof')->reference('id')->on('prof');
-        });
+        DB::table('matiere')->insert([
+            [
+                'label' => 'Biologie',
+                'number_chapitre' => 6,
+            ],
+            [
+                'label' => 'Biochimie',
+                'number_chapitre' => 4,
+            ]
+        ]);
     }
 
     /**
@@ -24,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('matiere');
+        DB::table('matiere')->delete();
     }
 };

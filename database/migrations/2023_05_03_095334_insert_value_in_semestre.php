@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        DB::table('stats')->insert([
+        DB::table('card_semestre')->insert([
             [
-                'total_connect' => 900000,
-                'total_card' => 120,
-                'current_cardnb' => 2,
-                'id_student' => 1,
-            ]
+                'label' => 'Semestre 1',
+            ],
+            [
+                'label' => 'Semestre 2',
+            ],
+
         ]);
     }
 
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        DB::table('class')->delete();
+        DB::table('card_semestre')->delete();
     }
 };

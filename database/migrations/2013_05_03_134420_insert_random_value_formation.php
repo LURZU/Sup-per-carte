@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        DB::table('public_card')->insert([
+        DB::table('formation')->insert([
             [
-                'id_prof' => 1,
-                'id_matiere' => 1,
-                'question' => 'Quelle est la capitale de la France ?',
-                'answer' => 'Paris',
-                'id_student' => 1,
-                'is_public' => true,
+                'label' => 'Prepa pass',
+            ],
+            [
+                'label' => 'Première santé',
             ]
         ]);
     }
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        DB::table('public_card')->delete();
+        DB::table('formation')->delete();
     }
 };

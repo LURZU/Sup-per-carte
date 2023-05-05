@@ -11,15 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        DB::table('students')->insert([
+        DB::table('user_status_card')->insert([
             [
-                'email' => 'tom@studiodefacto.com',
-                'user_id' => 3,
-                'first_name' => 'Tom',
-                'last_name' => 'DEFACTO',
-                'class_id' => 1,
-                'filliere' => 'Sup MATH'
-            ]
+                'user_id' => 2,
+                'status_card_id' => 1,
+                'card_id' => 1,
+            ],
+            [
+                'user_id' => 2,
+                'status_card_id' => 3,
+                'card_id' => 2,
+            ],
+
         ]);
     }
 
@@ -28,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        DB::table('students')->delete();
+        DB::table('user_status_card')->delete();
     }
 };

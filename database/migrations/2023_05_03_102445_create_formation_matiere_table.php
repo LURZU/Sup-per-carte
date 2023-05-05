@@ -11,15 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('prof', function (Blueprint $table) {
-            $table->id();
-            $table->string('email')->unique();
-            $table->string('last_name');
-            $table->string('first_name');
-            $table->string('civil_status');
+        Schema::create('formation_matiere', function (Blueprint $table) {
+            $table->foreignId('formation_id')->reference('id')->on('formation');
             $table->foreignId('matiere_id')->reference('id')->on('matiere');
-            $table->foreignId('user_id')->reference('id')->on('users');
-            $table->timestamps();
         });
     }
 
@@ -28,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('prof');
+        Schema::dropIfExists('formation_matiere');
     }
 };

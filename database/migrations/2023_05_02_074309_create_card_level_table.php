@@ -11,16 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        DB::table('prof')->insert([
-            [
-                'user_id' => '4',
-                'first_name' => 'John',
-                'last_name' => 'Doe',
-                'civil_status' => 'M',
-                'email' => 'johndoe@studiodefacto.com',
-                'matiere_id' => 1
-            ]
-        ]);
+        Schema::create('card_level', function (Blueprint $table) {
+            $table->id();
+            $table->string('label')->unique();
+        });
     }
 
     /**
@@ -28,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        DB::table('prof')->delete();
+        Schema::dropIfExists('card_level');
     }
 };

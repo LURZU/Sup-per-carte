@@ -13,8 +13,8 @@ return new class extends Migration
     {
         DB::table('student_card_fav')->insert([
             [
-                'id_student' => 1,
-                'id_public_card' => 1,
+                'user_id' => 2,
+                'card_id' => 1,
             ]
         ]);
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        DB::table('class_matiere')->delete();
+        DB::table('student_card_fav')->delete();
     }
 };

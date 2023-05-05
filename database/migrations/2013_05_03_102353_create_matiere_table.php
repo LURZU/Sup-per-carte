@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        DB::table('admin')->insert([
-            [
-                'email' => 'support@defacto.ovh',
-                'user_id' => 2,
-                'name' => 'Admin DEFACTO',
-            ]
-        ]);
+        Schema::create('matiere', function (Blueprint $table) {
+            $table->id();
+            $table->string('label')->unique();
+            $table->integer('number_chapitre');
+        });
     }
 
     /**
@@ -25,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        DB::table('admin')->delete();
+        Schema::dropIfExists('matiere');
     }
 };

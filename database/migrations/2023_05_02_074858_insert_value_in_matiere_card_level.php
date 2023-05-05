@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        DB::table('class')->insert([
+        DB::table('card_level')->insert([
             [
-                'level' => 1,
-                'id_prof' => 1,
-                'class_name' => 'Sup MATH',
-            ]
+                'label' => 'Avancé',
+            ],
+            [
+                'label' => 'Basique',
+            ],
+
         ]);
     }
 
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        DB::table('class')->delete();
+        DB::table('card_level')->delete();
     }
 };

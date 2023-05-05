@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('student_card_fav', function (Blueprint $table) {
-            $table->foreignId('id_student')->reference('id')->on('student');
-            $table->foreignId('id_public_card')->reference('id')->on('public_card');
+            $table->foreignId('user_id')->reference('id')->on('users');
+            $table->foreignId('card_id')->reference('id')->on('card');
         });
     }
 

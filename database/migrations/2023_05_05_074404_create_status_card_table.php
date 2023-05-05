@@ -11,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('admin', function (Blueprint $table) {
+        Schema::create('status_card', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-            $table->string('name')->unique();
-            $table->string('email');
-            $table->foreignId('user_id')->references('id')->on('users');
+            $table->string('label')->unique();
         });
     }
 
@@ -25,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('admin');
+        Schema::dropIfExists('status_card');
     }
 };

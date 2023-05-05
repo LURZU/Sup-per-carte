@@ -11,13 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('stats', function (Blueprint $table) {
+        Schema::create('card_semestre', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-            $table->integer('total_connect')->nullable();
-            $table->integer('total_card')->nullable();
-            $table->integer('current_cardnb')->nullable();
-            $table->foreignId('id_student')->reference('id')->on('prof');
+            $table->string('label');
         });
     }
 
@@ -26,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('stats');
+        Schema::dropIfExists('card_semestre');
     }
 };

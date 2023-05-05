@@ -11,11 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        DB::table('matiere')->insert([
+        DB::table('status_card')->insert([
             [
-                'id_prof' => 1,
-                'name' => 'Médecine',
-            ]
+                'label' => 'Pas maitrisée',
+            ],
+            [
+                'label' => 'Peu maitrisée',
+            ],
+            [
+                'label' => 'Bien maitrisée',
+            ],
+
         ]);
     }
 
@@ -24,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        DB::table('matiere')->delete();
+        DB::table('status_card')->delete();
     }
 };

@@ -11,13 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('class', function (Blueprint $table) {
+        Schema::create('formation', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-            
-            $table->string('class_name')->unique();
-            $table->foreignId('id_prof')->reference('id')->on('prof');
-            $table->integer('level')->nullable();
+            $table->string('label')->unique();
         });
     }
 
@@ -26,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('class');
+        Schema::dropIfExists('formation');
     }
 };
