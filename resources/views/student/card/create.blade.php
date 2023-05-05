@@ -8,7 +8,7 @@
                     <div class="card-header">{{ __('Create New Card') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="" >
+                        <form method="post" action="" enctype="multipart/form-data">
                             @csrf
 
                             <div class="form-group row">
@@ -41,11 +41,51 @@
 
                             <div class="form-group row">
                                 <label for="level" class="col-md-4 col-form-label text-md-right">{{ __('Level') }}</label>
-
                                 <div class="col-md-6">
-                                    <input id="level" type="number" class="form-control @error('level') is-invalid @enderror" name="level" value="{{ old('level') }}" required>
+                                    <select id="level" class="form-control @error('level') is-invalid @enderror" name="level" required>
+                                        <option value="" disabled selected>Selectionner un level</option>
+                                        @foreach ($cardLevels as $level)
+                                            <option value="{{ $level->id }}" {{ old('level') == $level->id ? 'selected' : '' }}>{{ $level->label }}</option>
+                                        @endforeach
+                                    </select>
 
                                     @error('level')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="matiere" class="col-md-4 col-form-label text-md-right">{{ __('Matiere') }}</label>
+                                <div class="col-md-6">
+                                    <select id="chapitre" class="form-control @error('matiere') is-invalid @enderror" name="matiere" required>
+                                        <option value="" disabled selected>Selectionner une matière</option>
+                                        @foreach ($matieres as $matiere)
+                                            <option value="{{ $matiere->id }}" {{ old('matiere') == $matiere->id ? 'selected' : '' }}>{{ $matiere->label }}</option>
+                                        @endforeach
+                                    </select>
+
+                                    @error('matiere')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="semestre" class="col-md-4 col-form-label text-md-right">{{ __('Semestre') }}</label>
+                                <div class="col-md-6">
+                                    <select id="semestre" class="form-control @error('semestre') is-invalid @enderror" name="semestre" required>
+                                        <option value="" disabled selected>Select a semestre</option>
+                                        @foreach ($semestres as $semestre)
+                                            <option value="{{ $semestre->id }}" {{ old('semestre') == $matiere->id ? 'selected' : '' }}>{{ $semestre->label }}</option>
+                                        @endforeach
+                                    </select>
+
+                                    @error('semestre')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>

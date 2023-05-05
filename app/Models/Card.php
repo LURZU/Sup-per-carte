@@ -12,7 +12,17 @@ class Card extends Model
 
     protected $table = 'card';
 
-
+    protected $fillable = [
+        'matiere_id',
+        'question',
+        'response',
+        'public',
+        'card_chapitre',
+        'card_level_id',
+        'card_semestre_id',
+        'createdBy',
+        'ValidatedBy',
+    ];
 
 
 }

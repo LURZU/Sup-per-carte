@@ -9,7 +9,9 @@ use Spatie\Permission\Models\Permission;
 use App\Models\User;
 use App\Models\Card;
 use App\Models\CardLevel;
-
+use App\Http\Requests\CardRequest;
+use App\Models\Matiere;
+use App\Models\CardSemestre; 
 
 class CardController extends Controller
 {
@@ -23,80 +25,59 @@ class CardController extends Controller
             $users = User::where('id', auth()->id())->get();
         }
 
-    
-
         $list_card_all = Card::all();
      
-
         return view('student.card.index', compact('list_card_all'));
     }
 
-
+    //function to show all card
     public function showAll() {
-        // Check if user has permission
-        if (auth()->user()->can('access_private_card')) {
+        $user = User::find(auth()->id());
+       
+        if (auth()->user()->hasRole('admin')) {
         // Display all users
-        $users = User::all();
+        dd(auth()->user()->hasRole('admin'));
         } else {
             // Display only current user
             $users = User::where('id', auth()->id())->get();
         }
-
         $list_card_all = Card::all();
         $level = new CardLevel();
         $list_card_all = $level->getLevel($list_card_all);
         return view('student.card.index', compact('users', 'list_card_all'));
     }
 
-    
+    //function to create card with value of level, semestre and matiere send in the view
     public function create() {
-        return view('student.card.create');
+        $cardLevels = CardLevel::all();
+        $matieres = Matiere::all(); 
+        $semestres = CardSemestre::all();
+        return view('student.card.create', compact('cardLevels', 'matieres', 'semestres'));
     }
 
     public function show() {
 
     }
 
-    public function store(Request $request) {
-          // Check if user has permission
-        if(auth()->user()) {
-            $users = User::where('id', auth()->id())->get();
-        } else {
-           return view('layouts.error');
-        }
-
-        $request->validate([
-            'question' => 'required|unique:card,question',
-            'response' => 'required',
-            'level' => 'required',
-        ]);
-    
-        // Créer une nouvelle instance de modèle Card
+    //function to store card in the database information wich has upadate or create
+    public function store(CardRequest $request) {
         $card = new Card();
-        $level = new CardLevel();
-        // Remplir les propriétés du modèle avec les données du formulaire
         $card->question = $request->input('question');
         $card->response = $request->input('response');
         $card->card_level_id = $request->input('level');
         $card->card_semestre_id = $request->input('semestre');
-
-        $user = auth()->id();
-
-        if ($user->hasRole('admin') || $user->hasRole('prof')) {
+        
+        if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('professeur')) {
             $card->public = true;
         } else {
             $card->public = false;
         }
-
-        $card->level = $request->input('level');
+        // Assurez-vous d'ajuster le nom de la colonne dans la table si besoin.
     
-        // Enregistrer le modèle dans la base de données
         $card->save();
     
-        // Rediriger l'utilisateur vers la liste des cartes
         return redirect()->route('card.index')->with('success', 'Carte créée avec succès.');
     }
-    
 
     public function destroy() {
 

@@ -11,7 +11,7 @@ class CardRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,27 @@ class CardRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'question ' => 'required|string',
+            'response' => 'required|string',
+            'public' => 'required|boolean',
+            'card_chapitre' => 'required|integer',
+            'card_level_id' => 'required|integer',
+            'card_semestre_id' => 'required|integer',
+            'created_by' => 'required|string',
+            'validated_by' => 'required|string',
         ];
+    }
+
+    public function prepareForValidation() { 
+        $this->merge([
+            'question' => $this->question,
+            'response' => $this->response,
+            'public' => $this->public,
+            'card_chapitre' => $this->card_chapitre,
+            'card_level_id' => $this->card_level_id,
+            'card_semestre_id' => $this->card_semestre_id,
+            'created_by' => $this->created_by,
+            'validated_by' => $this->validated_by,
+        ]);
     }
 }

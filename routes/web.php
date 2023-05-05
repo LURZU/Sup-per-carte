@@ -34,8 +34,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/card/fav', [CardController::class, 'index'])->name('card.index');
     Route::get('/quizz', [CardController::class, 'index'])->name('card.index');
     Route::get('/card/create', [CardController::class, 'create'])->name('card.create');
-    Route::post('/card/create', [CardController::class, 'store'])->name('card.create');
-
+    Route::post('/card/create', [CardController::class, 'store'])->name('card.store');
 });
 
 Route::controller()->group(function () {

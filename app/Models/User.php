@@ -61,5 +61,11 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-
+    public function hasRole($role): bool {
+        
+        if($this->roles()->first()->name === $role) {
+            return true;
+        }
+        return false;
+    }
 }
