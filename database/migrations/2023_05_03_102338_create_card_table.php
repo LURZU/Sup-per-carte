@@ -21,7 +21,8 @@ return new class extends Migration
             $table->foreignId('card_level_id')->references('id')->on('card_level');
             $table->foreignId('card_semestre_id')->references('id')->on('card_semestre');
             $table->string('created_by');
-            $table->string('validated_by');
+            $table->string('validated_by')->nullable();
+            $table->foreignId('user_id')->reference('id')->on('users');
             $table->timestamps();
         });
     }

@@ -5,6 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Students;
+use App\Models\CardLevel;
+use App\Models\CardSemestre;
+use App\Models\Matiere;
+
 
 class Card extends Model
 {
@@ -24,5 +28,23 @@ class Card extends Model
         'ValidatedBy',
     ];
 
+    public function matiere()
+    {
+        return $this->belongsTo(Matiere::class);
+    }
+
+    public function cardLevel()
+    {
+        return $this->belongsTo(CardLevel::class);
+    }
+
+    public function cardSemestre() 
+    {
+        return $this->belongsTo(CardSemestre::class);
+    }
+
+    public function getPrivateCard($list_all_card) {
+        return 'test'; 
+    }
 
 }

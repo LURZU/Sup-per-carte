@@ -1,14 +1,21 @@
-<h1>le paquet de cartes</h1>
-@if (auth()->user()->hasRole('student'))
-@foreach ($list_card_all as $list_card)
-
-<p>Creée par {{$list_card->created_by}}</p>
-<p>Chapitre {{$list_card->card_chapitre}}</p>
-<p>Niveau : {{$list_card->level}}</p>
-<p>Créée le : {{$list_card->created_at}}</p>
-<p>Question: {{$list_card->question}}</p>
-<p>Réponse : {{$list_card->response}}</p>
-<br>
-
-@endforeach
-@endif
+<div class="container">
+    <h1>Le paquet de cartes</h1>
+    @if (auth()->user())
+    <div class="row">
+        @foreach ($list_card_all as $list_card)
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Créée par {{ $list_card->created_by }}</h5>
+                    <p class="card-text">Chapitre {{ $list_card->card_chapitre }}</p>
+                    <p class="card-text">Niveau: {{ $list_card->level }}</p>
+                    <p class="card-text">Créée le: {{ $list_card->created_at }}</p>
+                    <p class="card-text">Question: {{ $list_card->question }}</p>
+                    <p class="card-text">Réponse: {{ $list_card->response }}</p>
+                </div>
+            </div>
+        </div>
+        @endforeach
+    </div>
+    @endif
+</div>

@@ -1,7 +1,5 @@
 @extends('student.base')
 
 @section('content')
-    @include('student.card.form')
+    @include('student.card.list')
 @endsection
-
-

@@ -21,7 +21,8 @@ return new class extends Migration
                 'card_level_id' => 1,
                 'card_semestre_id' => 1,
                 'created_by' => 'John Doe',
-                'validated_by' => 'John Doe'
+                'validated_by' => 'John Doe',
+                'user_id' => 3
             ],
             [
                 'matiere_id' => 2,
@@ -32,7 +33,8 @@ return new class extends Migration
                 'card_level_id' => 2,
                 'card_semestre_id' => 1,
                 'create_by' => 'Student',
-                'validated_by' => 'John Doe'
+                'validated_by' => 'John Doe',
+                'user_id' => 2
             ]
         ]);
     }

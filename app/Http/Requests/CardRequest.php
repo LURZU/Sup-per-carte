@@ -22,14 +22,16 @@ class CardRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'question ' => 'required|string',
-            'response' => 'required|string',
-            'public' => 'required|boolean',
+            'question' => 'required|string|min:8',
+            'response' => 'required|string|min:8',
+            'matiere_id' => 'required|integer',
+            'public' => 'boolean',
             'card_chapitre' => 'required|integer',
             'card_level_id' => 'required|integer',
             'card_semestre_id' => 'required|integer',
-            'created_by' => 'required|string',
-            'validated_by' => 'required|string',
+            'created_by' => 'string',
+            'validated_by' => 'string',
+            'user_id' => 'integer'
         ];
     }
 
@@ -37,12 +39,10 @@ class CardRequest extends FormRequest
         $this->merge([
             'question' => $this->question,
             'response' => $this->response,
-            'public' => $this->public,
+            'matiere_id' => $this->matiere_id,
             'card_chapitre' => $this->card_chapitre,
             'card_level_id' => $this->card_level_id,
             'card_semestre_id' => $this->card_semestre_id,
-            'created_by' => $this->created_by,
-            'validated_by' => $this->validated_by,
         ]);
     }
 }
