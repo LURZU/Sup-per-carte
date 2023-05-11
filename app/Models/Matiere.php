@@ -17,4 +17,7 @@ class Matiere extends Model
         return $list_card_all;
     }
 
+  
+
+
 }

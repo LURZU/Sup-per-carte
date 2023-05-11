@@ -1,5 +1,4 @@
 <div class="container">
-    <h1>Le paquet de cartes</h1>
     @if (auth()->user())
     <div class="row">
         @foreach ($list_card_all as $list_card)

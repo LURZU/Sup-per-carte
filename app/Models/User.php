@@ -61,11 +61,36 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
+    public function favorites()
+    {
+        return $this->belongsToMany(Card::class, 'student_card_fav', 'user_id', 'card_id');
+    }
+
+    
+    public function matieres()
+    {
+        return $this->belongsToMany(Matiere::class, 'matiere_user', 'user_id', 'matiere_id');
+    }
+
+    public function card_status_user()
+    {
+        return $this->belongsToMany(Card::class, 'user_status_card', 'user_id', 'card_id');
+    }
+
+    public function setStatusCard($list_card_all) {
+        foreach ($list_card_all as $card) {
+            $card->card_status = $this->where('id', $card->status_card_id)->first()->label;
+        }
+        return $list_card_all;
+    }
+
+
     public function hasRole($role): bool {
-        
         if($this->roles()->first()->name === $role) {
             return true;
         }
         return false;
     }
+
+    
 }

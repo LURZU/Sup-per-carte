@@ -8,6 +8,7 @@ use App\Models\Students;
 use App\Models\CardLevel;
 use App\Models\CardSemestre;
 use App\Models\Matiere;
+use App\Models\StatusCard;
 
 
 class Card extends Model
@@ -45,6 +46,13 @@ class Card extends Model
 
     public function getPrivateCard($list_all_card) {
         return 'test'; 
+    }
+
+    public function getCardStatus($card, $user_id) {
+            $allstatus = StatusCard::all();
+            $card->status_card_id = where('id', $card->card_id)->where('id', $user_id )->get();
+            
+        return $card;
     }
 
 }
