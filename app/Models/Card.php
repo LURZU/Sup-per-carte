@@ -48,11 +48,6 @@ class Card extends Model
         return 'test'; 
     }
 
-    public function getCardStatus($card, $user_id) {
-            $allstatus = StatusCard::all();
-            $card->status_card_id = where('id', $card->card_id)->where('id', $user_id )->get();
-            
-        return $card;
-    }
+
 
 }

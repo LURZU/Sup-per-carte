@@ -35,13 +35,11 @@ class ProgrammeQuotidienController extends Controller
             $user = auth()->user();
             $cards = Card::where('matiere_id', $request->input('matiere_id'))->get();
             $allStatusCards = $user->card_status_user;
-            foreach($allStatusCards as $card ) {
-                dd($card);
+            
+            foreach($allStatusCards as $card) {
                 $card->user_id = $user->id;
-                $card->user_status_card = $card->getCardStatus($card, $user->id);
+                $card = $user->getCardStatus($card, $user->id);
             }
-            $status_card = $allStatus ;
-            dd($status_card);
             return view('student.programme.quizzProgrammeQuotidien', [
             ]);
         }

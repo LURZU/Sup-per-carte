@@ -77,14 +77,22 @@ class User extends Authenticatable
         return $this->belongsToMany(Card::class, 'user_status_card', 'user_id', 'card_id');
     }
 
-    public function setStatusCard($list_card_all) {
-        foreach ($list_card_all as $card) {
-            $card->card_status = $this->where('id', $card->status_card_id)->first()->label;
-        }
-        return $list_card_all;
+    public function getCardStatus($card, $user_id) {
+        //Query to obtain the status of card with join 3 tables 
+        $query = $this->join('user_status_card', 'users.id', '=', 'user_status_card.user_id')
+        ->join('card', 'user_status_card.card_id', '=', 'card.id')
+        ->join('status_card', 'user_status_card.status_card_id', '=', 'status_card.id')
+        ->select('status_card.id', 'status_card.label', 'user_status_card.user_id')
+        ->where('users.id', $user_id)
+        ->where('card.id', $card->id)
+        ->first();
+        $card->auth_id_user = $query->user_id;
+        $card->status_card = $query->label;
+        $card->status_card_id = $query->id;
+        return $card;
+        
     }
-
-
+    
     public function hasRole($role): bool {
         if($this->roles()->first()->name === $role) {
             return true;

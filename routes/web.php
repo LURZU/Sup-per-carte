@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Card\CardController;
 use App\Http\Controllers\Card\CardListController;
 use App\Http\Controllers\Programme\ProgrammeQuotidienController;
+use App\Http\Livewire\DynamicMatiereSelection;
+use Livewire\Livewire;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +47,9 @@ Route::middleware('auth')->group(function () {
     //Route for programme (Quizz carte révision)
     Route::get('/programme/select', [ProgrammeQuotidienController::class, 'selectParameters'])->name('programme.select');
     Route::post('/programme/select', [ProgrammeQuotidienController::class, 'startProgram'])->name('programme.select');
+
+
+    //Route for livewire 
 });
 
 Route::controller()->group(function () {
