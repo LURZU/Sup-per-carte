@@ -26,7 +26,7 @@ class CardRequest extends FormRequest
             'response' => 'required|string|min:8',
             'matiere_id' => 'required|integer',
             'public' => 'boolean',
-            'card_chapitre' => 'required|integer',
+            'card_chapitre_id' => 'required|integer',
             'card_level_id' => 'required|integer',
             'card_semestre_id' => 'required|integer',
             'created_by' => 'string',
@@ -40,7 +40,7 @@ class CardRequest extends FormRequest
             'question' => $this->question,
             'response' => $this->response,
             'matiere_id' => $this->matiere_id,
-            'card_chapitre' => $this->card_chapitre,
+            'card_chapitre_id' => $this->card_chapitre_id,
             'card_level_id' => $this->card_level_id,
             'card_semestre_id' => $this->card_semestre_id,
         ]);

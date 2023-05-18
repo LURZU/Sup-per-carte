@@ -1,4 +1,3 @@
-
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -10,9 +9,7 @@
                         @csrf
 
                         @livewire('dynamic-matiere-select')
-                        
-                     
-                        
+                              
                         <div class="form-group row">
                             <label for="card_level_id" class="col-md-4 col-form-label text-md-right">{{ __('Level') }}</label>
                             <div class="col-md-6">
@@ -56,9 +53,9 @@
                                 </button>
                             </div>
                         </div>
-
-                        
                     </form>
+
+   
                 </div>
             </div>
         </div>

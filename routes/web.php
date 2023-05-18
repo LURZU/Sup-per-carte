@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Card\CardController;
 use App\Http\Controllers\Card\CardListController;
 use App\Http\Controllers\Programme\ProgrammeQuotidienController;
+use App\Http\Controllers\User\Admin\AdminController;
 use App\Http\Livewire\DynamicMatiereSelection;
 use Livewire\Livewire;
 
@@ -34,19 +35,28 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    //Route for student
-    Route::get('/card/create', [CardController::class, 'create'])->name('card.create');
-    Route::post('/card/create', [CardController::class, 'store'])->name('card.store');
-    Route::get('/card', [CardController::class, 'showAll'])->name('card.index');
-    Route::get('/card/{card}/edit', [CardController::class, 'edit'])->name('card.edit');
-    Route::post('/card/{card}/edit', [CardController::class, 'update'])->name('card.update');
-    Route::get('/card/{card}/del', [CardController::class, 'destroy'])->name('card.del');
-    Route::get('/card/private', [CardListController::class, 'showMyCard'])->name('card.index');
-    Route::get('/card/fav', [CardListController::class, 'showFavCard'])->name('card.favcard');
+     // Global route for all of user (admin, prof, student)
+     Route::get('/card/create', [CardController::class, 'create'])->name('card.create');
+     Route::post('/card/create', [CardController::class, 'store'])->name('card.store');
+     Route::get('/card', [CardListController::class, 'showAll'])->name('card.index');
+     Route::get('/card/{card}/edit', [CardController::class, 'edit'])->name('card.edit');
+     Route::post('/card/{card}/edit', [CardController::class, 'update'])->name('card.update');
+     Route::get('/card/{card}/del', [CardController::class, 'destroy'])->name('card.del');
+     Route::get('/card/private', [CardListController::class, 'showMyCard'])->name('card.private');
+     Route::get('/card/fav', [CardListController::class, 'showFavCard'])->name('card.favcard');
+     Route::get('/card/list', [CardListController::class, 'showProfCard'])->name('card.profcard');
+
+    //Student interface
+
+
+    //Prof interface
 
     //Route for programme (Quizz carte révision)
     Route::get('/programme/select', [ProgrammeQuotidienController::class, 'selectParameters'])->name('programme.select');
-    Route::post('/programme/select', [ProgrammeQuotidienController::class, 'startProgram'])->name('programme.select');
+    Route::post('/programme/select', [ProgrammeQuotidienController::class, 'startProgram'])->name('programme.start');
+
+    //Admin interface
+    Route::get('/admin', [AdminControlle::class, 'showDashboard'])->name('admin.dashboard');
 
 
     //Route for livewire 

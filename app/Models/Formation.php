@@ -14,4 +14,9 @@ class Formation extends Model
     {
         return $this->belongsToMany(Matiere::class, 'formation_matiere', 'matiere_id', 'formation_id');
     }
+
+    public function matieres()
+    {
+        return $this->belongsToMany(Matiere::class, 'formation_matiere');
+    }
 }

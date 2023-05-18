@@ -9,6 +9,8 @@ use App\Models\CardLevel;
 use App\Models\CardSemestre;
 use App\Models\Matiere;
 use App\Models\StatusCard;
+use Illuminate\Support\Facades\DB;
+
 
 
 class Card extends Model
@@ -22,7 +24,7 @@ class Card extends Model
         'question',
         'response',
         'public',
-        'card_chapitre',
+        'card_chapitre_id',
         'card_level_id',
         'card_semestre_id',
         'createdBy',
@@ -44,10 +46,41 @@ class Card extends Model
         return $this->belongsTo(CardSemestre::class);
     }
 
-    public function getPrivateCard($list_all_card) {
-        return 'test'; 
+    public function getPublicCard($list_all_card) {
+        $return_array = [];
+        foreach ($list_all_card as $card) {
+           if($card->public) {
+                $return_array[] = $card;
+           }
+        }
+        return $return_array;
     }
 
+    public function getUnMasterCard($list_all_card) {
+        $list_unmaster_card = [];
+     
+        foreach ($list_all_card as $card) {
+            if($card->status_card_id === 1 || $card->status_card_id === 2){
+                $list_unmaster_card[] = $card;
+            }
+        }
+        return $list_unmaster_card;
 
+    }
+
+    public function getCardsWithoutStatus($list_all_cards)
+    {
+        $cardIdsWithStatus = DB::table('user_status_card')
+            ->select('card_id')
+            ->distinct()
+            ->get()
+            ->pluck('card_id')
+            ->toArray();
+    
+        $cardsWithoutStatus = $list_all_cards->reject(function ($card) use ($cardIdsWithStatus) {
+            return in_array($card->id, $cardIdsWithStatus);
+        });
+        return $cardsWithoutStatus;
+    }
 
 }

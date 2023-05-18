@@ -24,7 +24,7 @@ class QuizzSelectRequest extends FormRequest
         return [
             'matiere_id' => 'required|array',
             'card_level_id' => 'required|array',
-            'card_chapitre' => 'required|array',
+            'card_chapitre_id' => 'required|array',
             'number_card' => 'required|integer'
         ];
     }
@@ -32,7 +32,7 @@ class QuizzSelectRequest extends FormRequest
     public function prepareForValidation() { 
         $this->merge([
             'matiere_id' => $this->matiere_id,
-            'card_chapitre' => $this->card_chapitre,
+            'card_chapitre_id' => $this->card_chapitre_id,
             'number_card' => $this->number_card,
             'card_level_id' => $this->card_level_id,
         ]);

@@ -9,8 +9,7 @@ use App\Models\Matiere;
 use App\Models\Formation;
 use App\Models\CardSemestre;
 
-
-class DynamicMatiereSelect extends Component
+class DynamicMatiereSelectUnique extends Component
 {
     public $formation;
     public $selectedMatiere;
@@ -28,15 +27,49 @@ class DynamicMatiereSelect extends Component
     public function updateChapitres()
     {   
         //Find the selectedMatiere and get the chapitres assign to the id of the matiere
-        $matieres = Matiere::with('chapitres')->find($this->selectedMatiere);
+        $matiere = Matiere::with('chapitres')->find($this->selectedMatiere);
         
-        if ($matieres) {
-            foreach($matieres as $matiere){
-                $this->chapitres = $matiere->chapitres->pluck('label', 'id')->toArray();
-            }
+        if ($matiere) {
+            $this->chapitres = $matiere->chapitres->pluck('label', 'id')->toArray();
         } else {
             $this->chapitres = [];
         }
+    }
+
+    public function updateMatieres()
+    {   
+         //Same as Chapitre but for Matiere
+        $formation = Formation::with('matieres')->find($this->selectedFormation);
+        
+        if ($formation) {
+            $this->matieres = $formation->matieres;
+        } else {
+            $this->matieres = [];
+        }
+    }
+
+
+    public function mount($matiereId, $chapitreId, $formationId, $card)
+    {
+        $this->selectedFormation = $formationId;
+        $this->card = $card;
+        $formation = Formation::with('matieres')->find($this->selectedFormation);
+        
+        if ($formation) {
+            $this->matieres = $formation->matieres;
+        } else {
+            $this->matieres = [];
+        }
+
+        $this->selectedMatiere = $matiereId;
+  
+        $matiere = Matiere::with('chapitres')->find($this->selectedMatiere);
+        if ($matiere) {
+            $this->chapitres = $matiere->chapitres->pluck('label', 'id')->toArray();
+        } else {
+            $this->chapitres = [];
+        }
+        $this->selectedChapitre = $chapitreId;
     }
 
 
@@ -68,6 +101,8 @@ class DynamicMatiereSelect extends Component
       
 
         
-        return view('livewire.dynamic-matiere-select');
+        return view('livewire.dynamic-matiere-select-unique');
     }
+
+ 
 }

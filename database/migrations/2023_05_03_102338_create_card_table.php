@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('card', function (Blueprint $table) {
             $table->id(); 
             $table->foreignId('matiere_id')->reference('id')->on('matiere');
+            $table->foreignId('formation_id')->nullable()->reference('id')->on('formation');
             $table->string('question', 1000);
             $table->string('response', 1000);
             $table->boolean('public');
-            $table->integer('card_chapitre');
+            $table->integer('card_chapitre_id');
             $table->foreignId('card_level_id')->references('id')->on('card_level');
             $table->foreignId('card_semestre_id')->references('id')->on('card_semestre');
             $table->string('created_by');

@@ -16,9 +16,18 @@ class Matiere extends Model
         'number_chapitre',
     ];
 
+    public function chapitres()
+    {
+        return $this->belongsToMany(Chapitre::class, 'chapitre_matiere');
+    }
+
     public function getMatiere($list_card_all) {
+        
         foreach ($list_card_all as $card) {
-            $card->matiere = $this->where('id', $card->matiere_id)->first()->label;
+            if($card->matiere_id !== null){
+                $card->matiere = $this->where('id', $card->matiere_id)->first()->label;
+            }
+  
         }
         return $list_card_all;
     }

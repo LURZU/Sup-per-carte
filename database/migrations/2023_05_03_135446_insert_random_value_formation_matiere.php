@@ -22,10 +22,6 @@ return new class extends Migration
             ],
             [
                 'matiere_id' => 2,
-                'formation_id' => 1,
-            ],
-            [
-                'matiere_id' => 2,
                 'formation_id' => 2,
             ]
         ]);
