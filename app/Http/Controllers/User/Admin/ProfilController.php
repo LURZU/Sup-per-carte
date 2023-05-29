@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Matiere;
 use App\Models\Formation;
 use App\Models\Schools;
 use App\Models\Roles;
@@ -26,7 +27,7 @@ class ProfilController extends Controller
     public function create()
     {
         $roles = Roles::all();
-
+        // foreach for on all role in bdd and add in table list_roles
         $list_roles = [];
         foreach($roles as $role){
             if( $role->name === 'prof') {
@@ -39,8 +40,8 @@ class ProfilController extends Controller
             }
         }
 
-        $user = new User(); // Créez une nouvelle instance de l'utilisateur
-        return view('admin.users.create', ['user' => $user, 'schools' => Schools::all(), 'formations' => Formation::all(), 'roles' => $list_roles]);
+        $user = new User();
+        return view('admin.users.create', ['user' => $user, 'schools' => Schools::all(), 'matieres' => Matiere::All(), 'formations' => Formation::all(), 'roles' => $list_roles]);
     }
     
 
@@ -52,8 +53,12 @@ class ProfilController extends Controller
         $user->name = $request->input('first_name') . ' ' . $request->input('last_name');
         // generate random password for user (temporary)
         $user->password = bcrypt(Str::random(8));
-
-
+        if($request->input('role_id') == 2) {
+            $user->matiere_id = $request->input('matiere_id');
+        } else if($request->input('role_id') == 3) {
+            $user->formation_id = $request->input('formation_id');
+        }
+    
         // Send the user a temporary password
         Mail::to($user->email)->send(new TemporaryPasswordMail($user->password));
         // Save the user

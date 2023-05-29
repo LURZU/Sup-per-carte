@@ -23,6 +23,8 @@ class ProfileUpdateRequest extends FormRequest
             'formation_id' => 'required|integer',
             'school_id' => 'required|integer',
             'role_id' => 'required|string ',
+            'formation_id' => 'integer',
+            'matiere_id' => 'integer',
         ];
     }
 
@@ -33,7 +35,6 @@ class ProfileUpdateRequest extends FormRequest
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
             'school_id' => $this->school_id,
-            'formation_id' => $this->formation_id,
         ]);
     }
 }

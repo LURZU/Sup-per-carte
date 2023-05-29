@@ -1,7 +1,7 @@
 <?php 
 // app/Http/Livewire/DynamicMatiereSelect.php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Card;
 
 use Livewire\Component;
 use App\Models\CardLevel;
@@ -101,7 +101,7 @@ class DynamicMatiereSelectUnique extends Component
       
 
         
-        return view('livewire.dynamic-matiere-select-unique');
+        return view('livewire.card.dynamic-matiere-select-unique');
     }
 
  

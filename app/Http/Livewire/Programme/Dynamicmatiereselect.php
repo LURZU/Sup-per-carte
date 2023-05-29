@@ -1,7 +1,7 @@
 <?php 
 // app/Http/Livewire/DynamicMatiereSelect.php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Programme;
 
 use Livewire\Component;
 use App\Models\CardLevel;
@@ -68,6 +68,6 @@ class DynamicMatiereSelect extends Component
       
 
         
-        return view('livewire.dynamic-matiere-select');
+        return view('livewire.programme.dynamic-matiere-select');
     }
 }

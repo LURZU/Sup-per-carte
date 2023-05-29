@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Programme;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\Matiere;
@@ -17,7 +18,7 @@ use App\Models\StatusCard;
 
 class ProgrammeQuotidienController extends Controller
 {
-    public function selectParameters(): View {
+    public function selectParameters(): View | RedirectResponse{
         if(auth()->user()->hasRole('prof') || auth()->user()->hasRole('admin')) {
             return redirect()->route('card.profcard');
         }

@@ -8,7 +8,7 @@
                     <form method="post" action="" enctype="multipart/form-data">
                         @csrf
 
-                        @livewire('dynamic-matiere-select')
+                        @livewire('programme.dynamic-matiere-select')
                               
                         <div class="form-group row">
                             <label for="card_level_id" class="col-md-4 col-form-label text-md-right">{{ __('Level') }}</label>

@@ -15,8 +15,7 @@
                         @endif
                         
 
-                        <livewire:dynamic-matiere-select-unique :matiereId="$matiereId" :chapitreId="$chapitreId" :formationId="$formationId" :card="$card" />
-
+                        @livewire('card.dynamic-matiere-select-unique', ['matiereId' => $matiereId, 'chapitreId' => $chapitreId, 'formationId' => $formationId, 'card' => $card] )
                         
                         <div class="form-group row">
                             <label for="card_level_id" class="col-md-4 col-form-label text-md-right">{{ __('Level') }}</label>
