@@ -26,6 +26,9 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'first_name',
+        'last_name',
+        'formation_id',
         'name',
         'email',
         'password',
@@ -75,6 +78,15 @@ class User extends Authenticatable
     public function card_status_user()
     {
         return $this->belongsToMany(Card::class, 'user_status_card', 'user_id', 'card_id');
+    }
+
+    public function schools()
+    {
+        return $this->belongsToMany(Schools::class, 'school_user', 'user_id', 'school_id');
+    }
+
+    public function getFormation() {
+        
     }
 
     public function getCardStatus($list_all_cards, $user_id) {

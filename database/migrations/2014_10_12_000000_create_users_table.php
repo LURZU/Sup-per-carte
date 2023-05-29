@@ -22,11 +22,11 @@ return new class extends Migration
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
-            $table->string('civil_status');
-            $table->integer('total_connect');
-            $table->integer('total_card_toshow');
+            $table->string('civil_status')->nullable();
+            $table->integer('total_connect')->nullable();
+            $table->integer('total_card_toshow')->nullable();
             $table->foreignId('formation_id')->references('id')->on('formation');
-            $table->foreignId('matiere_id')->references('id')->on('matiere');
+            $table->foreignId('matiere_id')->references('id')->on('matiere')->nullable();
             $table->timestamps();
         });
     }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Card\CardController;
 use App\Http\Controllers\Card\CardListController;
 use App\Http\Controllers\Programme\ProgrammeQuotidienController;
 use App\Http\Controllers\User\Admin\AdminController;
+use App\Http\Controllers\User\Admin\ProfilController;
 use App\Http\Livewire\DynamicMatiereSelection;
 use Livewire\Livewire;
 
@@ -56,7 +57,13 @@ Route::middleware('auth')->group(function () {
     Route::post('/programme/select', [ProgrammeQuotidienController::class, 'startProgram'])->name('programme.start');
 
     //Admin interface
-    Route::get('/admin', [AdminControlle::class, 'showDashboard'])->name('admin.dashboard');
+    Route::get('/admin', [AdminController::class, 'showDashboard'])->name('admin.dashboard');
+    Route::get('/admin/profil', [ProfilController::class, 'index'])->name('admin.profil.index');
+    Route::get('/admin/profil/create', [ProfilController::class, 'create'])->name('admin.profil.create');
+    Route::post('/admin/profil/create', [ProfilController::class, 'store'])->name('admin.profil.store');
+    Route::get('/admin/profil/{user}/edit', [ProfilController::class, 'edit'])->name('admin.profil.edit');
+    Route::post('/admin/profil/{user}/edit', [ProfilController::class, 'update'])->name('admin.profil.update');
+    Route::delete('/admin/profil/{user}/del', [ProfilController::class, 'destroy'])->name('admin.profil.destroy');
 
 
     //Route for livewire 
