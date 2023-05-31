@@ -24,7 +24,7 @@ class ProfileUpdateRequest extends FormRequest
             'school_id' => 'required|integer',
             'role_id' => 'required|string ',
             'formation_id' => 'integer',
-            'matiere_id' => 'integer',
+            'matiere_id' => 'array',
         ];
     }
 

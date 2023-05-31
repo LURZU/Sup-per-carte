@@ -16,11 +16,19 @@ class ProfilSelectOption extends Component
     public $selectedTypeProfil = 2;
     public $selectedSchool;
     public $selectedFormation;
+    public $selectedMatiere;
     public $user;
     public $schools;
     public $formations;
     public $roles;
+    public $matieresTab;
     public $matieres;
+    public $formationId;
+    public $matiereId;
+    public $schoolId;
+    public $firstname;
+    public $lastname;
+    public $email;
 
 
     public function updateFormOption() {
@@ -38,11 +46,24 @@ class ProfilSelectOption extends Component
         
     }
 
+    public function mount($user, $matieresTab) {
+        $this->user = $user;
+        $this->firstname = $user->first_name;
+        $this->lastname = $user->last_name;
+        $this->email = $user->email;
+        $this->schoolId = $user->school_id;
+        $this->formationId = $user->formation_id;
+        $this->matiereId = $matieresTab;
+        if(isset($user->roles()->first()->id)){
+            $this->selectedTypeProfil = $user->roles()->first()->id;
+        }
+    }
+
     public function render()
     {
         //Init all value for profil form
         $list_roles = Roles::all();
-        $this->user = new User();
+        
         $this->schools = Schools::all();
         $this->formations = Formation::all();
         $this->matieres = Matiere::all();
@@ -59,7 +80,6 @@ class ProfilSelectOption extends Component
             }
         }
 
-        $user = new User();
         return view('livewire.admin.profil-select-option');
     }
 

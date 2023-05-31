@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('matiere', function (Blueprint $table) {
             $table->id();
             $table->string('label')->unique();
-            $table->integer('number_chapitre');
+            $table->integer('number_chapitre')->nullable();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 

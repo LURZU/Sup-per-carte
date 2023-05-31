@@ -19,4 +19,5 @@ class Formation extends Model
     {
         return $this->belongsToMany(Matiere::class, 'formation_matiere');
     }
+
 }

@@ -9,6 +9,20 @@
                 <div class="card-body">
                     <form method="POST" action="">
                         @csrf
+                        @if($user->id)
+                      
+                        <div class="form-group row">
+                            <label for="role_id" class="col-md-4 col-form-label text-md-right">{{ __('Type de profil') }}</label>
+                            <div class="col-md-6">
+                               {{ $user->roles()->first()->name }}
+                                @error('role_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        @else
                         <div class="form-group row">
                             <label for="role_id" class="col-md-4 col-form-label text-md-right">{{ __('Type de profil') }}</label>
                             <div class="col-md-6">
@@ -25,13 +39,13 @@
                                 @enderror
                             </div>
                         </div>
-
+                        @endif
 
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">Prénom</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('first_name') is-invalid @enderror" name="first_name" value="{{ old('first_name', $user->first_name) }}" required autocomplete="name" autofocus>
+                                <input wire:model="firstname" id="name" type="text" class="form-control @error('first_name') is-invalid @enderror" name="first_name" value="{{ old('first_name', $user->first_name) }}" required autocomplete="name" autofocus>
 
                                 @error('first_name')
                                     <span class="invalid-feedback" role="alert">
@@ -45,7 +59,7 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">Nom</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name" value="{{ old('last_name', $user->last_name) }}" required autocomplete="name" autofocus>
+                                <input wire:model="lastname" id="name" type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name" value="{{ old('last_name', $user->last_name) }}" required autocomplete="name" autofocus>
 
                                 @error('last_name')
                                     <span class="invalid-feedback" role="alert">
@@ -59,7 +73,7 @@
                             <label for="email" class="col-md-4 col-form-label text-md-right">Email</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email', $user->email) }}" required autocomplete="email">
+                                <input wire:model="email" id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email', $user->email) }}" required autocomplete="email">
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -69,10 +83,11 @@
                             </div>
                         </div>
 
+                        
                         <div class="form-group row">
                             <label for="card_level_id" class="col-md-4 col-form-label text-md-right">{{ __('école') }}</label>
                             <div class="col-md-6">
-                                <select id="school_id" class="form-control @error('school_id') is-invalid @enderror" name="school_id">
+                                <select wire:model="schoolId" id="school_id" class="form-control @error('school_id') is-invalid @enderror" name="school_id">
                                     <option value="" disabled selected>école</option>
                                     @foreach ($schools as $school)
                                         <option value="{{ $school->id }}" {{ old('school_id', $school->id) == $school->id ? 'selected' : '' }}>{{ $school->label }}</option>
@@ -108,7 +123,7 @@
                             <div class="form-group row">
                                 <label for="matiere_id" class="col-md-4 col-form-label text-md-right">{{ __('Matières') }}</label>
                                 <div class="col-md-6">
-                                    <select id="matiere_id" class="form-control @error('matiere_id') is-invalid @enderror" name="matiere_id">
+                                    <select wire:model="matiereId" id="matiere_id" class="form-control @error('matiere_id') is-invalid @enderror" name="matiere_id[]" multiple required>
                                         <option value="" disabled selected>école</option>
                                         @foreach ($matieres as $matiere)
                                             <option value="{{ $matiere->id }}" {{ old('matiere_id', $matiere->id) == $matiere->id ? 'selected' : '' }}>{{ $matiere->label }}</option>
@@ -133,6 +148,9 @@
                                     @else
                                     {{ __('Créer') }}
                                     @endif
+                                </button>
+                                <button href="{{route('admin.profil.index')}}" class="btn btn-secondary">
+                                    {{ __('Annuler') }}
                                 </button>
                             </div>
                         </div>

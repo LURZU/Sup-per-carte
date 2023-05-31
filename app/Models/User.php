@@ -11,6 +11,7 @@ use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
+
 class User extends Authenticatable
 {
     use HasRoles;
@@ -69,11 +70,17 @@ class User extends Authenticatable
         return $this->belongsToMany(Card::class, 'student_card_fav', 'user_id', 'card_id');
     }
 
+    public function formation()
+    {
+        return $this->belongsTo(Formation::class);
+    }
+
     
     public function matieres()
     {
         return $this->belongsToMany(Matiere::class, 'matiere_user', 'user_id', 'matiere_id');
     }
+
 
     public function card_status_user()
     {
@@ -83,10 +90,6 @@ class User extends Authenticatable
     public function schools()
     {
         return $this->belongsToMany(Schools::class, 'school_user', 'user_id', 'school_id');
-    }
-
-    public function getFormation() {
-        
     }
 
     public function getCardStatus($list_all_cards, $user_id) {
@@ -104,6 +107,37 @@ class User extends Authenticatable
             $card->status_card_id = $query->id;
         }
         return $list_all_cards;
+    }
+
+    public static function getFormation($users)
+    {
+            foreach($users as $user) {
+                if($user->formation_id) {
+                $user->formation = User::where('id', $user->formation_id)->first()->formation->label;
+                } else {
+                    $user->formation = null;
+                }
+            return $users;
+        }
+       
+    }
+
+    public static function getRoles($users)
+    {
+        $roles = Roles::all();
+        foreach ($users as $user) {
+            $userRole = $user->roles->first();
+            if ($userRole) {
+                // Trouver le rôle correspondant dans la liste des rôles
+                $role = $roles->firstWhere('name', $userRole->name);
+            
+
+                // Définir la valeur du rôle (nom et ID) pour l'utilisateur
+                $user->role_name = $role ? $role->name : null;
+                $user->role_id = $role ? $role->id : null;
+            }
+        }
+        return $users;
     }
 
 

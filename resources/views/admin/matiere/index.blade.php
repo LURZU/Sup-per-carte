@@ -13,31 +13,27 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Utilisateurs <a href="{{ route('admin.profil.create') }}" class="btn btn-primary">Créer un utilisateur</a></div>
+                    <div class="card-header">Matieres <a href="{{ route('admin.matiere.create') }}" class="btn btn-primary">Créer une matiere</a></div>
 
                     <div class="card-body">
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Nom</th>
-                                    <th>Email</th>
-                                    <th>Role / Formation</th>
+                                    <th>Nom de la matière</th>
+                                    <th>Formation</th>
+                                    <th>Prof référent</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($users_role as $user)
+                                @foreach ($matieres as $matiere)
                                     <tr>
-                                        <td>{{ $user->name }}</td>
-                                        <td>{{ $user->email }}</td>
-                                        @if($user->role_name == 'Etudiant')
-                                        <td>{{ $user->role_name.' / '.$user->formation }}</td>
-                                        @else
-                                        <td>{{ $user->role_name }}</td>
-                                        @endif
+                                        <td>{{ $matiere->nom }}</td>
+                                        <td>{{ $matiere->formation->nom }}</td>
+                                        <td>{{ $matiere->prof_referent->name }}</td>
                                         <td>
-                                            <a href="{{ route('admin.profil.edit', $user->id) }}" class="btn btn-primary">Modifier</a>
-                                            <form action="{{ route('admin.profil.destroy', $user->id) }}" method="POST" class="d-inline">
+                                            <a href="{{ route('admin.matiere.edit', $matiere->id) }}" class="btn btn-primary">Modifier</a>
+                                            <form action="{{ route('admin.matiere.destroy', $matiere->id) }}" method="POST" class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger">Supprimer</button>

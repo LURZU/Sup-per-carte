@@ -17,7 +17,10 @@ return new class extends Migration
             ],
             [
                 'label' => 'Première santé',
-            ]
+            ], 
+            [
+                'label' => 'Non assigné',
+            ], 
         ]);
     }
 

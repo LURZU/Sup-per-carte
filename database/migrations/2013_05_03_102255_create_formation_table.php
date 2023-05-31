@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('formation', function (Blueprint $table) {
             $table->id();
             $table->string('label')->unique();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 

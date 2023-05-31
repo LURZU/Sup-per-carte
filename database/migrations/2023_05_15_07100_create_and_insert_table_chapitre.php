@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('label');
             $table->integer('numero_chapitre');
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
+            $table->timestamp('created_at')->useCurrent();
         });
 
         DB::table('chapitre')->insert([
@@ -47,6 +49,11 @@ return new class extends Migration
             [
                 'id' => 6,
                 'label' => 'Glucides',
+                'numero_chapitre' => 6
+            ],
+            [
+                'id' => 7,
+                'label' => 'Non assigné',
                 'numero_chapitre' => 6
             ],
 

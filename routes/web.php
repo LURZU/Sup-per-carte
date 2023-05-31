@@ -6,7 +6,10 @@ use App\Http\Controllers\Card\CardController;
 use App\Http\Controllers\Card\CardListController;
 use App\Http\Controllers\Programme\ProgrammeQuotidienController;
 use App\Http\Controllers\User\Admin\AdminController;
+use App\Http\Controllers\User\Admin\FormationController;
+use App\Http\Controllers\User\Admin\ChapitreController;
 use App\Http\Controllers\User\Admin\ProfilController;
+use App\Http\Controllers\User\Admin\MatiereController;
 use App\Http\Livewire\DynamicMatiereSelection;
 use Livewire\Livewire;
 
@@ -23,7 +26,7 @@ use Livewire\Livewire;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::get('/dashboard', function () {
@@ -51,13 +54,14 @@ Route::middleware('auth')->group(function () {
 
 
     //Prof interface
+    Route::get('/prof/chapitre/', [App\Http\Controllers\User\Prof\ChapitreController::class, 'index'])->name('prof.chapitre.index');
 
     //Route for programme (Quizz carte révision)
     Route::get('/programme/select', [ProgrammeQuotidienController::class, 'selectParameters'])->name('programme.select');
     Route::post('/programme/select', [ProgrammeQuotidienController::class, 'startProgram'])->name('programme.start');
 
     //Admin interface
-    Route::get('/admin', [AdminController::class, 'showDashboard'])->name('admin.dashboard');
+    Route::get('/admin', function () { return view('dashboard');  })->name('admin.dashboard');
     Route::get('/admin/profil', [ProfilController::class, 'index'])->name('admin.profil.index');
     Route::get('/admin/profil/create', [ProfilController::class, 'create'])->name('admin.profil.create');
     Route::post('/admin/profil/create', [ProfilController::class, 'store'])->name('admin.profil.store');
@@ -65,6 +69,14 @@ Route::middleware('auth')->group(function () {
     Route::post('/admin/profil/{user}/edit', [ProfilController::class, 'update'])->name('admin.profil.update');
     Route::delete('/admin/profil/{user}/del', [ProfilController::class, 'destroy'])->name('admin.profil.destroy');
 
+    Route::get('/admin/formation', [FormationController::class, 'index'])->name('admin.formation.index');
+
+    Route::get('/admin/matiere', [MatiereController::class, 'index'])->name('admin.matiere.index');
+    Route::get('/admin/matiere/create', [MatiereController::class, 'create'])->name('admin.matiere.create');
+    Route::post('/admin/matiere/create', [MatiereController::class, 'store'])->name('admin.matiere.store');
+    Route::get('/admin/matiere/{user}/edit', [MatiereController::class, 'edit'])->name('admin.matiere.edit');
+    Route::post('/admin/matiere/{user}/edit', [MatiereController::class, 'update'])->name('admin.matiere.update');
+    Route::delete('/admin/matiere/{user}/del', [MatiereController::class, 'destroy'])->name('admin.matiere.destroy');
 
     //Route for livewire 
 });

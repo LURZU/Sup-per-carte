@@ -16,6 +16,11 @@ class Matiere extends Model
         'number_chapitre',
     ];
 
+    public function formations()
+    {
+        return $this->belongsToMany(Formation::class, 'formation_matiere');
+    }
+
     public function chapitres()
     {
         return $this->belongsToMany(Chapitre::class, 'chapitre_matiere');

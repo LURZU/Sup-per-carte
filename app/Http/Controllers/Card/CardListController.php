@@ -82,19 +82,23 @@ class CardListController extends Controller
     }
 
     public function showProfCard() {
+        if(auth()->user()->hasRole('student')) {
+            return redirect()->route('card.private');
+        } else if(auth()->user()->hasRole('admin')){
+            return redirect()->route('card.index'); 
+        }
         $user = User::find(auth()->id());
         if (auth()->user()) {
             // Display all users
             $users = User::where('id', auth()->id())->get();
         }
-        $list_card_all = Card::where('created_by', $user->name)->get();
+        $list_card_all = Card::where('created_by', $user->name)->where('public', true)->get();
         $level = new CardLevel();
         $matiere = new Matiere();
         $chapitre = new Chapitre();
         $list_card_all = $level->getLevel($list_card_all);
         $list_card_all =  $matiere->getMatiere($list_card_all);
         $list_card_all = $chapitre->getChapitre($list_card_all);
-
         
         return view('student.card.profcard', compact('list_card_all', 'users'));
     }

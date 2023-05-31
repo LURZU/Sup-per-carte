@@ -15,6 +15,8 @@ return new class extends Migration
             $table->foreignId('user_id')->reference('id')->on('users');
             $table->foreignId('status_card_id')->reference('id')->on('status_card');
             $table->foreignId('card_id')->reference('id')->on('card');
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 

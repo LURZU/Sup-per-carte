@@ -20,8 +20,16 @@ class ProfilController extends Controller
 
     public function index()
     {
-        $users = User::all();
-        return view('admin.users.userlist', compact('users'));
+        if(auth()->user()->hasRole('admin')) {
+            $users = User::all();
+            $users_role = User::getRoles($users);
+            $users_role = User::getFormation($users_role);
+            
+            return view('admin.users.userlist', compact('users_role'));
+        } else {
+            return redirect()->route('dashboard');
+        }
+     
     }
 
     public function create()
@@ -53,9 +61,7 @@ class ProfilController extends Controller
         $user->name = $request->input('first_name') . ' ' . $request->input('last_name');
         // generate random password for user (temporary)
         $user->password = bcrypt(Str::random(8));
-        if($request->input('role_id') == 2) {
-            $user->matiere_id = $request->input('matiere_id');
-        } else if($request->input('role_id') == 3) {
+        if($request->input('role_id') == 3) {
             $user->formation_id = $request->input('formation_id');
         }
     
@@ -64,6 +70,9 @@ class ProfilController extends Controller
         // Save the user
         $user->save();
         if($request->input('role_id') == 2) {
+            foreach($request->input('matiere_id') as $matiere) {
+                $user->matieres()->attach($matiere);
+            }
             $user->assignRole('prof');
         } else if($request->input('role_id') == 3) {
             $user->assignRole('student');
@@ -90,9 +99,23 @@ class ProfilController extends Controller
             }
         }
 
+        if($user->hasRole('student')) {
+            $user->formation_id = $user->formation()->first()->id;
+            if(!isset($user->schools()->first()->id)) {
+                $user->school_id = 1;
+            } else {
+                $user->school_id = $user->schools()->first()->id;
+            }
+            return view('admin.users.edit',['user' => $user,'roles' => $list_roles ]);
+        } else if($user->hasRole('prof')) {
+            $matiere_ids = $user->matieres()->pluck('id')->toArray();
+            return view('admin.users.edit', ['user' => $user, 'roles' => $list_roles, 'matieres' => $matiere_ids]);
+        }
+        
         $user->school_id = $user->schools()->first()->id;
-        dd($user->school_id);
-        return view('admin.users.edit',['user' => $user, 'schools' => Schools::all(), 'formations' => Formation::all(), 'roles' => $list_roles]);
+      
+       
+        return view('admin.users.edit',['user' => $user, 'schools' => Schools::all()]);
     }
 
     public function update(ProfileUpdateRequest $request, User $user)
@@ -100,13 +123,10 @@ class ProfilController extends Controller
         // Valider les données du formulaire
         $data = $request->validated();
         $user = new User($data);
-        // Mettre à jour les attributs de l'utilisateur
+        
         $user->name = $request->input('name');
         $user->email = $request->input('email');
     
-        // Mettez à jour d'autres attributs de l'utilisateur si nécessaire
-
-        // Enregistrer les modifications dans la base de données
         $user->save();
 
         // Rediriger vers la page d'index des utilisateurs avec un message de succès
@@ -121,6 +141,13 @@ class ProfilController extends Controller
 
         $user->schools()->detach();
         $user->roles()->detach();
+        
+        if($user->formation_id !== null) {
+            $user->formation()->detach();
+        } else {
+            $user->matieres()->detach();
+        }
+       
         $user->delete();
 
         // Rediriger vers la page d'index des utilisateurs avec un message de succès

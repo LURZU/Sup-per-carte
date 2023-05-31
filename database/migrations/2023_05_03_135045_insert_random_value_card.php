@@ -43,11 +43,11 @@ return new class extends Migration
                 'formation_id' => 2,
                 'question' => 'Quelles sont les outils test Lorem ipseum ?',
                 'response' => 'Lorem ipsum dolor sit amet consectetur adipiscing elit. Nulla euismod, nisl vitae aliquam ultricies, nunc nisl ultricies nunc, vitae aliquam nisl nisl vitae nisl. Donec euismod, nisl vitae aliquam ultricies, nunc nisl ultricies nunc, vitae aliquam nisl nisl vitae nisl.',
-                'public' => true,
+                'public' => false,
                 'card_chapitre_id' => 2,
                 'card_level_id' => 2,
                 'card_semestre_id' => 1,
-                'create_by' => 'Student',
+                'create_by' => 'Tom',
                 'validated_by' => 'John Doe',
                 'user_id' => 2
             ],
@@ -56,11 +56,11 @@ return new class extends Migration
                 'formation_id' => 2,
                 'question' => 'Quelles sont les outils test Lorem ipseum ?',
                 'response' => 'Lorem ipsum dolor sit amet consectetur adipiscing elit. Nulla euismod, nisl vitae aliquam ultricies, nunc nisl ultricies nunc, vitae aliquam nisl nisl vitae nisl. Donec euismod, nisl vitae aliquam ultricies, nunc nisl ultricies nunc, vitae aliquam nisl nisl vitae nisl.',
-                'public' => true,
+                'public' => false,
                 'card_chapitre_id' => 2,
                 'card_level_id' => 2,
                 'card_semestre_id' => 1,
-                'create_by' => 'Student',
+                'create_by' => 'Tom',
                 'validated_by' => 'John Doe',
                 'user_id' => 2
             ]

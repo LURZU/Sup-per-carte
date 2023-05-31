@@ -10,10 +10,23 @@ class Chapitre extends Model
     use HasFactory;
     protected $table = 'chapitre';
 
+    public function matieres()
+    {
+        return $this->belongsToMany(Matiere::class, 'chapitre_matiere');
+    }
+
     public function chapitre_matiere()
     {
-        return $this->belongsToMany(Matiere::class, 'formation_matiere', 'matiere_id', 'chapitre_id');
+        return $this->belongsToMany(Matiere::class, 'chapitre_matiere', 'matiere_id', 'chapitre_id');
     }
+
+    public function getChapitresByMatiere($matiere_id)
+    {
+        $matiere = Matiere::findOrFail($matiere_id);
+        $chapitres = $matiere->chapitres;
+        return $chapitres;
+    }
+
 
     public function getChapitre($list_card_all) {
             foreach ($list_card_all as $card) {
