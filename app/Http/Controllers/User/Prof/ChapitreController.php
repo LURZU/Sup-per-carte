@@ -26,7 +26,7 @@ class ChapitreController extends Controller
                 ->section('content')
                 ->layoutData(['title' => 'Liste des chapitres']);
         } else {
-            return redirect()->route('home');
+            return redirect()->route('dashboard');
         }
     }
 }

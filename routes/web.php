@@ -34,10 +34,14 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+
+
     //Route for profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    //parameters (Student, prof, admin)
 
      // Global route for all of user (admin, prof, student)
      Route::get('/card/create', [CardController::class, 'create'])->name('card.create');
@@ -74,9 +78,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/matiere', [MatiereController::class, 'index'])->name('admin.matiere.index');
     Route::get('/admin/matiere/create', [MatiereController::class, 'create'])->name('admin.matiere.create');
     Route::post('/admin/matiere/create', [MatiereController::class, 'store'])->name('admin.matiere.store');
-    Route::get('/admin/matiere/{user}/edit', [MatiereController::class, 'edit'])->name('admin.matiere.edit');
-    Route::post('/admin/matiere/{user}/edit', [MatiereController::class, 'update'])->name('admin.matiere.update');
-    Route::delete('/admin/matiere/{user}/del', [MatiereController::class, 'destroy'])->name('admin.matiere.destroy');
+    Route::get('/admin/matiere/{matiere}/edit', [MatiereController::class, 'edit'])->name('admin.matiere.edit');
+    Route::post('/admin/matiere/{matiere}/edit', [MatiereController::class, 'update'])->name('admin.matiere.update');
+    Route::delete('/admin/matiere/{matiere}/del', [MatiereController::class, 'destroy'])->name('admin.matiere.destroy');
 
     //Route for livewire 
 });

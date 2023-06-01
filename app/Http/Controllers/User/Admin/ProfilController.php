@@ -140,6 +140,7 @@ class ProfilController extends Controller
         }
 
         $user->schools()->detach();
+        $user->matieres()->detach();
         $user->roles()->detach();
         
         if($user->formation_id !== null) {

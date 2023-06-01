@@ -36,6 +36,11 @@ class Card extends Model
         return $this->belongsTo(Matiere::class);
     }
 
+    public function statusCard()
+    {
+        return $this->belongsTo(StatusCard::class);
+    }
+
     public function cardLevel()
     {
         return $this->belongsTo(CardLevel::class);

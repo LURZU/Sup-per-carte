@@ -26,6 +26,11 @@ class Matiere extends Model
         return $this->belongsToMany(Chapitre::class, 'chapitre_matiere');
     }
 
+    public function cards()
+    {
+       
+    }
+
     public function getMatiere($list_card_all) {
         
         foreach ($list_card_all as $card) {

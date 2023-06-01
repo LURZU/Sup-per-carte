@@ -13,7 +13,13 @@
             <li class="list-group-item"><a href="{{ route('card.create') }}">Créer une carte</a></li>
         </ul>
         @elseif(auth()->user()->hasRole('student'))
-        <p>Contenu spécifique pour les étudiants.</p>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="">Paramètres</a></li>
+            <li class="list-group-item"><a href="">Mes statistiques</a></li>
+            <li class="list-group-item"><a href="{{ route('card.private') }}">Cartes créées</a></li>           
+            <li class="list-group-item"><a href="{{ route('card.favcard') }}">Mes cartes favorites</a></li>
+            <li class="list-group-item"><a href="{{ route('card.create') }}">Créer une carte</a></li>
+        </ul>
         @elseif(auth()->user()->hasRole('prof'))
         <p>Contenu spécifique pour les enseignants.</p>
         @endif
