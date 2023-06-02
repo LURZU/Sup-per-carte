@@ -88,4 +88,18 @@ class Card extends Model
         return $cardsWithoutStatus;
     }
 
+    public function getCardRequest($cards, $request) {
+
+        $cards = collect($cards);
+
+        $requestedLevels = $request->input('card_level_id');
+        $requestedChapter = $request->input('card_chapitre_id');
+        //use filter to get the card that respond to the request of the user
+        $filteredCards = $cards->filter(function($card) use ($requestedLevels, $requestedChapter) {
+            return in_array($card->card_level_id, $requestedLevels) && in_array($card->card_chapitre_id, $requestedChapter);
+        });
+    
+        return $filteredCards;
+    }
+
 }

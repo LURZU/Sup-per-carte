@@ -22,21 +22,27 @@ class CardController extends Controller
 
 
     //function to create card with value of level, semestre and matiere send in the view
-    public function create(): View {
-        $user = auth()->user();
-        $card = new Card();
-        $cardLevels = CardLevel::all();
-        $semestres = CardSemestre::all();
-     
-        //formation and matieres is define in livewire component DynamicMatiereSelectUnique for card create
-        if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('prof')) { 
-            $allUser = User::all();
-            $formations = Formation::all(); 
-            // MANQUE CONDITION SI PROF ALORS SELECTIONNER UNE MATIERE PAR DEFAUT
-            return view('student.card.create', ['user' => $user,'formations' => $formations, 'allUser' => $allUser, 'card' => $card, 'cardLevels' => $cardLevels, 'semestres' => $semestres, 'matiereId' => null, 'chapitreId' => null, 'formationId' => null]);
-        } else if(auth()->user()->hasRole('student')) {
-            return view('student.card.create', ['user' => $user, 'card' => $card, 'cardLevels' => $cardLevels, 'semestres' => $semestres, 'matiereId' => null, 'chapitreId' => null,  'formationId' => null]);
+    public function create(): View | RedirectResponse{
+        //Verify if the number of public card is less than the number of public card in the deck 
+        if(User::find(1)->total_card_toshow > Card::where('public', true)->get()->count()) {
+            $user = auth()->user();
+            $card = new Card();
+            $cardLevels = CardLevel::all();
+            $semestres = CardSemestre::all();
+         
+            //formation and matieres is define in livewire component DynamicMatiereSelectUnique for card create
+            if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('prof')) { 
+                $allUser = User::all();
+                $formations = Formation::all(); 
+                
+                return view('student.card.create', ['user' => $user,'formations' => $formations, 'allUser' => $allUser, 'card' => $card, 'cardLevels' => $cardLevels, 'semestres' => $semestres, 'matiereId' => null, 'chapitreId' => null, 'formationId' => null]);
+            } else if(auth()->user()->hasRole('student')) {
+                return view('student.card.create', ['user' => $user, 'card' => $card, 'cardLevels' => $cardLevels, 'semestres' => $semestres, 'matiereId' => null, 'chapitreId' => null,  'formationId' => null]);
+            }
+        } else {
+            return redirect()->route('dashboard')->with('error', 'Le nombre maximum de carte créer a été atteint, veuillez demander à l\'admin d\'augmenter la limite');
         }
+       
     }
 
     //function to store card in the database information wich has upadate or create

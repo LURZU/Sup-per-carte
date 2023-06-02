@@ -24,22 +24,13 @@ class MatiereController extends Controller
     {
         $matieres = Matiere::with('formations')->get();
         foreach($matieres as $matiere) {
+            // get all label of matiere's formations
             $formationLabels = $matiere->formations->pluck('label')->toArray();
             $matiere->formationLabels = $formationLabels;
         }
         return view('admin.matiere.create', ['matieres' => new Matiere()]);
     }
 
-    // public function store(Request $request): RedirectResponse
-    // {
-    //     $request->validate([
-    //         'label' => 'required',
-    //     ]);
-
-    //     Matiere::create($request->all());
-
-    //     return redirect()->route('matieres.index')->with('success', 'Matiere created successfully.');
-    // }
 
     public function edit(Matiere $matiere): View
     {
@@ -57,6 +48,8 @@ class MatiereController extends Controller
         return redirect()->route('admin.matiere.index')->with('success', 'Matiere updated successfully.');
     }
 
+
+    //Catch all relation of matiere and detach them of it (except chapitre who will be redefined to "Chapitre Non assigné")
     public function destroy(Matiere $matiere)
     {
         $matiere->formations()->detach();
@@ -72,6 +65,7 @@ class MatiereController extends Controller
                 $carte->save();
             });
         } else {
+            // Create the chapitre "Chapitre Non assigné" if it doesn't exist
             $matiereNonAssigné = Matiere::create(['label' => 'Non assigné', 'number_chapitre' => 0]);
             $cards->each(function ($carte) use ($matiereNonAssigné) {
                 $carte->matiere_id = $matiereNonAssigné->id;

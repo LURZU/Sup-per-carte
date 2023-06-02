@@ -28,10 +28,10 @@ class ChapitreSelectOption extends Component
     {
         $nouveauChapitre = new Chapitre();
         $nouveauChapitre->label = 'Nouveau chapitre'; 
-        $nouveauChapitre->numero_chapitre = 0;// Ajoutez un label par défaut
-        $nouveauChapitre->save(); // Sauvegardez le nouveau Chapitre
-        $nouveauChapitre->matieres()->attach($this->matiere->id);
-        $this->chapitres->push($nouveauChapitre); // Ajoutez le nouveau Chapitre à la collection
+        $nouveauChapitre->numero_chapitre = 0;// Add default value before it register
+        $nouveauChapitre->save(); //Create a chapter in the databe to push it in the $this->chapitre
+        $nouveauChapitre->matieres()->attach($this->matiere->id); 
+        $this->chapitres->push($nouveauChapitre); 
     }
     
 
@@ -45,10 +45,10 @@ class ChapitreSelectOption extends Component
             }
         }
 
-        // Supprimer le chapitre de la collection
+        // delete the chapitre from the array
         unset($this->chapitres[$index]);
 
-        // Réindexer les clés du tableau pour éviter des problèmes avec Livewire
+        // refresh the array to reset the view livewire
         $this->chapitres = $this->chapitres->values();
     }
 
@@ -68,7 +68,7 @@ class ChapitreSelectOption extends Component
 
         foreach ($this->chapitres as $key => $chapitre) {
             if ($chapitre->id) {
-                // Chapitre existant, mise à jour
+                // Chapitre existant, up to date
                 $chapitre->save();
             } else {
                 // Nouveau chapitre, association à la matière et sauvegarde
@@ -77,7 +77,7 @@ class ChapitreSelectOption extends Component
             }
         }
 
-        $this->matiere->refresh(); // Rafraîchir la relation avec les chapitres
+        $this->matiere->refresh(); // Refresh data from relation
         $this->chapitres = $this->matiere->chapitres()->get();
         return redirect()->route('admin.matiere.index');
         session()->flash('success', 'Les chapitres ont été enregistrés.');

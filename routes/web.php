@@ -26,6 +26,9 @@ use Livewire\Livewire;
 */
 
 Route::get('/', function () {
+    if(Auth::user()->id){
+        return redirect()->route('dashboard');
+    }
     return view('auth.login');
 });
 
@@ -42,6 +45,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     //parameters (Student, prof, admin)
+    Route::get('/parameters', [ProfileController::class, 'parameters'])->name('parameters');
 
      // Global route for all of user (admin, prof, student)
      Route::get('/card/create', [CardController::class, 'create'])->name('card.create');
@@ -63,6 +67,8 @@ Route::middleware('auth')->group(function () {
     //Route for programme (Quizz carte révision)
     Route::get('/programme/select', [ProgrammeQuotidienController::class, 'selectParameters'])->name('programme.select');
     Route::post('/programme/select', [ProgrammeQuotidienController::class, 'startProgram'])->name('programme.start');
+    Route::get('/programme/unmastered', [ProgrammeQuotidienController::class, 'randomCard'])->name('programme.unmastered.start');
+    Route::post('/programme/unmastered', [ProgrammeQuotidienController::class, 'randomCard'])->name('programme.unmastered.start');
 
     //Admin interface
     Route::get('/admin', function () { return view('dashboard');  })->name('admin.dashboard');

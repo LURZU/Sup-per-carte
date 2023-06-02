@@ -26,6 +26,11 @@ class Matiere extends Model
         return $this->belongsToMany(Chapitre::class, 'chapitre_matiere');
     }
 
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'matiere_user', 'user_id', 'matiere_id');
+    }
+
     public function cards()
     {
        

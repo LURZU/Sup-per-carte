@@ -7,6 +7,7 @@ use Livewire\Component;
 use App\Models\CardLevel;
 use App\Models\Matiere;
 use App\Models\Formation;
+use App\Models\User;
 use App\Models\CardSemestre;
 
 class DynamicMatiereSelectUnique extends Component
@@ -40,11 +41,30 @@ class DynamicMatiereSelectUnique extends Component
     {   
          //Same as Chapitre but for Matiere
         $formation = Formation::with('matieres')->find($this->selectedFormation);
-        
-        if ($formation) {
-            $this->matieres = $formation->matieres;
+        if(auth()->user()->hasRole('prof')) {
+            if ($formation) {
+                $user = auth()->user();
+                $userMatieres = $user->matieres()->get();
+
+                // Récupère la formation spécifiée et ses matières
+                $formation = Formation::with('matieres')->find($this->selectedFormation);
+                $formationMatieres = $formation->matieres;
+            
+                // Trouve l'intersection des deux collections
+                $commonMatieres = $userMatieres->intersect($formationMatieres);
+
+                //Set the matieres to the matieres of the formation
+           
+                $this->matieres = $commonMatieres;
+            } else {
+                $this->matieres = [];
+            }
         } else {
-            $this->matieres = [];
+            if ($formation) {
+                $this->matieres = $formation->matieres;
+            } else {
+                $this->matieres = [];
+            }
         }
     }
 
@@ -54,7 +74,7 @@ class DynamicMatiereSelectUnique extends Component
         $this->selectedFormation = $formationId;
         $this->card = $card;
         $formation = Formation::with('matieres')->find($this->selectedFormation);
-        
+        //Set the matieres to the matieres of the formation
         if ($formation) {
             $this->matieres = $formation->matieres;
         } else {
@@ -62,7 +82,7 @@ class DynamicMatiereSelectUnique extends Component
         }
 
         $this->selectedMatiere = $matiereId;
-  
+        //Catch all Matiere with chapitre and wich have the selected id matiere
         $matiere = Matiere::with('chapitres')->find($this->selectedMatiere);
         if ($matiere) {
             $this->chapitres = $matiere->chapitres->pluck('label', 'id')->toArray();
@@ -85,15 +105,18 @@ class DynamicMatiereSelectUnique extends Component
         //Take the formation_id of the user
         $formation = Formation::find($user->formation_id);
         //Contain all of "matiere" for the formation_id FOR STUDENT
-        if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('prof')) {
+        if(auth()->user()->hasRole('admin')) {
             $this->formations = Formation::all();
             
+        } elseif( auth()->user()->hasRole('prof')) {
+            $this->formations = Formation::all();
+         
         } else {
             $this->matieres = $formation->formation_matiere()->wherePivot('formation_id', $user->formation_id)->get();
-            // Récupérer les chapitres pour chaque matière
             $this->matieres->each(function ($matiere) {
                 $matiere->chapitres = $matiere->chapitres()->pluck('label', 'id');
             });
+
         }
     
         $cardLevels =  CardLevel::all(); 
