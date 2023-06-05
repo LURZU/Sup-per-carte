@@ -1,7 +1,8 @@
 @extends('admin.base')
+@section('title', 'Créer une carte')
+
 
 @section('content')
-<h1>Créer une carte</h1>
     @include('admin.users.form')
 @endsection
 

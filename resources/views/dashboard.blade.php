@@ -1,4 +1,5 @@
 <x-app-layout>
+    @section('title', 'Dashboard')
     @section('active_dashboard', 'active')
      @if(session('success'))
      <div class="alert alert-success">{{ session('success') }}</div>
@@ -8,29 +9,68 @@
      <div class="alert alert-danger">{{ session('error') }}</div>
      @endif
 
-    <div class="py-12 w-100">
-        <div class="row">
-            <div class="col-6">
                 @if(auth()->user()->hasRole('admin'))
-                <ul class="list-group text-center d-flex flex-row">
-                    <li class="list-group-item row w-50">
-                        <div class="col-6"><i class="fa fa-cog"></i></div>
-                        <div class="col-6"><a href="{{route('parameters')}}">Paramètres</a></div>
-                    </li>
-                    <li class="list-group-item row w-50">
-                        <div class="col-6"><i class="fa fa-cog"></i></div>
-                        <div class="col-6"><a href="{{route('parameters')}}">Statistiques étudiant</a></div>
-                    </li>
-                    <li class="list-group-item row">
-                        <div class="col-6"><i class="fa fa-cog"></i></div>
-                        <div class="col-6"><a href="{{route('card.index')}}">Carte crées</a></div>
-                    </li>
-                    <li class="list-group-item row">
-                        <div class="col-6"><i class="fa fa-cog"></i></div>
-                        <div class="col-6"><a href="{{route('admin.profil.index')}}">Profils étudiant, Enseignant</a></div>
-                    </li>
-                    <!-- Repeat for each list item -->
-                </ul>
+                    <div class="d-flex flex-row" style="height:100vh!important">
+                        <div class="w-50 h-25 pb-2">
+                            <div class="row g-0 h-75">
+                                <div class="col">
+                                    <ul class="list-group text-center h-100">
+                                        <li class="list-group-item shadow h-100 d-flex align-items-center justify-content-center">
+                                            <div>
+                                                <i class="fa fa-cog fa-xl"></i>
+                                                <div><a class="fs-5" style="font-size: 20px; color: #333333" href="{{route('parameters')}}">Paramètres</a></div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col">
+                                    <ul class="list-group text-center h-100">
+                                        <li class="list-group-item shadow h-100 d-flex align-items-center justify-content-center">
+                                            <div>
+                                                <i class="fa-solid fa-chart-pie m-2 my-2 fa-xl"></i>
+                                                <div><a  style="font-size: 20px; color: #333333" href="{{route('parameters')}}">Statistiques étudiant</a></div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row g-0 mt-3 h-75">
+                                <div class="col">
+                                    <ul class="list-group text-center h-100">
+                                        <li class="list-group-item shadow h-100 d-flex align-items-center justify-content-center">
+                                            <div>
+                                                <i class="fa-solid fa-clipboard-list m-2 my-2 fa-xl"></i>
+                                                <div><a style="font-size: 20px; color: #333333" href="{{route('parameters')}}">Cartes crées</a></div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col">
+                                    <ul class="list-group text-center h-100">
+                                        <li class="list-group-item shadow h-100 d-flex align-items-center justify-content-center">
+                                            <div>
+                                                <i class="fa-solid fa-user-plus m-2 fa-xl"></i>
+                                                <div><a style="font-size: 20px; color: #333333" href="{{route('admin.profil.index')}}">Profils étudiant, Enseignants</a></div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-50 h-50">
+                            <div class="d-flex h-75 align-items-stretch pl-3 shadow">
+                                <ul class="list-group text-center w-100 h-100">
+                                    <li class="list-group-item shadow h-100 d-flex align-items-center justify-content-center">
+                                        <div>
+                                            <i class="fas fa-plus-circle ml-2 fa-xl"></i>
+                                            <div><a style="font-size: 20px; color: #333333" href="{{route('card.index')}}">Créer une carte</a></div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                     
                 @elseif(auth()->user()->hasRole('student'))
                 <ul class="list-group text-center">
                     <li class="list-group-item row">
@@ -60,13 +100,7 @@
                     <!-- Repeat for each list item -->
                 </ul>
                 @endif
-            </div>
-            <div class="col-6 d-flex align-items-center justify-content-center">
-                <div class="text-center">
-                    <i class="fa fa-plus-circle fa-3x"></i>
-                    <a href="{{ route('card.create') }}" class="d-block">Créer une carte</a>
-                </div>
-            </div>
-        </div>
-    </div>
+          
+    
+    
 </x-app-layout>

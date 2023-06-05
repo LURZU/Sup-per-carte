@@ -2,6 +2,8 @@
 
 @section('title', 'Paramètres')
 
+@section('active_parameters', 'active')
+
 @section('content')
 <div>
     <h3>Paramètres</h3>

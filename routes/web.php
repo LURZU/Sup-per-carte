@@ -26,7 +26,7 @@ use Livewire\Livewire;
 */
 
 Route::get('/', function () {
-    if(Auth::user()->id){
+    if(auth()->user()){
         return redirect()->route('dashboard');
     }
     return view('auth.login');

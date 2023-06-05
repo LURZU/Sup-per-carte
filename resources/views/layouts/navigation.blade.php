@@ -2,7 +2,7 @@
     <!-- Sidebar -->
     <div id="sidebar-wrapper">
         <div class="d-flex justify-content-center align-items-center mt-3">
-            <img src="{{ asset('image/logo-supperform.jpg') }}" class="mt-4">
+            <img src="{{ asset('image/logo-supperform.jpg') }}" class="mt-4 P  px-4">
         </div>
         <div class="list-group list-group-flush px-2 p-2 fs-5 pt-5 text-decoration-none">
             <a href="{{ route('dashboard') }}" class="text-decoration-none text-uppercase text-white mt-3 hover-bg my-4 @yield('active_dashboard')"><i class="fa-solid fa-house m-2"></i><span>{{ __('SUP\'PER CARTE') }}</span></a>
@@ -15,7 +15,7 @@
             <!-- Add more links here -->
         </div>
         <div class="d-flex justify-content-center align-items-center my-3" >
-                <button class="btn btn-primary bg-white text-dark border-0 w-100 mx-3 py-3">Créer une carte<i class="fas fa-plus-circle ms-2 "></i></button>
+                <button class="btn btn-primary bg-white text-dark border-0 w-100 mx-3 py-3">Créer une carte<i class="fas fa-plus-circle ml-2 "></i></button>
         </div> 
         <div> 
             <form method="POST" action="{{ route('logout') }}">
@@ -23,8 +23,8 @@
                 <a href="{{ route('logout') }}" class="text-white text-center fs-5 text-decoration-none"><i class="fa-solid fa-power-off m-2 mx-auto  w-100"></i><p class="text-center">Déconnexion</p></a>
             </form>
             <div class="d-flex justify-content-center mt-auto mb-2 fs-3 text-white">
-                <a href="#" class="text-white me-2"><i class="fab fa-instagram "></i></a>
-                <a href="#" class="text-white ms-2"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="text-white mr-2"><i class="fab fa-instagram "></i></a>
+                <a href="#" class="text-white ml-2"><i class="fab fa-facebook-f"></i></a>
             </div>
         </div>
     </div>

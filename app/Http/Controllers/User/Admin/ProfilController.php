@@ -24,7 +24,7 @@ class ProfilController extends Controller
             $users = User::all();
             $users_role = User::getRoles($users);
             $users_role = User::getFormation($users_role);
-            
+            $users_role = User::getRoles($users_role);
             return view('admin.users.userlist', compact('users_role'));
         } else {
             return redirect()->route('dashboard');
@@ -129,7 +129,7 @@ class ProfilController extends Controller
     
         $user->save();
 
-        // Rediriger vers la page d'index des utilisateurs avec un message de succès
+        // Redirect to the users.index view and display message
         return redirect()->route('admin.profil.index')->with('success', 'Utilisateur mis à jour avec succès.');
     }
 
