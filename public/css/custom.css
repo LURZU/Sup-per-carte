@@ -170,3 +170,14 @@
 }
 
 /************************************/
+
+/* Path: views/card/form */
+
+.form-select.select-icon:after {
+    content: '\33';
+    font-family: 'ElegantIcons';
+    font-size: 18px;
+    position: absolute;
+}
+
+/************************************/

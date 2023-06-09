@@ -35,9 +35,9 @@ class CardController extends Controller
                 $allUser = User::all();
                 $formations = Formation::all(); 
                 
-                return view('student.card.create', ['user' => $user,'formations' => $formations, 'allUser' => $allUser, 'card' => $card, 'cardLevels' => $cardLevels, 'semestres' => $semestres, 'matiereId' => null, 'chapitreId' => null, 'formationId' => null]);
+                return view('student.card.create', ['user' => $user,'formations' => $formations, 'allUser' => $allUser, 'card' => $card, 'cardLevels' => $cardLevels, 'semestres' => $semestres, 'matiereId' => null, 'chapitreId' => null, 'formationId' => null, 'cardLevelId' => null]);
             } else if(auth()->user()->hasRole('etudiant')) {
-                return view('student.card.create', ['user' => $user, 'card' => $card, 'cardLevels' => $cardLevels, 'semestres' => $semestres, 'matiereId' => null, 'chapitreId' => null,  'formationId' => null]);
+                return view('student.card.create', ['user' => $user, 'card' => $card, 'cardLevels' => $cardLevels, 'semestres' => $semestres, 'matiereId' => null, 'chapitreId' => null,  'formationId' => null, 'cardLevelId' => null]);
             }
         } else {
             return redirect()->route('dashboard')->with('error', 'Le nombre maximum de carte créer a été atteint, veuillez demander à l\'admin d\'augmenter la limite');
@@ -112,6 +112,7 @@ class CardController extends Controller
             'matiereId' => $card->matiere_id,
             'chapitreId' => $card->card_chapitre_id,
             'formationId' => $card->formation_id,
+            'cardLevelId' => $card->card_level_id,
             'cardLevels' => CardLevel::all(),
             'matieres' => Matiere::all(),
             'chapitres' => Chapitre::all(),

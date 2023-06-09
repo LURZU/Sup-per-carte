@@ -10,7 +10,7 @@
             <a href="{{ route('parameters') }}" class="text-decoration-none text-white @yield('active_parameters')"><i class="fa-solid fa-gear m-2 my-2 "></i>{{ __('Paramètres') }}</a>
             <a href="{{ route('dashboard') }}" class="text-decoration-none text-white @yield('active_app')"><i class="fa-solid fa-database m-2 my-2 "></i>{{ __('Gestion de l\'application') }}</a>
             <a href="{{ route('dashboard') }}" class="text-decoration-none text-white @yield('active_stats')"><i class="fa-solid fa-chart-pie m-2 my-2"></i>{{ __('Statistique étudiant') }}</a>
-            <a href="{{ route('card.create') }}" class="text-decoration-none text-white @yield('active_card')"><i class="fa-solid fa-clipboard-list m-2 my-2"></i>{{ __('Carte créées') }}</a>
+            <a href="{{ route('card.index') }}" class="text-decoration-none text-white @yield('active_card')"><i class="fa-solid fa-clipboard-list m-2 my-2"></i>{{ __('Carte créées') }}</a>
             <a href="{{ route('admin.profil.index') }}" class="text-decoration-none text-white @yield('active_profil')"><i class="fa-solid fa-user-plus m-2"></i>{{ __('Profils étudiant, Enseignant') }}</a>
             <!-- Add more links here -->
         </div>

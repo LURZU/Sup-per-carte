@@ -25,6 +25,7 @@ class CardRequest extends FormRequest
             'question' => 'required|string|min:8',
             'response' => 'required|string|min:8',
             'matiere_id' => 'required|integer',
+            'formation_id' => 'required|integer',
             'public' => 'boolean',
             'card_chapitre_id' => 'required|integer',
             'card_level_id' => 'required|integer',

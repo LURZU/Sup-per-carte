@@ -21,6 +21,8 @@ class DynamicMatiereSelectUnique extends Component
     public $formations;
     public $selectedChapitre;
     public $selectedFormation;
+    public $cardLevels;
+    public $cardLevelId;
     public $semestres;
     public $card;
 
@@ -69,9 +71,12 @@ class DynamicMatiereSelectUnique extends Component
     }
 
 
-    public function mount($matiereId, $chapitreId, $formationId, $card)
+    public function mount($matiereId, $chapitreId, $formationId, $card, $cardLevels ,$cardLevelId)
     {
+        $this->cardLevels = $cardLevels;
+        $this->cardLevelId = $cardLevelId;
         $this->selectedFormation = $formationId;
+
         $this->card = $card;
         $formation = Formation::with('matieres')->find($this->selectedFormation);
         //Set the matieres to the matieres of the formation
