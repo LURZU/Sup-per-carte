@@ -17,6 +17,24 @@ class UserFactory extends Factory
      */
     protected $model = User::class;
 
+
+//$table->id();
+//$table->string('name');
+//$table->string('last_name');
+//$table->string('first_name');
+//$table->string('email')->unique();
+//$table->timestamp('email_verified_at')->nullable();
+//$table->string('password');
+//$table->rememberToken();
+//$table->foreignId('current_team_id')->nullable();
+//$table->string('profile_photo_path', 2048)->nullable();
+//$table->string('civil_status')->nullable();
+//$table->integer('total_connect')->nullable();
+//$table->integer('total_card_toshow')->nullable();
+//$table->foreignId('formation_id')->references('id')->nullable()->on('formation');
+//$table->foreignId('matiere_id')->references('id')->nullable()->on('matiere');
+//$table->timestamps();
+
     /**
      * Define the model's default state.
      *
@@ -26,14 +44,21 @@ class UserFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
+            'first_name' => $this->faker->lastName(),
+            'last_name' => $this->faker->firstName(),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'two_factor_secret' => null,
             'two_factor_recovery_codes' => null,
             'remember_token' => Str::random(10),
-            'profile_photo_path' => null,
-            'current_team_id' => null,
+            'civil_status' => $this->faker->randomElement(['M.', 'Mlle.']),
+            'total_connect' => $this->faker->numberBetween(5, 30),
+            'total_card_toshow' => $this->faker->numberBetween(10, 50),
+            'formation_id' => $this->faker->randomElement([1, 2]),
+            'matiere_id' => $this->faker->randomElement([1, 2]),
+//            'profile_photo_path' => null,
+//            'current_team_id' => null,
         ];
     }
 
