@@ -41,7 +41,7 @@ class DynamicMatiereSelectUnique extends Component
     {   
          //Same as Chapitre but for Matiere
         $formation = Formation::with('matieres')->find($this->selectedFormation);
-        if(auth()->user()->hasRole('prof')) {
+        if(auth()->user()->hasRole('enseignant')) {
             if ($formation) {
                 $user = auth()->user();
                 $userMatieres = $user->matieres()->get();
@@ -108,7 +108,7 @@ class DynamicMatiereSelectUnique extends Component
         if(auth()->user()->hasRole('admin')) {
             $this->formations = Formation::all();
             
-        } elseif( auth()->user()->hasRole('prof')) {
+        } elseif( auth()->user()->hasRole('enseignant')) {
             $this->formations = Formation::all();
          
         } else {

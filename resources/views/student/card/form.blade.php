@@ -10,7 +10,7 @@
                     <form method="post" action="" enctype="multipart/form-data">
                         @csrf
 
-                        @if(auth()->user()->hasRole('student'))
+                        @if(auth()->user()->hasRole('etudiant'))
                         @include('components.radio-select-input-semestre')
                         @endif
                         

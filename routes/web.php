@@ -44,7 +44,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    //parameters (Student, prof, admin)
+    //parameters (Student, enseignant, admin)
     Route::get('/parameters', [ProfileController::class, 'parameters'])->name('parameters');
 
      // Global route for all of user (admin, prof, student)

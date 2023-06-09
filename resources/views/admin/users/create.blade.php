@@ -1,5 +1,5 @@
 @extends('admin.base')
-@section('title', 'Créer une carte')
+@section('title', 'Créer un profil')
 
 
 @section('content')

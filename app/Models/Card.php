@@ -36,6 +36,12 @@ class Card extends Model
         return $this->belongsTo(Matiere::class);
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+
     public function statusCard()
     {
         return $this->belongsTo(StatusCard::class);
@@ -75,13 +81,14 @@ class Card extends Model
 
     public function getCardsWithoutStatus($list_all_cards)
     {
+        //Query to obtain the status of card with join 3 tables
         $cardIdsWithStatus = DB::table('user_status_card')
             ->select('card_id')
             ->distinct()
             ->get()
             ->pluck('card_id')
             ->toArray();
-    
+        //use reject to get the card that don't have status
         $cardsWithoutStatus = $list_all_cards->reject(function ($card) use ($cardIdsWithStatus) {
             return in_array($card->id, $cardIdsWithStatus);
         });

@@ -53,10 +53,15 @@ class ProfilSelectOption extends Component
         $this->email = $user->email;
         $this->schoolId = $user->school_id;
         $this->formationId = $user->formation_id;
+        //Array of matiere_id
         $this->matiereId = $matieresTab;
         if(isset($user->roles()->first()->id)){
             $this->selectedTypeProfil = $user->roles()->first()->id;
         }
+    }
+
+    public function redirect_index() {
+        return redirect()->route('admin.profil.index');
     }
 
     public function render()
@@ -70,11 +75,11 @@ class ProfilSelectOption extends Component
         // foreach for on all role in bdd and add in table list_roles
         $this->roles = [];
         foreach($list_roles as $role){
-            if( $role->name === 'prof') {
+            if( $role->name === 'enseignant') {
                 $role->name = 'Enseignant';
                 $this->roles[] =  $role;
                 
-            } else if($role->name === 'student') {
+            } else if($role->name === 'etudiant') {
                 $role->name = 'Etudiant';
                 $this->roles[] =  $role;
             }

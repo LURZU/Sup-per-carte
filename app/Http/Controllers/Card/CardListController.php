@@ -42,9 +42,9 @@ class CardListController extends Controller
      //function to show all card
      public function showAll(): View | RedirectResponse {
 
-        if(auth()->user()->hasRole('student')) {
+        if(auth()->user()->hasRole('etudiant')) {
             return redirect()->route('card.private');
-        } else if(auth()->user()->hasRole('prof')){
+        } else if(auth()->user()->hasRole('enseignant')){
             return redirect()->route('card.profcard'); 
         }
 
@@ -82,7 +82,7 @@ class CardListController extends Controller
     }
 
     public function showProfCard() {
-        if(auth()->user()->hasRole('student')) {
+        if(auth()->user()->hasRole('etudiant')) {
             return redirect()->route('card.private');
         } else if(auth()->user()->hasRole('admin')){
             return redirect()->route('card.index'); 

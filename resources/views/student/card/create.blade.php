@@ -1,7 +1,7 @@
 @extends('student.base')
 
 @section('content')
-<h1>Créer une carte</h1>
+@section('title', 'Créer une carte')
     @include('student.card.form')
 @endsection
 

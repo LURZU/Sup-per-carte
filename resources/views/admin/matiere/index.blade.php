@@ -20,7 +20,7 @@
                                 <tr>
                                     <th>Nom de la matière</th>
                                     <th>Assigné à la formation Formation</th>
-                                    <th>Prof référent</th>
+                                    <th>Enseignants référent</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>

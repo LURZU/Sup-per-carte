@@ -1,3 +1,16 @@
+/*Import font */
+@font-face {
+	font-family: 'ElegantIcons';
+	src:url('fonts/ElegantIcons.eot');
+	src:url('fonts/ElegantIcons.eot?#iefix') format('embedded-opentype'),
+		url('fonts/ElegantIcons.woff') format('woff'),
+		url('fonts/ElegantIcons.ttf') format('truetype'),
+		url('fonts/ElegantIcons.svg#ElegantIcons') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+/************************************/
+
 .active {
     background-color: #606060;
     color: white;   
@@ -5,3 +18,155 @@
     padding-top: 5px;
     padding-bottom: 5px;
 }
+
+  /* Designing for scroll-bar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    padding: 0 5px!important;
+    margin-right: 5px!important;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: gainsboro;
+    border-radius: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #333333;
+    border-radius: 5px;
+    padding: 0 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+
+
+/* Path: views/livewire/admin/filter-profil */
+
+.dropdown-toggle.btn-secondary.disablebg {
+    background: none;
+    border: none;
+}
+
+.dropdown-toggle.btn-secondary.disablebg::after {
+    display: none;
+}
+
+.custom-table {
+    background-color: #F0F0F0;
+    color: #333333; 
+}
+
+.custom-table th, .custom-table td {
+    border: none;
+}
+
+.card {
+    border-radius: 0;
+}
+
+
+/****************************/
+
+/* Path: views/admin/users/create */
+
+.light-grey-background {
+    background-color: #f2f2f2; 
+    border-radius: 8px;
+    border: 0px;
+}
+
+.btn-custom-grey {
+    background-color: #808080; /* ou la couleur que vous voulez */
+    color: #ffffff; /* couleur du texte sur le bouton */
+} 
+
+.select {
+    border-radius: 8px !important;
+    padding-right: 5px;
+    border-right: none !important;
+}
+.input-group-text {
+    background: none !important;
+    border-radius: 0 0.25rem 0.25rem 0 !important;
+    border-left: none !important;
+}
+
+.radio-input {
+    background-color: white;
+    border: 2px solid #333333;
+}
+
+.radio-input:checked {
+    background-color: #333333;
+    border: 2px solid #333333;
+    color: white;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #FFFFFF;
+    border: 1px solid #333333;
+    border-radius: 5px;
+    min-width: 200px;
+    margin-top: 10px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    
+    z-index: 1;
+  }
+
+  .dropdown-content .dropdown-panel {
+    padding: 2px 2px;
+  }
+  
+  .dropdown .dropdown-content {
+    display: block;
+  }
+  
+  .dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .dropbtn:hover {
+    background-color: #3e8e41;
+  }
+
+
+
+  
+
+/************************************/
+
+/* Path: views/card/list */
+
+
+.card-body .nav-tabs .nav-link {
+    color : #333333;
+    text-transform: uppercase;
+  
+}
+
+.card-body .nav-tabs .nav-link.active {
+    border: 0px;
+    padding: 8px 16px;
+    border-bottom: 2px solid #333333;
+    border-radius: 0px;
+}
+
+/************************************/

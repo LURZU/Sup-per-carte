@@ -16,7 +16,7 @@ class ChapitreController extends Controller
 
     public function index()
     {
-        if(auth()->user()->hasRole('prof')) {
+        if(auth()->user()->hasRole('enseignant')) {
             $matiere = User::find(auth()->user()->id)->matiere_id;
             $matiere_name = Matiere::where('id', $matiere)->first()->label;
             $chapitre = new Chapitre();

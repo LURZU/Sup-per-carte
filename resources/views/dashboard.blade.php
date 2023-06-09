@@ -71,34 +71,108 @@
                         </div>
                     </div>
                      
-                @elseif(auth()->user()->hasRole('student'))
-                <ul class="list-group text-center">
-                    <li class="list-group-item row">
-                        <div class="col-6"><i class="fa fa-cog"></i></div>
-                        <div class="col-6"><a href="{{route('parameters')}}">Paramètres</a></div>
-                    </li>
-                    <li class="list-group-item row">
-                        <div class="col-6"><i class="fa fa-cog"></i></div>
-                        <div class="col-6"><a href="{{route('parameters')}}">Mes statistiques</a></div>
-                    </li>
-                    <li class="list-group-item row">
-                        <div class="col-6"><i class="fa fa-cog"></i></div>
-                        <div class="col-6"><a href="{{route('card.private')}}">Carte crées</a></div>
-                    </li>
-                    <li class="list-group-item row">
-                        <div class="col-6"><i class="fa fa-cog"></i></div>
-                        <div class="col-6"><a href="{{route('admin.favcard')}}">Carte préférées</a></div>
-                    </li>
-                    <!-- Repeat for each list item -->
-                </ul>
-                @elseif(auth()->user()->hasRole('prof'))
-                <ul class="list-group text-center">
-                    <li class="list-group-item row">
-                        <div class="col-6"><i class="fa fa-cog"></i></div>
-                        <div class="col-6"><a href="{{route('parameters')}}">Paramètres</a></div>
-                    </li>
-                    <!-- Repeat for each list item -->
-                </ul>
+                @elseif(auth()->user()->hasRole('etudiant'))
+                <div class="d-flex flex-row" style="height:100vh!important">
+                    <div class="w-50 h-25 pb-2">
+                        <div class="row g-0 h-75">
+                            <div class="col">
+                                <ul class="list-group text-center h-100">
+                                    <li class="list-group-item shadow h-100 d-flex align-items-center justify-content-center">
+                                        <div>
+                                            <i class="fa fa-cog fa-xl"></i>
+                                            <div><a class="fs-5" style="font-size: 20px; color: #333333" href="{{route('parameters')}}">Paramètres</a></div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul class="list-group text-center h-100">
+                                    <li class="list-group-item shadow h-100 d-flex align-items-center justify-content-center">
+                                        <div>
+                                            <i class="fa-solid fa-chart-pie m-2 my-2 fa-xl"></i>
+                                            <div><a  style="font-size: 20px; color: #333333" href="{{route('parameters')}}">Mes statistiques</a></div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row g-0 mt-3 h-75">
+                            <div class="col">
+                                <ul class="list-group text-center h-100">
+                                    <li class="list-group-item shadow h-100 d-flex align-items-center justify-content-center">
+                                        <div>
+                                            <i class="fa-solid fa-clipboard-list m-2 my-2 fa-xl"></i>
+                                            <div><a style="font-size: 20px; color: #333333" href="{{route('parameters')}}">Cartes crées</a></div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul class="list-group text-center h-100">
+                                    <li class="list-group-item shadow h-100 d-flex align-items-center justify-content-center">
+                                        <div>
+                                            <i class="fa-solid fa-user-plus m-2 fa-xl"></i>
+                                            <div><a style="font-size: 20px; color: #333333" href="{{route('admin.profil.index')}}">Carte préférées</a></div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-50 h-50">
+                        <div class="d-flex h-75 align-items-stretch pl-3 shadow">
+                            <ul class="list-group text-center w-100 h-100">
+                                <li class="list-group-item shadow h-100 d-flex align-items-center justify-content-center">
+                                    <div>
+                                        <i class="fas fa-plus-circle ml-2 fa-xl"></i>
+                                        <div><a style="font-size: 20px; color: #333333" href="{{route('card.index')}}">Créer une carte</a></div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                @elseif(auth()->user()->hasRole('enseignant'))
+                <div class="d-flex flex-row" style="height:100vh!important">
+                    <div class="w-50 h-25 pb-2">
+                        <div class="row g-0 h-75">
+                            <div class="col">
+                                <ul class="list-group text-center h-100">
+                                    <li class="list-group-item shadow h-100 d-flex align-items-center justify-content-center">
+                                        <div>
+                                            <i class="fa fa-cog fa-xl"></i>
+                                            <div><a class="fs-5" style="font-size: 20px; color: #333333" href="{{route('parameters')}}">Paramètres</a></div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row g-0 mt-3 h-75">
+                            <div class="col">
+                                <ul class="list-group text-center h-100">
+                                    <li class="list-group-item shadow h-100 d-flex align-items-center justify-content-center">
+                                        <div>
+                                            <i class="fa-solid fa-clipboard-list m-2 my-2 fa-xl"></i>
+                                            <div><a style="font-size: 20px; color: #333333" href="{{route('parameters')}}">Cartes crées</a></div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-50 h-50">
+                        <div class="d-flex h-75 align-items-stretch pl-3 shadow">
+                            <ul class="list-group text-center w-100 h-100">
+                                <li class="list-group-item shadow h-100 d-flex align-items-center justify-content-center">
+                                    <div>
+                                        <i class="fas fa-plus-circle ml-2 fa-xl"></i>
+                                        <div><a style="font-size: 20px; color: #333333" href="{{route('card.index')}}">Créer une carte</a></div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
                 @endif
           
     

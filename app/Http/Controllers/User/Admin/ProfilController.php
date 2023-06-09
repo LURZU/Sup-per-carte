@@ -38,11 +38,11 @@ class ProfilController extends Controller
         // foreach for on all role in bdd and add in table list_roles
         $list_roles = [];
         foreach($roles as $role){
-            if( $role->name === 'prof') {
+            if( $role->name === 'enseignant') {
                 $role->name = 'Enseignant';
                 $list_roles[] =  $role;
                 
-            } else if($role->name === 'student') {
+            } else if($role->name === 'etudiant') {
                 $role->name = 'Etudiant';
                 $list_roles[] =  $role;
             }
@@ -73,9 +73,9 @@ class ProfilController extends Controller
             foreach($request->input('matiere_id') as $matiere) {
                 $user->matieres()->attach($matiere);
             }
-            $user->assignRole('prof');
+            $user->assignRole('enseignant');
         } else if($request->input('role_id') == 3) {
-            $user->assignRole('student');
+            $user->assignRole('etudiant');
         }
         // Associate the user with the role
         $user->schools()->attach($request->input('school_id'));
@@ -89,17 +89,17 @@ class ProfilController extends Controller
 
         $list_roles = [];
         foreach($roles as $role){
-            if( $role->name === 'prof') {
+            if( $role->name === 'enseignant') {
                 $role->name = 'Enseignant';
                 $list_roles[] =  $role;
                 
-            } else if($role->name === 'student') {
+            } else if($role->name === 'etudiant') {
                 $role->name = 'Etudiant';
                 $list_roles[] =  $role;
             }
         }
 
-        if($user->hasRole('student')) {
+        if($user->hasRole('etudiant')) {
             $user->formation_id = $user->formation()->first()->id;
             if(!isset($user->schools()->first()->id)) {
                 $user->school_id = 1;
@@ -107,7 +107,7 @@ class ProfilController extends Controller
                 $user->school_id = $user->schools()->first()->id;
             }
             return view('admin.users.edit',['user' => $user,'roles' => $list_roles ]);
-        } else if($user->hasRole('prof')) {
+        } else if($user->hasRole('enseignant')) {
             $matiere_ids = $user->matieres()->pluck('id')->toArray();
             return view('admin.users.edit', ['user' => $user, 'roles' => $list_roles, 'matieres' => $matiere_ids]);
         }

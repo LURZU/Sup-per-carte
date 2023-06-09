@@ -19,7 +19,7 @@ use App\Models\StatusCard;
 class ProgrammeQuotidienController extends Controller
 {
     public function selectParameters(): View | RedirectResponse{
-        if(auth()->user()->hasRole('prof') || auth()->user()->hasRole('admin')) {
+        if(auth()->user()->hasRole('enseignant') || auth()->user()->hasRole('admin')) {
             return redirect()->route('card.profcard');
         }
         $user = auth()->user();
@@ -31,7 +31,7 @@ class ProgrammeQuotidienController extends Controller
     }
 
     public function startProgram(QuizzSelectRequest $request): View {
-        if (auth()->user()->hasRole('student')) {
+        if (auth()->user()->hasRole('etudiant')) {
             $user = auth()->user();
             $cards = Card::where('matiere_id', $request->input('matiere_id'))->get();
             $card = new Card();
@@ -70,7 +70,7 @@ class ProgrammeQuotidienController extends Controller
 
     //Function to get all of card with no status, wich has public and 
     public function randomCard() {
-        if (auth()->user()->hasRole('student')) {
+        if (auth()->user()->hasRole('etudiant')) {
             $user = auth()->user();
             $cards = Card::all();
             $card = new Card();

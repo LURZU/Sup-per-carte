@@ -52,7 +52,7 @@ class DynamicMatiereSelect extends Component
         //Take the formation_id of the user
         $formation = Formation::find($user->formation_id);
         //Contain all of "matiere" for the formation_id FOR STUDENT
-        if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('prof')) {
+        if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('enseignant')) {
             $this->formations = Formation::all();
             
         } else {

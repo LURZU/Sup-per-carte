@@ -31,12 +31,12 @@ class CardController extends Controller
             $semestres = CardSemestre::all();
          
             //formation and matieres is define in livewire component DynamicMatiereSelectUnique for card create
-            if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('prof')) { 
+            if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('enseignant')) { 
                 $allUser = User::all();
                 $formations = Formation::all(); 
                 
                 return view('student.card.create', ['user' => $user,'formations' => $formations, 'allUser' => $allUser, 'card' => $card, 'cardLevels' => $cardLevels, 'semestres' => $semestres, 'matiereId' => null, 'chapitreId' => null, 'formationId' => null]);
-            } else if(auth()->user()->hasRole('student')) {
+            } else if(auth()->user()->hasRole('etudiant')) {
                 return view('student.card.create', ['user' => $user, 'card' => $card, 'cardLevels' => $cardLevels, 'semestres' => $semestres, 'matiereId' => null, 'chapitreId' => null,  'formationId' => null]);
             }
         } else {
@@ -51,7 +51,7 @@ class CardController extends Controller
         $data = $request->validated();
         $card = new Card($data);
         //set the value of created_by and user_id if admin is the connected user
-        if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('prof')) {
+        if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('enseignant')) {
             if(is_array($request->input('created_by'))){
                 $parts = explode(':', $request->input('created_by'));
                 $id = $parts[1];
@@ -80,7 +80,7 @@ class CardController extends Controller
     public function update(CardRequest $request, Card $card) 
     {
         $data = $request->validated();
-        if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('prof')) {
+        if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('enseignant')) {
             if(is_array($request->input('created_by'))){
                 $parts = explode(':', $request->input('created_by'));
                 $id = $parts[1];
@@ -101,7 +101,7 @@ class CardController extends Controller
     
 
     public function edit(Card $card): View | RedirectResponse{
-        if(auth()->user()->hasRole('student') && $card->user_id != auth()->id()) {
+        if(auth()->user()->hasRole('etudiant') && $card->user_id != auth()->id()) {
             return redirect()->route('card.index');
         } 
         

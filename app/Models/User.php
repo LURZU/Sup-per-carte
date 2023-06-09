@@ -75,6 +75,13 @@ class User extends Authenticatable
         return $this->belongsTo(Formation::class);
     }
 
+    //to use this function, use getRoles($users) in controller
+    public function getMatiereListAttribute($user)
+    {
+        if ($user->role_name === 'enseignant') {
+            $user->matieres_list = $this->matieres()->pluck('label')->toArray();
+        }
+    }
     
     public function matieres()
     {

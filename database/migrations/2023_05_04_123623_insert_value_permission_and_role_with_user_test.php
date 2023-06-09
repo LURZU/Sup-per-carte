@@ -24,8 +24,8 @@ return new class extends Migration
 
         // Define roles
         Role::create(['name' => 'admin']);
-        Role::create(['name' => 'prof']);
-        Role::create(['name' => 'student']);
+        Role::create(['name' => 'enseignant']);
+        Role::create(['name' => 'etudiant']);
     
         // Define permissions
         Permission::create(['name' => 'access_private_card']);
@@ -33,10 +33,10 @@ return new class extends Migration
     
         // Assign permissions to roles
         Role::findByName('admin')->givePermissionTo('manage users');
-        Role::findByName('student')->givePermissionTo('access_private_card');
+        Role::findByName('etudiant')->givePermissionTo('access_private_card');
 
         $user = User::find(2); 
-        $role = Role::where('name', 'student')->first();
+        $role = Role::where('name', 'etudiant')->first();
         $user->assignRole($role);
 
         $user = User::find(1); 
@@ -44,7 +44,7 @@ return new class extends Migration
         $user->assignRole($role);
 
         $user = User::find(3); 
-        $role = Role::where('name', 'prof')->first();
+        $role = Role::where('name', 'enseignant')->first();
         $user->assignRole($role);
     }
 

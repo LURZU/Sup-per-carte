@@ -1,6 +1,6 @@
 @extends('student.base')
 
 @section('content')
-<h1>Mes cartes crées</h1>
+@section('title', 'Carte créées')
     @include('student.card.list')
 @endsection
