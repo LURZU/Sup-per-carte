@@ -5,14 +5,14 @@
         <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
             <input type="radio" class="btn-check mx-2 rounded" name="btnradio" id="btnradio1" wire:model="role" value="all" autocomplete="off" checked>
             <label class="btn btn-outline-secondary mx-2 rounded" for="btnradio1">Tous</label>
-        
+
             <input type="radio" class="btn-check mx-2 rounded" name="btnradio" id="btnradio2" wire:model="role" value="etudiant" autocomplete="off">
             <label class="btn btn-outline-secondary mx-2 rounded" for="btnradio2">Étudiants</label>
-        
+
             <input type="radio" class="btn-check mx-2 rounded" name="btnradio" id="btnradio3" wire:model="role" value="enseignant" autocomplete="off">
             <label class="btn btn-outline-secondary mx-2 rounded" for="btnradio3">Enseignants</label>
-        </div>    
-        
+        </div>
+
         <select class="form-select" style="width: 15%" wire:model="sorting">
             <option value="default" selected hidden disabled>Trier par</option>
             <option value="date_desc">Date de création - Descendant</option>
@@ -23,10 +23,10 @@
     </div>
 
 
-        
+
         <div class="w-100">
             <div class="row justify-content-center">
-                    <div class="card border-0 w-100">   
+                    <div class="card border-0 w-100">
                     <div class="card-body p-0 w-100">
                         <table class="table w-100 custom-table">
                             <tbody>
@@ -46,7 +46,7 @@
                                         <td>
                                             <div class="d-flex align-items-center">
                                                 <div>
-                                                    Créée le {{ $user->created_at->format('d/m/Y') }}
+                                                    Créée le {{ $user->created_at ? $user->created_at->format('d/m/Y') : '-' }}
                                                 </div>
                                             </div>
                                         </td>
@@ -76,8 +76,8 @@
                             </tbody>
                         </table>
                     </div>
-                    
-                
+
+
             </div>
         </div>
     </div>

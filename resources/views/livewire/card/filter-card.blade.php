@@ -87,7 +87,7 @@
             <div class="card mb-4 shadow rounded-3 border-0">
                 <div class="card-header bg-transparent border-0">
                     <span class="card-number">Carte {{$key+1}}</span>
-                    <span class="card-creator">Créée par {{ $list_card->created_by }} le {{$list_card->created_at ? $list_card->created_at->format('d/m/Y') : ''}}</span>
+                    <span class="card-creator">Créée par {{ $list_card->created_by }} le {{$list_card->created_at ? $list_card->created_at->format('d/m/Y') : '-'}}</span>
                 </div>
 
                 <div class="card-body pt-1">
