@@ -4,18 +4,18 @@
         <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
             <input type="radio" class="btn-check mx-2 rounded" name="btnradio" id="btnradio1" wire:model="role" value="default" autocomplete="off" checked>
             <label class="btn btn-outline-secondary mx-2 rounded" for="btnradio1">Tous</label>
-        
+
             <input type="radio" class="btn-check mx-2 rounded" name="btnradio" id="btnradio2" wire:model="role" value="etudiant" autocomplete="off">
             <label class="btn btn-outline-secondary mx-2 rounded" for="btnradio2">Étudiants</label>
-        
+
             <input type="radio" class="btn-check mx-2 rounded" name="btnradio" id="btnradio3" wire:model="role" value="enseignant" autocomplete="off">
             <label class="btn btn-outline-secondary mx-2 rounded" for="btnradio3">Enseignants</label>
 
             <input type="radio" class="btn-check mx-2 rounded" name="btnradio" id="btnradio4" wire:model="role" value="admin" autocomplete="off">
             <label class="btn btn-outline-secondary mx-2 rounded" for="btnradio4">Admin</label>
-        </div> 
-      
-    
+        </div>
+
+
 
         <div class="w-25 d-flex flex-wrap justify-content-between">
           <div class="dropdown">
@@ -32,7 +32,7 @@
                                 <label><input type="checkbox" value="{{$formation->id}}"> {{$formation->label}}</label><br>
                             @endforeach
                         </div>
-        
+
                         <button class="btn matieres fw-bold" type="button">
                             Matières
                             <i class="fa-solid fa-chevron-down"></i>
@@ -62,11 +62,11 @@
                                 <label><input type="checkbox"  value="{{$niveau->id}}"> {{$niveau->label}}</label><br>
                             @endforeach
                         </div>
-        
+
                         <!-- Faites de même pour les chapitres et niveaux -->
                     </div>
                     <button class="w-100 text-white border-0" style="background-color:#606060; height: 35px; " id="apply-filters">Valider les filtres</button>
-                </div> 
+                </div>
             @endif
           </div>
           <select class="form-select ms-4" style="width: 50%;  border-color: #333333;" wire:model="sorting">
@@ -78,13 +78,16 @@
       </div>
 
       <div class="row overflow-auto">
+
         @forelse ($list_card_all as $key => $list_card)
+
+{{--              {{ dd($list_card->created_by) }}--}}
         <div class="col-md-6">
 
             <div class="card mb-4 shadow rounded-3 border-0">
                 <div class="card-header bg-transparent border-0">
                     <span class="card-number">Carte {{$key+1}}</span>
-                    <span class="card-creator">Créée par {{$list_card->created_by}} le {{$list_card->created_at->format('d/m/Y')}}</span>
+                    <span class="card-creator">Créée par {{ $list_card->created_by }} le {{$list_card->created_at ? $list_card->created_at->format('d/m/Y') : ''}}</span>
                 </div>
 
                 <div class="card-body pt-1">
@@ -109,8 +112,8 @@
                           </div>
                               <div class="w-75">
                               <h3 class="fw-bold text-center mb-1">Question</h3>
-                              <p style="color:#c5c5c5; font-size: 14px;" class="text-center mb-1">Matière {{$list_card->matiere}} / Chap. {{$list_card->chapitre}} / Niv. {{$list_card->level}}</p> 
-                              </div> 
+                              <p style="color:#c5c5c5; font-size: 14px;" class="text-center mb-1">Matière {{$list_card->matiere}} / Chap. {{$list_card->chapitre}} / Niv. {{$list_card->level}}</p>
+                              </div>
                               <div class="d-flex justify-content-end">
                                 <div class="btn-group">
                                     <button class="btn btn-secondary dropdown-toggle disablebg" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -132,7 +135,7 @@
                           </div>
                         </div>
                         <div class="pb-0 tab-pane fade" id="answer{{$key}}" role="tabpanel" aria-labelledby="answer-tab">
-                            
+
                           <div id="card-header" class="d-flex flex-wrap justify-content-between" style="">
                               <div class="d-flex justify-content-end">
                                 <div class="btn-group">
@@ -143,8 +146,8 @@
                               </div>
                                 <div class="w-75">
                                 <h3 class="fw-bold text-center mb-1">Réponse</h3>
-                                <p style="color:#c5c5c5; font-size: 14px;" class="text-center mb-1">Matière {{$list_card->matiere}} / Chap. {{$list_card->chapitre}} / Niv. {{$list_card->level}}</p> 
-                                </div> 
+                                <p style="color:#c5c5c5; font-size: 14px;" class="text-center mb-1">Matière {{$list_card->matiere}} / Chap. {{$list_card->chapitre}} / Niv. {{$list_card->level}}</p>
+                                </div>
                                 <div class="d-flex justify-content-end">
                                   <div class="btn-group">
                                       <button class="btn btn-secondary dropdown-toggle disablebg" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -168,7 +171,7 @@
                         </div>
                     </div>
                 </div>
-       
+
             </div>
         </div>
         @empty
@@ -179,9 +182,9 @@
                 </div>
             </div>
         </div>
-        @endforelse 
+        @endforelse
     </div>
-    
+
     @else
     <h2>Vous n'êtes pas connecté</h2>
     <button href="{{route('card.index')}}"></button>
