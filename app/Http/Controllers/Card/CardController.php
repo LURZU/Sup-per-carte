@@ -72,8 +72,17 @@ class CardController extends Controller
             $card->public = false;
             $card->validated_by = null;
         }
+        if ($request->hasFile('question_img_url')) {
+            $questionImagePath = $request->file('question_img_url')->store('img/card', 'public');
+            $card->question_img_url = $questionImagePath;
+        }
+    
+        if ($request->hasFile('response_img_url')) {
+            $responseImagePath = $request->file('response_img_url')->store('img/card', 'public');
+            $card->response_img_url = $responseImagePath;
+        }
         $card->save();
-        return redirect()->route('card.index')->with('success', 'Carte créée avec succès.');
+        return redirect()->route('card.index')->with('success', 'Votre carte a été créée avec succès.');
     }    
 
     //update all of validated request value + change the Created By if admin is the connected user
@@ -94,9 +103,21 @@ class CardController extends Controller
             $card->created_by = $name;
             $card->user_id = $id;
         } 
+        if ($request->hasFile('question_img_url')) {
+            $questionImagePath = $request->file('question_img_url')->store('img/card', 'public');
+            $card->question_img_url = $questionImagePath;
+            $card->save();
+        }
+    
+        if ($request->hasFile('response_img_url')) {
+            $responseImagePath = $request->file('response_img_url')->store('img/card', 'public');
+            $card->response_img_url = $responseImagePath;
+            $card->save();
+        }
+        
         $card->update($data);
     
-        return redirect()->route('card.index');
+        return redirect()->route('card.index')->with('success', 'Votre carte a été modifiée avec succès.');
     }
     
 

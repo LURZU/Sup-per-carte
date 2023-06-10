@@ -10,6 +10,7 @@ use App\Models\CardSemestre;
 use App\Models\Matiere;
 use App\Models\StatusCard;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 
 
@@ -29,6 +30,8 @@ class Card extends Model
         'card_semestre_id',
         'createdBy',
         'ValidatedBy',
+        'question_img_url',
+        'response_img_url',
     ];
 
     public function matiere()
@@ -108,5 +111,14 @@ class Card extends Model
     
         return $filteredCards;
     }
+
+    public function imageUrlQuestion(): string  {
+        return Storage::url($this->response_img_url);
+    }
+
+    public function imageUrlResponse(): string  {
+        return Storage::url($this->question_img_url);
+    }
+
 
 }

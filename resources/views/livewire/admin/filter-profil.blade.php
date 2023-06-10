@@ -38,6 +38,7 @@
                                                 {{ $user->role_name.' / '.$user->formation->label }}
                                             @elseif($user->role_name == 'enseignant')
                                             {{ $user->role_name.' / ' }}
+                                            
                                             @foreach($user->matieres_list as $matiere)
                                                 {{ $matiere }},
                                             @endforeach

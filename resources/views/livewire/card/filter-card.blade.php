@@ -105,7 +105,7 @@
                           <div id="card-header" class="d-flex flex-wrap justify-content-between" style="">
                             <div class="d-flex justify-content-end">
                               <div class="btn-group">
-                                  <button class="btn btn-secondary dropdown-toggle disablebg" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                  <button id="question-img-button-{{$list_card->id}}"  class="btn btn-secondary dropdown-toggle disablebg" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                       <span class="bg-white p-2" style="border-radius: 100%; padding: 5px 10px!important;"><i class="fa-solid fa-plus fa-sm" style="color: #606060; "></i></span>
                                   </button>
                               </div>
@@ -121,11 +121,8 @@
                                     </button>
                                     <ul class="dropdown-menu">
                                         <li> <a class="dropdown-item" href="{{ route('card.edit', ['card' => $list_card]) }}">Modifier</a></li>
-                                        <li><form action="{{ route('card.del', ['card' => $list_card]) }}" method="POST" class="d-inline">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="dropdown-item">Supprimer</button>
-                                            </form></li>
+                                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" data-url="{{ route('card.del', ['card' => $list_card]) }}">Supprimer</a>
+                                        </li>
                                     </ul>
                                 </div>
                               </div>
@@ -139,7 +136,7 @@
                           <div id="card-header" class="d-flex flex-wrap justify-content-between" style="">
                               <div class="d-flex justify-content-end">
                                 <div class="btn-group">
-                                    <button class="btn btn-secondary dropdown-toggle disablebg" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <button id="response-img-button-{{$list_card->id}}" class="btn btn-secondary dropdown-toggle disablebg" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         <span class="bg-white p-2" style="border-radius: 100%; padding: 5px 10px!important;"><i class="fa-solid fa-plus fa-sm" style="color: #606060; "></i></span>
                                     </button>
                                 </div>
@@ -155,11 +152,7 @@
                                       </button>
                                       <ul class="dropdown-menu">
                                           <li> <a class="dropdown-item" href="{{ route('card.edit', ['card' => $list_card]) }}">Modifier</a></li>
-                                          <li><form action="{{ route('card.del', ['card' => $list_card]) }}" method="POST" class="d-inline">
-                                              @csrf
-                                              @method('DELETE')
-                                              <button type="submit" class="dropdown-item">Supprimer</button>
-                                              </form></li>
+                                          <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" data-url="{{ route('card.del', ['card' => $list_card]) }}">Supprimer</a>
                                       </ul>
                                   </div>
                                 </div>
@@ -174,6 +167,7 @@
 
             </div>
         </div>
+
         @empty
         <div class="col-md-4">
             <div class="card mb-4 shadow">
@@ -191,3 +185,38 @@
     @endif
     <script src="{{ asset('js/app.js') }}"></script>
   </div>
+    <div id="question-img-modal-{{$list_card->id}}" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <img id="question-img-{{$list_card->id}}" src="" alt="Question image">
+        </div>
+    </div>
+
+<script>
+    var btn = document. getElementById("question-img-button-{{$list_card->id}}");
+    var modal = document.getElementById("question-img-modal-{{$list_card->id}}");
+    var img = document.getElementById("question-img-{{$list_card->id}}");
+    var span = document.getElementsByClassName("close")[0];
+    var btnresponse = document.getElementById("response-img-button-{{$list_card->id}}");
+    var modal = document.getElementById("question-img-modal-{{$list_card->id}}");
+
+    btn.onclick = function() {
+        img.src = '{{$list_card->imageUrlQuestion()}}'; // Remplacer par le chemin de l'image correspondant à la question
+        modal.style.display = "block";
+    }
+
+    btnresponse.onclick = function() {
+        img.src = '{{$list_card->imageUrlResponse()}}'; // Remplacer par le chemin de l'image correspondant à la question
+        modal.style.display = "block";
+    }
+
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>

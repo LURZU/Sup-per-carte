@@ -19,9 +19,10 @@
                 <a class="btn btn-primary bg-white text-dark border-0 w-100 mx-3 py-3" href="{{route('card.create')}}">Créer une carte<i class="fas fa-plus-circle ms-2 "></i></a>
         </div> 
         <div class="mt-3"> 
-            <form method="POST" action="{{ route('logout') }}">
+            <form action="{{ route('logout') }}" method="POST" >
                 @csrf
-                <a href="{{ route('logout') }}" class="text-white text-center fs-5 text-decoration-none"><i class="fa-solid fa-power-off  mx-auto  w-100"></i><p class="text-center">Déconnexion</p></a>
+                @method('POST')
+                <a href="" class="text-white text-center fs-5 text-decoration-none"><i class="fa-solid fa-power-off  mx-auto  w-100"></i><p class="text-center">Déconnexion</p></a>
             </form>
             <div class="d-flex justify-content-center mt-auto mb-2 fs-3 text-white">
                 <a href="#" class="text-white me-2"><i class="fab fa-instagram "></i></a>

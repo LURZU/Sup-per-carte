@@ -11,13 +11,9 @@
                         @include('components.radio-select-input-semestre')
                         @endif
 
-                     
-    
                         @livewire('card.dynamic-matiere-select-unique', ['matiereId' => $matiereId, 'chapitreId' => $chapitreId, 'formationId' => $formationId, 'card' => $card, 'cardLevels' => $cardLevels, 'cardLevelId' => $cardLevelId] )
 
                         <div class="row">
-
-                        <!-- End of the new grid layout -->
 
                         @if(auth()->user()->hasRole('admin'))
                         <script>
@@ -33,11 +29,11 @@
                         </script>
                         <div class="d-flex mt-4">
                         <div class="pb-0 tab-pane fade show active w-50 me-4">
-                            <div id="card-header" class="d-flex flex-wrap justify-content-between" style="">
+                            <div id="card-header" class="d-flex flex-wrap justify-content-between py-2" style="">
                                 <div class="d-flex justify-content-end">
                                   <div class="btn-group">
                                       <button class="btn btn-secondary dropdown-toggle disablebg" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                          <span class="bg-white p-2" style="border-radius: 100%; padding: 1px 7px!important;"><i class="fa-solid fa-plus fa-2xs" style="color: #606060; "></i></span>
+                                          <span id="question-img-button-{{$card->id}}" class="bg-white p-2" style="border-radius: 100%; padding: 1px 7px!important;"><i class="fa-solid fa-plus fa-2xs" style="color: #606060; "></i></span>
                                       </button>
                                   </div>
                                 </div>
@@ -49,14 +45,15 @@
                                   </div>
                             </div>
                             <textarea style="background-color: #D5D5D5; border-radius: 0px 0px 6px 6px; resize: none; height: 200px;" id="question" type="text" class=" w-100 p-3 form-control @error('question') is-invalid @enderror" name="question" value="" placeholder="Question">{{ old('question', $card->question) }}</textarea>
+                            <input type="file" class="form-control" id="question_img_url" name="question_img_url">
                         </div>
 
                         <div class="pb-0 tab-pane fade show active w-50">
-                            <div id="card-header" class="d-flex flex-wrap justify-content-between" style="">
+                            <div id="card-header" class="d-flex flex-wrap justify-content-between py-2" style="">
                                 <div class="d-flex justify-content-end">
                                   <div class="btn-group">
                                       <button class="btn btn-secondary dropdown-toggle disablebg" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                          <span class="bg-white p-2" style="border-radius: 100%; padding: 1px 7px!important;"><i class="fa-solid fa-plus fa-2xs" style="color: #606060; "></i></span>
+                                          <span id="response-img-button-{{$card->id}}" class="bg-white p-2" style="border-radius: 100%; padding: 1px 7px!important;"><i class="fa-solid fa-plus fa-2xs" style="color: #606060; "></i></span>
                                       </button>
                                   </div>
                                 </div>
@@ -67,7 +64,9 @@
                                     <p></p>
                                   </div>
                             </div>
-                                <textarea style="background-color: #D5D5D5; border-radius: 0px 0px 6px 6px; resize: none;     height: 200px; " id="response" type="text" class=" w-100 p-3 form-control @error('response') is-invalid @enderror" name="response" value="" placeholder="Réponse">{{ old('response', $card->response) }}</textarea>
+                                <textarea style="background-color: #D5D5D5; border-radius: 0px 0px 6px 6px; resize: none; height: 200px; " id="response" type="text" class=" w-100 p-3 form-control @error('response') is-invalid @enderror" name="response" value="" placeholder="Réponse">{{ old('response', $card->response) }}
+                                </textarea>
+                                <input type="file" class="form-control" id="response_img_url" name="response_img_url">
                         </div>
                         </div> 
                         <h5 class="mt-4 mb-2">Qui a crée la carte ?</h5>
@@ -104,17 +103,19 @@
                         </div>
                         @endif
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary" style="background-color: #333333 ; border-color: #333333">
+                        <div class="d-flex justify-content-center mb-0 mt-4" style="text-align: center;">
+                            <div class="w-100">
+                                <button type="submit" class="btn btn-primary py-2" style="background-color: #333333 ; border-color: #333333; width: 300px;">
                                     @if($card->id)
                                     {{ __('Confirmer la modification') }}
                                     @else
                                     {{ __('Créer la carte') }}
                                     @endif
+                                    <i class="fa-solid fa-chevron-right ps-2"></i>
                                 </button>
                             </div>
                         </div>
+                        
                     </form>
                 </div>
             </div>
@@ -131,5 +132,41 @@
 </ul>
 </div>
 @endif
+
+<div id="question-img-modal-{{$card->id}}" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <img id="question-img-{{$card->id}}" src="" alt="Question image">
+    </div>
+</div>
+
+<script>
+    var btn = document.getElementById("question-img-button-{{$card->id}}");
+    var modal = document.getElementById("question-img-modal-{{$card->id}}");
+    var img = document.getElementById("question-img-{{$card->id}}");
+    var span = document.getElementsByClassName("close")[0];
+    var btnresponse = document.getElementById("response-img-button-{{$card->id}}");
+    var modal = document.getElementById("question-img-modal-{{$card->id}}");
+
+    btn.onclick = function() {
+        img.src = '{{$card->imageUrlQuestion()}}'; // Remplacer par le chemin de l'image correspondant à la question
+        modal.style.display = "block";
+    }
+
+    btnresponse.onclick = function() {
+        img.src = '{{$card->imageUrlResponse()}}'; // Remplacer par le chemin de l'image correspondant à la question
+        modal.style.display = "block";
+    }
+
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
 
 <script src="{{ asset('js/app.js') }}"></script>

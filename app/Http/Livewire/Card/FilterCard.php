@@ -70,6 +70,8 @@ class FilterCard extends Component
             $this->list_card_all =  $this->list_card_all->sortBy('created_at');
         } elseif($this->sorting === 'desc') {
             $this->list_card_all =  $this->list_card_all->sortByDesc('created_at');
+        } elseif($this->sorting === 'default'){
+            $this->list_card_all =  $this->list_card_all->sortByDesc('created_at');
         }
         return view('livewire.card.filter-card', [
             'list_card_all' =>  $this->list_card_all,

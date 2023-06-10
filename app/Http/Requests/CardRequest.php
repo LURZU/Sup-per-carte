@@ -32,7 +32,9 @@ class CardRequest extends FormRequest
             'card_semestre_id' => 'required|integer',
             'created_by' => 'string',
             'validated_by' => 'string',
-            'user_id' => 'integer'
+            'user_id' => 'integer',
+            'question_img_url' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'response_img_url' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }
 

@@ -17,6 +17,8 @@ return new class extends Migration
             $table->foreignId('formation_id')->nullable()->reference('id')->on('formation');
             $table->string('question', 1000);
             $table->string('response', 1000);
+            $table->string('question_img_url')->nullable();
+            $table->string('response_img_url')->nullable();
             $table->boolean('public');
             $table->integer('card_chapitre_id');
             $table->foreignId('card_level_id')->references('id')->on('card_level');

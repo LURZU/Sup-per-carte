@@ -32,6 +32,8 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+Route::get('/logout', 'Auth\LoginController@logout');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

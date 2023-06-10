@@ -28,6 +28,9 @@ class FilterProfil extends Component
         }
     }
     
+    public function AssignMatiere() {
+
+    }
     
     public function updatedRole()
     {
@@ -50,7 +53,6 @@ class FilterProfil extends Component
         $this->originalUsers = $user->getRoles($this->originalUsers);
         $this->originalUsers = $user->getFormation($this->originalUsers);
         $users = collect($this->originalUsers);
-
     
         if ($this->search) {
             $users = $users->filter(function ($user) {
@@ -77,12 +79,18 @@ class FilterProfil extends Component
             case 'name_za':
                 $users = $users->sortByDesc('name');
                 break;
-            default:
-                // Pas besoin de faire quoi que ce soit ici car nous avons déjà affecté $users au-dessus.
+        
         }
     
-        // Après le tri, réassigner $this->users
+
         $this->users = $users->values()->all();
+        foreach($this->users as $user) {
+            // take all matieres for enseignant
+            if($user->role_name === 'enseignant') {
+                $user->getMatiereListAttribute($user);
+            }
+        }
+
     }
     
     
