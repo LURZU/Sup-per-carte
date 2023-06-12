@@ -25,8 +25,8 @@ return new class extends Migration
             $table->string('civil_status')->nullable();
             $table->integer('total_connect')->nullable();
             $table->integer('total_card_toshow')->nullable();
-            $table->foreignId('formation_id')->references('id')->nullable()->on('formation');
-            $table->foreignId('matiere_id')->references('id')->nullable()->on('matiere');
+            $table->foreignId('formation_id')->nullable()->references('id')->on('formation');
+            $table->foreignId('matiere_id')->nullable()->references('id')->on('matiere');
             $table->timestamps();
         });
     }
