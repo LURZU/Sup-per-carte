@@ -38,6 +38,8 @@ class ProfilController extends Controller
         // foreach for on all role in bdd and add in table list_roles
         $list_roles = [];
         foreach($roles as $role){
+
+            //FIXME: Capitalize on CSS on display because changing the property value can causes conflicts after (there is more places with the same)
             if( $role->name === 'enseignant') {
                 $role->name = 'Enseignant';
                 $list_roles[] =  $role;
@@ -121,11 +123,13 @@ class ProfilController extends Controller
 
     public function update(ProfileUpdateRequest $request, User $user)
     {
+
         // Valider les données du formulaire
         $data = $request->validated();
         $user = new User($data);
 
         $user->name = $request->input('name');
+        //FIXME: can't update user because of error on form: The email has already been taken.
         $user->email = $request->input('email');
 
         $user->save();
