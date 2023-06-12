@@ -1,4 +1,5 @@
     @if (auth()->user())
+    @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('enseignant'))
     <div>
     <div class="d-flex justify-content-between mb-4">
         <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
@@ -14,10 +15,14 @@
             <input type="radio" class="btn-check mx-2 rounded" name="btnradio" id="btnradio4" wire:model="role" value="admin" autocomplete="off">
             <label class="btn btn-outline-secondary mx-2 rounded" for="btnradio4">Admin</label>
         </div>
+        @else
+        <div class="d-flex justify-content-between">
+            <span></span>
+        </div>
+        @endif
 
 
-
-        <div class="w-25 d-flex flex-wrap justify-content-between">
+        <div class="w-25 d-flex flex-wrap justify-content-between mt-2 response-mobile">
           <div class="dropdown">
             <button class="btn btn-primary bg-white border" style="color: #333333; border-color: #333333!important;" wire:click="toggleDropdown">Filtrer <i class="fa-solid fa-sliders"></i></button>
             @if($showDropdown)
@@ -77,7 +82,11 @@
         </div>
       </div>
 
-      <div class="row overflow-auto">
+        @if(auth()->user()->hasRole('etudiant'))
+      <div class="row overflow-auto mt-4 ms-4 disable-margin-mobile">
+        @else
+        <div class="row overflow-auto">
+        @endif
 
         @forelse ($list_card_all as $key => $list_card)
 
@@ -103,7 +112,7 @@
                     <div class="tab-content" id="myTabContent">
                         <div class="pb-0 tab-pane fade show active" id="question{{$key}}" role="tabpanel" aria-labelledby="question-tab">
                           <div id="card-header" class="d-flex flex-wrap justify-content-between" style="">
-                            <div class="d-flex justify-content-end">
+                            <div class="d-flex justify-content-end mobile-w-15">
                               <div class="btn-group">
                                   <button id="question-img-button-{{$list_card->id}}"  class="btn btn-secondary dropdown-toggle disablebg" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                       <span class="bg-white p-2" style="border-radius: 100%; padding: 5px 10px!important;"><i class="fa-solid fa-plus fa-sm" style="color: #606060; "></i></span>
@@ -114,7 +123,7 @@
                               <h3 class="fw-bold text-center mb-1">Question</h3>
                               <p style="color:#c5c5c5; font-size: 14px;" class="text-center mb-1">Matière {{$list_card->matiere}} / Chap. {{$list_card->chapitre}} / Niv. {{$list_card->level}}</p>
                               </div>
-                              <div class="d-flex justify-content-end">
+                              <div class="d-flex justify-content-end ">
                                 <div class="btn-group">
                                     <button class="btn btn-secondary dropdown-toggle disablebg" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="fa-solid fa-ellipsis-vertical fa-xl" style="color: white;"></i>
@@ -134,7 +143,7 @@
                         <div class="pb-0 tab-pane fade" id="answer{{$key}}" role="tabpanel" aria-labelledby="answer-tab">
 
                           <div id="card-header" class="d-flex flex-wrap justify-content-between" style="">
-                              <div class="d-flex justify-content-end">
+                              <div class="d-flex justify-content-end mobile-w-15">
                                 <div class="btn-group">
                                     <button id="response-img-button-{{$list_card->id}}" class="btn btn-secondary dropdown-toggle disablebg" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         <span class="bg-white p-2" style="border-radius: 100%; padding: 5px 10px!important;"><i class="fa-solid fa-plus fa-sm" style="color: #606060; "></i></span>
@@ -167,6 +176,41 @@
 
             </div>
         </div>
+            <div id="question-img-modal-{{$list_card->id}}" class="modal">
+        <div class="modal-content">
+            <span class="close-pop-{{$list_card->id}}">&times;</span>
+            <img id="question-img-{{$list_card->id}}" src="" alt="Question image">
+        </div>
+    </div>
+
+    <script>
+        var btn = document. getElementById("question-img-button-{{$list_card->id}}");
+        var modal = document.getElementById("question-img-modal-{{$list_card->id}}");
+        var img = document.getElementById("question-img-{{$list_card->id}}");
+        var span = document.getElementsByClassName("close-pop-{{$list_card->id}}")[0];
+        var btnresponse = document.getElementById("response-img-button-{{$list_card->id}}");
+        var modal = document.getElementById("question-img-modal-{{$list_card->id}}");
+
+        btn.onclick = function() {
+            img.src = '{{$list_card->imageUrlQuestion()}}'; // Remplacer par le chemin de l'image correspondant à la question
+            modal.style.display = "block";
+        }
+
+        btnresponse.onclick = function() {
+            img.src = '{{$list_card->imageUrlResponse()}}'; // Remplacer par le chemin de l'image correspondant à la question
+            modal.style.display = "block";
+        }
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
 
         @empty
         <div class="col-md-4">
@@ -185,38 +229,4 @@
     @endif
     <script src="{{ asset('js/app.js') }}"></script>
   </div>
-    <div id="question-img-modal-{{$list_card->id}}" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <img id="question-img-{{$list_card->id}}" src="" alt="Question image">
-        </div>
-    </div>
 
-<script>
-    var btn = document. getElementById("question-img-button-{{$list_card->id}}");
-    var modal = document.getElementById("question-img-modal-{{$list_card->id}}");
-    var img = document.getElementById("question-img-{{$list_card->id}}");
-    var span = document.getElementsByClassName("close")[0];
-    var btnresponse = document.getElementById("response-img-button-{{$list_card->id}}");
-    var modal = document.getElementById("question-img-modal-{{$list_card->id}}");
-
-    btn.onclick = function() {
-        img.src = '{{$list_card->imageUrlQuestion()}}'; // Remplacer par le chemin de l'image correspondant à la question
-        modal.style.display = "block";
-    }
-
-    btnresponse.onclick = function() {
-        img.src = '{{$list_card->imageUrlResponse()}}'; // Remplacer par le chemin de l'image correspondant à la question
-        modal.style.display = "block";
-    }
-
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
-
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-</script>

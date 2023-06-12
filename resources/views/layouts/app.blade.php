@@ -39,9 +39,34 @@
     </style>
 </head>
 <body class="font-sans antialiased h-100" style="height: 100vh!important;">
+    <div class="header shadow-sm justify-content-between">
+    <div class="burger-menu icon nav-icon-5  mt-4">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <x-application-logo style="width: 200px" class="justify-content-center mt-3 disable-desktop" />
+
+    <div class="d-inline" style="width: 28px; height: 32px;">
+        <button class="btn btn-secondary dropdown-toggle disablebg position-absolute" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="right: 25px; top: 20px">
+            <i class="fa-regular fa-user fa-2xl" style="color: #333333"></i>
+        </button>
+        <ul class="dropdown-menu">
+            <li class="text-center mb-2">Bonjour <b>{{auth()->user()->name}}</b>,</li>
+            <li> <a class="dropdown-item text-center py-2" href="{{ route('profile.edit')}}">Profile</a></li>
+            <li> <a class="dropdown-item text-center" href=""> 
+                <form action="{{ route('logout') }}" method="POST" >
+                @csrf
+                @method('POST')
+                    <button type="submit"  class="dropdown-item text-center" style="background-color: transparent;">Déconnexion</button>
+            </form></a></li>
+        </ul>
+    </div>  
+    </div>
     <div class="d-flex h-100" id="wrapper">
-        @include('layouts.navigation')
    
+        @include('layouts.navigation')
         <!-- Page Heading -->
         <div id="page-content-wrapper" class="w-100" style="overflow: auto;">
             @if (isset($header))
@@ -51,8 +76,8 @@
                     </div>
                 </header>
             @endif
-            <div class="px-5 w-100">
-                <div class="d-flex align-items-center my-5 ml-4">
+            <div class="px-5 w-100 disable-padding-mobile">
+                <div class="d-flex align-items-center my-5 ml-4 my-reduce-mobile @yield('display_title_h1')">
                     <i class="fa-solid fa-table-cells-large fa-2xl mr-3"></i>
                     <h2 class="fs-3 mb-0 ms-2">@yield('title')</h2>
                 </div>
@@ -65,5 +90,16 @@
         </div>
     </div>
     @livewireScripts
+    <script>
+        $('.burger-menu').click(function() {
+            $('#sidebar-wrapper').slideToggle();
+        });
+        const icons = document.querySelectorAll('.icon');
+        icons.forEach (icon => {  
+        icon.addEventListener('click', (event) => {
+            icon.classList.toggle("open");
+        });
+        });
+    </script>
 </body>
 </html>

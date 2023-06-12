@@ -14,16 +14,30 @@ class DynamicMatiereSelect extends Component
 {
     public $formation;
     public $selectedMatiere;
+    public $cardLevels;
     public $matiere_id;
     public $chapitre_id;
+    public $card_id;
     public $chapitres = [];
     public $matieres = [];
     public $formations;
     public $selectedChapitre;
     public $selectedFormation;
+    public $selectedLevel;
+    public $selectedNumberCard;
     public $semestres;
     public $card;
+    public $step = 1;
 
+    public function nextStep()
+    {
+        $this->step++;
+    }
+
+    public function previousStep()
+    {
+        $this->step--;
+    }
 
     public function updateChapitres()
     {   
@@ -42,7 +56,11 @@ class DynamicMatiereSelect extends Component
 
     public function submitForm()
     {
-        $this->redirect(route('card.edit', ['card' => $this->card, 'matiereId' => $this->selectedMatiere, 'chapitreId' => $this->selectedChapitre]));
+        $this->redirect(route('programme.start', ['card' => $this->card, 'matiere_id' => $this->selectedMatiere, 'card_chapitre_id' => $this->selectedChapitre, 'card_level_id' => $this->selectedLevel, 'number_card' => $this->selectedNumberCard]));
+    }
+
+    public function mount($cardLevels) {
+        $this->cardLevels = $cardLevels;
     }
 
 

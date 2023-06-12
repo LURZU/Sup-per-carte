@@ -27,9 +27,13 @@ use Livewire\Livewire;
 
 Route::get('/', function () {
     if(auth()->user()){
+        if(auth()->user()->hasRole('etudiant')) {
+            return redirect()->route('student.index');
+        }
         return redirect()->route('dashboard');
     }
-    return view('auth.login');
+   
+    return redirect()->route('login');
 });
 
 Route::get('/logout', 'Auth\LoginController@logout');
@@ -39,7 +43,6 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-
 
     //Route for profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -61,7 +64,8 @@ Route::middleware('auth')->group(function () {
      Route::get('/card/list', [CardListController::class, 'showProfCard'])->name('card.profcard');
 
     //Student interface
-
+    Route::get('/accueil', [App\Http\Controllers\User\Student\StudentController::class, 'index'])->name('student.index');
+    Route::get('/stats', [App\Http\Controllers\User\Student\StatController::class, 'index'])->name('stats.index');
 
     //Prof interface
     Route::get('/prof/chapitre/', [App\Http\Controllers\User\Prof\ChapitreController::class, 'index'])->name('prof.chapitre.index');
@@ -69,6 +73,8 @@ Route::middleware('auth')->group(function () {
     //Route for programme (Quizz carte révision)
     Route::get('/programme/select', [ProgrammeQuotidienController::class, 'selectParameters'])->name('programme.select');
     Route::post('/programme/select', [ProgrammeQuotidienController::class, 'startProgram'])->name('programme.start');
+    Route::get('/programme/mycard/select', [ProgrammeQuotidienController::class, 'selectParameters'])->name('programme.mycard.select');
+    Route::post('/programme/mycard/select', [ProgrammeQuotidienController::class, 'startProgram'])->name('programme.mycard.start');
     Route::get('/programme/unmastered', [ProgrammeQuotidienController::class, 'randomCard'])->name('programme.unmastered.start');
     Route::post('/programme/unmastered', [ProgrammeQuotidienController::class, 'randomCard'])->name('programme.unmastered.start');
 
@@ -93,8 +99,5 @@ Route::middleware('auth')->group(function () {
     //Route for livewire 
 });
 
-Route::controller()->group(function () {
-    
-});
 
 require __DIR__.'/auth.php';

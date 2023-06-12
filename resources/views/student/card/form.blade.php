@@ -15,8 +15,9 @@
 
                         <div class="row">
 
-                        @if(auth()->user()->hasRole('admin'))
+                      
                         <script>
+                            //Pour changer les input check lors de la selection d'un paramètre
                             function selectUser() {
                                 document.getElementById('created_by_admin').checked = false;
                                 document.getElementById('created_by_user').checked = true;
@@ -27,8 +28,8 @@
                                 document.getElementById('created_by_user').checked = false;
                             }
                         </script>
-                        <div class="d-flex mt-4">
-                        <div class="pb-0 tab-pane fade show active w-50 me-4">
+                        <div class="d-flex mt-4 mobile-d-block">
+                        <div class="pb-0 tab-pane fade show active w-50 me-4 w-100-mobile mb-2-mobile">
                             <div id="card-header" class="d-flex flex-wrap justify-content-between py-2" style="">
                                 <div class="d-flex justify-content-end">
                                   <div class="btn-group">
@@ -48,7 +49,7 @@
                             <input type="file" class="form-control" id="question_img_url" name="question_img_url">
                         </div>
 
-                        <div class="pb-0 tab-pane fade show active w-50">
+                        <div class="pb-0 tab-pane fade show active w-50 w-100-mobile">
                             <div id="card-header" class="d-flex flex-wrap justify-content-between py-2" style="">
                                 <div class="d-flex justify-content-end">
                                   <div class="btn-group">
@@ -64,11 +65,11 @@
                                     <p></p>
                                   </div>
                             </div>
-                                <textarea style="background-color: #D5D5D5; border-radius: 0px 0px 6px 6px; resize: none; height: 200px; " id="response" type="text" class=" w-100 p-3 form-control @error('response') is-invalid @enderror" name="response" value="" placeholder="Réponse">{{ old('response', $card->response) }}
-                                </textarea>
+                                <textarea style="background-color: #D5D5D5; border-radius: 0px 0px 6px 6px; resize: none; height: 200px; " id="response" type="text" class=" w-100 p-3 form-control @error('response') is-invalid @enderror" name="response" value="" placeholder="Réponse">{{ old('response', $card->response)}}</textarea>
                                 <input type="file" class="form-control" id="response_img_url" name="response_img_url">
                         </div>
                         </div> 
+                        @if(auth()->user()->hasRole('admin'))
                         <h5 class="mt-4 mb-2">Qui a crée la carte ?</h5>
                         <div class="form-group row mb-2">
                             <div class="col-md-6">
@@ -83,7 +84,7 @@
                                 @enderror
                             </div>
                         </div>
-                        
+       
                         <div class="form-group row">
                             <div class="col-md-6 d-flex">
                                 <input type="radio" id="created_by_user" name="created_by_user" disabled value="{{ $card->user_id }}">

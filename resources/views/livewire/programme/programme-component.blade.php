@@ -1,4 +1,5 @@
 <div>
+    @section('display_title_h1', 'd-none')
 <div class="container">
     <h1>Quizz</h1>
     
