@@ -69,8 +69,9 @@ Route::middleware('auth')->group(function () {
     //Route for programme (Quizz carte révision)
     Route::get('/programme/select', [ProgrammeQuotidienController::class, 'selectParameters'])->name('programme.select');
     Route::post('/programme/select', [ProgrammeQuotidienController::class, 'startProgram'])->name('programme.start');
+    //FIXME: route for unmastered card
     Route::get('/programme/unmastered', [ProgrammeQuotidienController::class, 'randomCard'])->name('programme.unmastered.start');
-    Route::post('/programme/unmastered', [ProgrammeQuotidienController::class, 'randomCard'])->name('programme.unmastered.start');
+    Route::post('/programme/unmastered', [ProgrammeQuotidienController::class, 'randomCard'])->name('programme.unmastered.post');
 
     //Admin interface
     Route::get('/admin', function () { return view('dashboard');  })->name('admin.dashboard');
@@ -90,11 +91,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/admin/matiere/{matiere}/edit', [MatiereController::class, 'update'])->name('admin.matiere.update');
     Route::delete('/admin/matiere/{matiere}/del', [MatiereController::class, 'destroy'])->name('admin.matiere.destroy');
 
-    //Route for livewire 
+    //Route for livewire
 });
 
 Route::controller()->group(function () {
-    
+
 });
 
 require __DIR__.'/auth.php';
