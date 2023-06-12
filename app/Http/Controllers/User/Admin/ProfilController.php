@@ -29,7 +29,7 @@ class ProfilController extends Controller
         } else {
             return redirect()->route('dashboard');
         }
-     
+
     }
 
     public function create()
@@ -41,7 +41,7 @@ class ProfilController extends Controller
             if( $role->name === 'enseignant') {
                 $role->name = 'Enseignant';
                 $list_roles[] =  $role;
-                
+
             } else if($role->name === 'etudiant') {
                 $role->name = 'Etudiant';
                 $list_roles[] =  $role;
@@ -51,7 +51,7 @@ class ProfilController extends Controller
         $user = new User();
         return view('admin.users.create', ['user' => $user, 'schools' => Schools::all(), 'matieres' => Matiere::All(), 'formations' => Formation::all(), 'roles' => $list_roles]);
     }
-    
+
 
     public function store(ProfileUpdateRequest $request)
     {
@@ -64,9 +64,10 @@ class ProfilController extends Controller
         if($request->input('role_id') == 3) {
             $user->formation_id = $request->input('formation_id');
         }
-    
-        // Send the user a temporary password
-        Mail::to($user->email)->send(new TemporaryPasswordMail($user->password));
+
+        // FIXME: Send the user a temporary password (disabling this until mail is configured on env)
+        //Mail::to($user->email)->send(new TemporaryPasswordMail($user->password));
+
         // Save the user
         $user->save();
         if($request->input('role_id') == 2) {
@@ -92,7 +93,7 @@ class ProfilController extends Controller
             if( $role->name === 'enseignant') {
                 $role->name = 'Enseignant';
                 $list_roles[] =  $role;
-                
+
             } else if($role->name === 'etudiant') {
                 $role->name = 'Etudiant';
                 $list_roles[] =  $role;
@@ -111,10 +112,10 @@ class ProfilController extends Controller
             $matiere_ids = $user->matieres()->pluck('id')->toArray();
             return view('admin.users.edit', ['user' => $user, 'roles' => $list_roles, 'matieres' => $matiere_ids]);
         }
-        
+
         $user->school_id = $user->schools()->first()->id;
-      
-       
+
+
         return view('admin.users.edit',['user' => $user, 'schools' => Schools::all()]);
     }
 
@@ -123,10 +124,10 @@ class ProfilController extends Controller
         // Valider les données du formulaire
         $data = $request->validated();
         $user = new User($data);
-        
+
         $user->name = $request->input('name');
         $user->email = $request->input('email');
-    
+
         $user->save();
 
         // Redirect to the users.index view and display message
@@ -142,13 +143,13 @@ class ProfilController extends Controller
         $user->schools()->detach();
         $user->matieres()->detach();
         $user->roles()->detach();
-        
+
         if($user->formation_id !== null) {
             $user->formation()->detach();
         } else {
             $user->matieres()->detach();
         }
-       
+
         $user->delete();
 
         // Rediriger vers la page d'index des utilisateurs avec un message de succès
