@@ -25,7 +25,7 @@ class CardRequest extends FormRequest
             'question' => 'required|string|min:8',
             'response' => 'required|string|min:8',
             'matiere_id' => 'required|integer',
-            'formation_id' => 'required|integer',
+            'formation_id' => 'integer',
             'public' => 'boolean',
             'card_chapitre_id' => 'required|integer',
             'card_level_id' => 'required|integer',
@@ -33,8 +33,8 @@ class CardRequest extends FormRequest
             'created_by' => 'string',
             'validated_by' => 'string',
             'user_id' => 'integer',
-            'question_img_url' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'response_img_url' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'question_img_url' => 'image|mimes:jpeg,png,jpg,gif,svg|max:9048',
+            'response_img_url' => 'image|mimes:jpeg,png,jpg,gif,svg|max:9048',
         ];
     }
 

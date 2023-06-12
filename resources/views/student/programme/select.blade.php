@@ -1,6 +1,6 @@
 @extends('student.base')
-
+@section('display_title_h1', 'd-none')
 @section('content')
-<h1>Selection carte</h1>
+
     @include('student.programme.form')
 @endsection

@@ -14,8 +14,8 @@
                         <div class="w-50 h-25 pb-2">
                             <div class="row g-0 h-75">
                                 <div class="col">
-                                    <ul class="list-group text-center h-100">
-                                        <li class="list-group-item shadow h-100 d-flex align-items-center justify-content-center">
+                                    <ul class="list-group text-center h-100 pe-3">
+                                        <li class="list-group-item shadow h-100 d-flex align-items-center justify-content-center ps-2">
                                             <div>
                                                 <i class="fa fa-cog fa-xl"></i>
                                                 <div><a class="fs-5" style="font-size: 20px; color: #333333" href="{{route('parameters')}}">Paramètres</a></div>
@@ -28,7 +28,7 @@
                                         <li class="list-group-item shadow h-100 d-flex align-items-center justify-content-center">
                                             <div>
                                                 <i class="fa-solid fa-chart-pie m-2 my-2 fa-xl"></i>
-                                                <div><a  style="font-size: 20px; color: #333333" href="{{route('parameters')}}">Statistiques étudiant</a></div>
+                                                <div><a  style="font-size: 20px; color: #333333" href="{{route('stats.index')}}">Statistiques étudiant</a></div>
                                             </div>
                                         </li>
                                     </ul>
@@ -36,7 +36,7 @@
                             </div>
                             <div class="row g-0 mt-3 h-75">
                                 <div class="col">
-                                    <ul class="list-group text-center h-100">
+                                    <ul class="list-group text-center h-100 pe-3">
                                         <li class="list-group-item shadow h-100 d-flex align-items-center justify-content-center">
                                             <div>
                                                 <i class="fa-solid fa-clipboard-list m-2 my-2 fa-xl"></i>
@@ -58,7 +58,7 @@
                             </div>
                         </div>
                         <div class="w-50 h-50">
-                            <div class="d-flex h-75 align-items-stretch pl-3 shadow">
+                            <div class="d-flex h-75 align-items-stretch ms-3 shadow">
                                 <ul class="list-group text-center w-100 h-100">
                                     <li class="list-group-item shadow h-100 d-flex align-items-center justify-content-center">
                                         <div>
@@ -76,7 +76,7 @@
                     <div class="w-50 h-25 pb-2">
                         <div class="row g-0 h-75">
                             <div class="col">
-                                <ul class="list-group text-center h-100">
+                                <ul class="list-group text-center h-100 me-3">
                                     <li class="list-group-item shadow h-100 d-flex align-items-center justify-content-center">
                                         <div>
                                             <i class="fa fa-cog fa-xl"></i>
@@ -98,7 +98,7 @@
                         </div>
                         <div class="row g-0 mt-3 h-75">
                             <div class="col">
-                                <ul class="list-group text-center h-100">
+                                <ul class="list-group text-center h-100 me-3">
                                     <li class="list-group-item shadow h-100 d-flex align-items-center justify-content-center">
                                         <div>
                                             <i class="fa-solid fa-clipboard-list m-2 my-2 fa-xl"></i>
@@ -111,7 +111,7 @@
                                 <ul class="list-group text-center h-100">
                                     <li class="list-group-item shadow h-100 d-flex align-items-center justify-content-center">
                                         <div>
-                                            <i class="fa-solid fa-user-plus m-2 fa-xl"></i>
+                                            <i class="fa-solid fa-heart fa-xl"></i>
                                             <div><a style="font-size: 20px; color: #333333" href="{{route('admin.profil.index')}}">Carte préférées</a></div>
                                         </div>
                                     </li>
@@ -120,7 +120,7 @@
                         </div>
                     </div>
                     <div class="w-50 h-50">
-                        <div class="d-flex h-75 align-items-stretch pl-3 shadow">
+                        <div class="d-flex h-75 align-items-stretch ms-3 shadow">
                             <ul class="list-group text-center w-100 h-100">
                                 <li class="list-group-item shadow h-100 d-flex align-items-center justify-content-center">
                                     <div>
@@ -137,7 +137,7 @@
                     <div class="w-50 h-25 pb-2">
                         <div class="row g-0 h-75">
                             <div class="col">
-                                <ul class="list-group text-center h-100">
+                                <ul class="list-group text-center h-100 me-3">
                                     <li class="list-group-item shadow h-100 d-flex align-items-center justify-content-center">
                                         <div>
                                             <i class="fa fa-cog fa-xl"></i>
@@ -149,7 +149,7 @@
                         </div>
                         <div class="row g-0 mt-3 h-75">
                             <div class="col">
-                                <ul class="list-group text-center h-100">
+                                <ul class="list-group text-center h-100 me-3">
                                     <li class="list-group-item shadow h-100 d-flex align-items-center justify-content-center">
                                         <div>
                                             <i class="fa-solid fa-clipboard-list m-2 my-2 fa-xl"></i>
@@ -161,7 +161,7 @@
                         </div>
                     </div>
                     <div class="w-50 h-50">
-                        <div class="d-flex h-75 align-items-stretch pl-3 shadow">
+                        <div class="d-flex h-75 align-items-stretch ms-3 shadow">
                             <ul class="list-group text-center w-100 h-100">
                                 <li class="list-group-item shadow h-100 d-flex align-items-center justify-content-center">
                                     <div>

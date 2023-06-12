@@ -21,8 +21,8 @@
             </div>
     @endif
         <h5 class="mb-3">Sélectionnez la matière, le chapitre et le niveau</h4>  
-        <div class="col-md-4">
-                <select wire:model="selectedMatiere" wire:change="updateChapitres" id="matiere_id" style="background-color: #ACACAC ;" class="form-select text-white py-3  @error('matiere_id') is-invalid @enderror" name="matiere_id" wire:key="matieres">
+        <div class="col-md-4 mb-1-mobile">
+                <select wire:model="selectedMatiere" wire:change="updateChapitres" id="matiere_id" style="background-color: #ACACAC; border-radius: 15px!important" class="form-select text-white py-3 @error('matiere_id') is-invalid @enderror" name="matiere_id" wire:key="matieres">
                     <option value="" selected hidden>Matiere</option>
                     @foreach ($matieres as $matiere)
                         <option value="{{$matiere->id}}" {{ $matiere->id, old('matiere_id', []) ? 'selected' : '' }}>{{ $matiere->label }}</option>
@@ -38,9 +38,9 @@
         </div>
 
 
-        <div class="col-md-4">
+        <div class="col-md-4 mb-1-mobile">
             
-                <select wire:model="selectedChapitre" id="card_chapitre_id" style="background-color: #ACACAC ;" class="form-select text-white py-3 @error('card_chapitre_id') is-invalid @enderror" name="card_chapitre_id" wire:key="chapitres">
+                <select wire:model="selectedChapitre" id="card_chapitre_id" style="background-color: #ACACAC ;  border-radius: 15px!important" class="form-select text-white py-3 @error('card_chapitre_id') is-invalid @enderror" name="card_chapitre_id" wire:key="chapitres">
                     <option value="" selected hidden>Chapitre</option>
                     @foreach ($chapitres as $id => $label)
                         <option value="{{ $id }}" {{ $id, (array)old('card_chapitre_id') ? 'selected' : '' }}>{{ $label }}</option>
@@ -55,7 +55,7 @@
            
             </div>
             <div class="col-md-4">
-                <select id="card_level_id" style="background-color: #ACACAC ;" class="form-select text-white py-3 @error('card_level_id') is-invalid @enderror" name="card_level_id" placeholder="Niveau">
+                <select id="card_level_id" style="background-color: #ACACAC ;  border-radius: 15px!important" class="form-select text-white py-3 @error('card_level_id') is-invalid @enderror" name="card_level_id" placeholder="Niveau">
                     <option value="" hidden selected>Niveau</option>
                     @foreach ($cardLevels as $level)
                         <option value="{{ $level->id }}" {{ old('card_level_id', $card->card_level_id) == $level->id ? 'selected' : '' }}>{{ $level->label }}</option>
