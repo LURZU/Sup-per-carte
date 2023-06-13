@@ -14,8 +14,9 @@
                             <div class="col-12 col-lg-8">
                                 <div class="row">
                                     <x-buttons.dashboard-button link="parameters" icon="cog" label="Paramètres" class="col-lg-6" />
-                                    <x-buttons.dashboard-button link="stats.index" icon="chart-pie" label="Statistiques étudiant" class="col-lg-6" />
+                                    <x-buttons.dashboard-button link="stats.index" icon="chart-pie" label="Statistiques {{ auth()->user()->hasRole('admin') ? 'étudiant' : '' }}" class="col-lg-6" />
                                     <x-buttons.dashboard-button link="parameters" icon="clipboard-list" label="Cartes crées" class="col-lg-6" />
+                                    <x-buttons.dashboard-button link="card.favcard" icon="clipboard-list" label="Cartes préférées" class="col-lg-6" />
                                     <x-buttons.dashboard-button link="admin.profil.index" icon="user-plus" label="Profils étudiant, Enseignants" class="col-lg-6" />
                                 </div>
                             </div>

@@ -53,7 +53,7 @@ Route::middleware('auth')->group(function () {
     //parameters (Student, enseignant, admin)
     Route::get('/parameters', [ProfileController::class, 'parameters'])->name('parameters');
 
-     // Global route for all of user (admin, prof, student)
+     // Global route for all users (admin, prof, student)
      Route::get('/card/create', [CardController::class, 'create'])->name('card.create');
      Route::post('/card/create', [CardController::class, 'store'])->name('card.store');
      Route::get('/card', [CardListController::class, 'showAll'])->name('card.index');
