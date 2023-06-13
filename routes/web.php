@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\User\Student\StatController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Card\CardController;
 use App\Http\Controllers\Card\CardListController;
@@ -95,6 +96,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/matiere/{matiere}/edit', [MatiereController::class, 'edit'])->name('admin.matiere.edit');
     Route::post('/admin/matiere/{matiere}/edit', [MatiereController::class, 'update'])->name('admin.matiere.update');
     Route::delete('/admin/matiere/{matiere}/del', [MatiereController::class, 'destroy'])->name('admin.matiere.destroy');
+
+    // Disabled to prevent error until construction
+    Route::get('/stats', [StatController::class, 'index'])->name('stats.index');
 
     //Route for livewire
 });
