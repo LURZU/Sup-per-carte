@@ -8,7 +8,6 @@
      @if(session('error'))
      <div class="alert alert-danger">{{ session('error') }}</div>
      @endif
-
                 @if(auth()->user()->hasRole('admin'))
                     <div class="d-flex flex-row flex-column flex-lg-row py-3">
                         <div class="row mx-0 w-100">
@@ -21,25 +20,12 @@
                                 </div>
                             </div>
 
-                            <div class="col-12 col-lg-4">
+                            <div class="col-12 col-lg-4 px-0 px-lg-2">
                                 <x-buttons.dashboard-button link="card.index" icon="plus-circle" label="Créer une carte" class="col-lg-12 h-100 dashboard-col-2" />
                             </div>
 
-
-
                         </div>
-{{--                        <div class="w-50 h-50">--}}
-{{--                            <div class="d-flex h-75 align-items-stretch ms-3 shadow">--}}
-{{--                                <ul class="list-group text-center w-100 h-100">--}}
-{{--                                    <li class="list-group-item shadow h-100 d-flex align-items-center justify-content-center">--}}
-{{--                                        <div>--}}
-{{--                                            <i class="fas fa-plus-circle ml-2 fa-xl"></i>--}}
-{{--                                            <div><a style="font-size: 20px; color: #333333" href="{{route('card.index')}}">Créer une carte</a></div>--}}
-{{--                                        </div>--}}
-{{--                                    </li>--}}
-{{--                                </ul>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
+
                     </div>
 
                 @elseif(auth()->user()->hasRole('etudiant'))

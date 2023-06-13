@@ -21,8 +21,14 @@
     <!-- Inclusion de Popper.js (nécessaire pour certains composants JavaScript de Bootstrap comme les tooltips et popovers) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
 
+    <!-- Fonts  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
     <!-- Scripts -->
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/responsive.css') }}" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
@@ -55,17 +61,17 @@
         <ul class="dropdown-menu">
             <li class="text-center mb-2">Bonjour <b>{{auth()->user()->name}}</b>,</li>
             <li> <a class="dropdown-item text-center py-2" href="{{ route('profile.edit')}}">Profile</a></li>
-            <li> <a class="dropdown-item text-center" href=""> 
+            <li> <a class="dropdown-item text-center" href="">
                 <form action="{{ route('logout') }}" method="POST" >
                 @csrf
                 @method('POST')
                     <button type="submit"  class="dropdown-item text-center" style="background-color: transparent;">Déconnexion</button>
             </form></a></li>
         </ul>
-    </div>  
+    </div>
     </div>
     <div class="d-flex h-100" id="wrapper">
-   
+
         @include('layouts.navigation')
         <!-- Page Heading -->
         <div id="page-content-wrapper" class="w-100" style="overflow: auto;">
@@ -81,7 +87,7 @@
                     <i class="fa-solid fa-table-cells-large fa-2xl mr-3"></i>
                     <h2 class="fs-3 mb-0 ms-2">@yield('title')</h2>
                 </div>
-                
+
                 <!-- Page Content -->
                 <main class="">
                     {{ $slot }}
@@ -95,7 +101,7 @@
             $('#sidebar-wrapper').slideToggle();
         });
         const icons = document.querySelectorAll('.icon');
-        icons.forEach (icon => {  
+        icons.forEach (icon => {
         icon.addEventListener('click', (event) => {
             icon.classList.toggle("open");
         });

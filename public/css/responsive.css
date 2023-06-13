@@ -1,0 +1,89 @@
+/****** Reponsive ******/
+
+@media (max-width: 750px) {
+    .modal-content {
+        width: 100%;
+    }
+
+    .dashboard-col-2 {
+        /*background-color: inherit;*/
+    }
+
+    .dashboard-btn {
+        height: 80px;
+    }
+
+    .dashboard-col-2 .dashboard-btn {
+        box-shadow: 0 0.5rem 1rem rgba(0,0,0,.15) !important;
+        padding: .5rem 0 !important;
+    }
+
+    .dashboard-col-2 a {
+        /*color: inherit;*/
+    }
+}
+
+/* Styles for screens smaller than 1000px */
+@media (max-width: 999px) {
+    /* Hide sidebar and show burger menu */
+    #sidebar-wrapper {
+        display: none;
+        position: absolute;
+        top: 0;
+        z-index: 10;
+        background-color: #333333;
+        width: 100%;
+        height: 100%;
+    }
+    .burger-menu {
+        display: block;
+    }
+    .reduce-mobile {
+        width: 75%;
+        margin-top: 0px!important;
+    }
+    .disable-padding-mobile {
+        padding-left: 10px!important;
+        padding-right: 10px!important;
+    }
+    .disable-margin-mobile {
+        margin-left: 0px!important;
+        margin-right: 0px!important;
+    }
+    .response-mobile {
+        width: 100%!important;
+    }
+    .my-reduce-mobile {
+        margin-top: 30px!important;
+        margin-bottom: 30px!important;
+    }
+    .mobile-w-15 {
+        width: 15%!important;
+    }
+    .mobile-d-block {
+        display: block!important;
+    }
+    .w-100-mobile {
+        width: 100%!important;
+    }
+    .mb-2-mobile {
+        margin-bottom: 2rem!important;
+    }
+    .mb-1-mobile {
+        margin-bottom: 1rem!important;
+    }
+}
+
+/* Styles for screens larger than or equal to 1000px */
+@media (min-width: 1000px) {
+    /* Show sidebar and hide burger menu */
+    #sidebar-wrapper {
+        display: block;
+    }
+    .disable-desktop {
+        display: none;
+    }
+    .burger-menu {
+        display: none!important;
+    }
+}
