@@ -81,6 +81,7 @@ Route::middleware('auth')->group(function () {
 
     //Admin interface
     Route::get('/admin', function () { return view('dashboard');  })->name('admin.dashboard');
+    Route::get('/admin/data', function () { return view('admin.data-edit-select');  })->name('admin.data');
     Route::get('/admin/profil', [ProfilController::class, 'index'])->name('admin.profil.index');
     Route::get('/admin/profil/create', [ProfilController::class, 'create'])->name('admin.profil.create');
     Route::post('/admin/profil/create', [ProfilController::class, 'store'])->name('admin.profil.store');

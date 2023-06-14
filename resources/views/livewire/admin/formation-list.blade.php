@@ -1,5 +1,6 @@
+@section('active_app', 'active')
+@section('content')
 <div class="container">
-    <h1>Liste des formations</h1>
     <button class="btn btn-primary" wire:click="addFormation()">Créer une formation</button>
     @if($newFormation)
     <div class="form-group">

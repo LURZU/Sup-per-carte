@@ -7,7 +7,8 @@ use App\Models\User;
 
 class TotalCardToShow extends Component
 {
-    public $total_card_toshow;
+    public int $initial_total_card_toshow;
+    public int $total_card_toshow;
     public $user;
 
     protected $listeners = ['refresh' => '$refresh'];
@@ -16,6 +17,7 @@ class TotalCardToShow extends Component
     {
         $this->user = $user;
         $this->total_card_toshow = $this->user->total_card_toshow;
+        $this->initial_total_card_toshow = $this->user->total_card_toshow;
     }
 
     public function save()
@@ -31,10 +33,12 @@ class TotalCardToShow extends Component
 
     public function increments() {
         $this->total_card_toshow++;
+        $this->save();
     }
 
     public function decrements() {
         $this->total_card_toshow--;
+        $this->save();
     }
 
     public function render()
