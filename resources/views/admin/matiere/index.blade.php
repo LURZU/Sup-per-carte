@@ -1,5 +1,5 @@
 @extends('admin.base')
-
+@section('active_app', 'active')
 @section('content')
     
     @if(session('success'))
