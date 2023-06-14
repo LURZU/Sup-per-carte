@@ -15,9 +15,8 @@ class ProfileUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $rules = [
             'name' => ['string', 'max:255'],
-            'email' => ['email', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'formation_id' => 'required|integer',
@@ -26,6 +25,27 @@ class ProfileUpdateRequest extends FormRequest
             'formation_id' => 'integer',
             'matiere_id' => 'array',
         ];
+
+        if ($this->method() === 'PUT') {
+            // when updating, the email must be unique, but only for users other than the current user
+            $rules['email'] = ['email', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)];
+           
+
+        } else {
+            // normal verification for new users
+        
+            $rules['email'] = ['email', 'max:255', Rule::unique(User::class)];
+
+        }
+        return $rules;
+    }
+
+    public function messages()
+    {
+    return [
+    'email.unique' => 'L\'email existe déjà en base de donnée ',
+    'category_id.numeric' => 'Invalid category value.',
+    ];
     }
 
     public function prepareForValidation() { 

@@ -48,15 +48,14 @@ class DynamicMatiereSelectUnique extends Component
                 $user = auth()->user();
                 $userMatieres = $user->matieres()->get();
 
-                // Récupère la formation spécifiée et ses matières
+                // Turn the matieres of the formation into a collection
                 $formation = Formation::with('matieres')->find($this->selectedFormation);
                 $formationMatieres = $formation->matieres;
             
-                // Trouve l'intersection des deux collections
+                // find the common matieres between the user and the formation
                 $commonMatieres = $userMatieres->intersect($formationMatieres);
 
                 //Set the matieres to the matieres of the formation
-           
                 $this->matieres = $commonMatieres;
             } else {
                 $this->matieres = [];

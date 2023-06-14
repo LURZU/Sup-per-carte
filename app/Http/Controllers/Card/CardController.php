@@ -66,7 +66,7 @@ class CardController extends Controller
             $card->public = true;
             $card->validated_by = User::find(auth()->id())->name;
         } elseif(auth()->user()->hasRole('etudiant')) {
-         
+            
             $card->formation_id = User::find(auth()->id())->formation_id;
             $card->created_by = User::find(auth()->id())->name;
             $card->user_id = User::find(auth()->id())->id;
