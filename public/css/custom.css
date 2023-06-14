@@ -369,27 +369,57 @@ a, a:hover {
 /* Fontawesome icons overwrites */
 
 .fa-table-cells-large:before, .fa-th-large:before {
-    content: url("../icon/dashboard-icon.svg");
+    content: url("../icon/dashboard-icon-dark.svg");
+}
+
+.fa-table-cells-large.white-icon:before, .fa-th-large.white-icon:before {
+    content: url("../icon/dashboard-icon-white.svg");
 }
 
 .fa-cog:before, .fa-gear:before {
-    content: url("../icon/setting-icon.svg");
+    content: url("../icon/setting-icon-dark.svg");
+}
+
+.fa-cog.white-icon:before, .fa-gear.white-icon:before {
+    content: url("../icon/setting-icon-white.svg");
 }
 
 .fa-chart-pie:before, .fa-pie-chart:before {
-    content: url("../icon/stats-icon.svg");
+    content: url("../icon/stats-icon-dark.svg");
+}
+
+.fa-chart-pie.white-icon:before, .fa-pie-chart.white-icon:before {
+    content: url("../icon/stats-icon-white.svg");
 }
 
 .fa-clipboard-list:before {
-    content: url("../icon/card-icon.svg");
+    content: url("../icon/card-icon-dark.svg");
+}
+
+.fa-clipboard-list.white-icon:before {
+    content: url("../icon/card-icon-white.svg");
 }
 
 .fa-user-plus:before {
-    content: url("../icon/profiles-icon.svg");
+    content: url("../icon/profiles-icon-dark.svg");
+}
+.fa-user-plus.white-icon:before {
+    content: url("../icon/profiles-icon-white.svg");
 }
 
 .fa-user:before {
-    content: url("../icon/profile-icon.svg");
+    content: url("../icon/profile-icon-dark.svg");
+}
+.fa-user.white-icon:before {
+    content: url("../icon/profiles-icon-white.svg");
+}
+
+.fa-heart:before {
+    content: url("../icon/fav-icon-dark.svg");
+}
+
+.fa-heart.white-icon:before {
+    content: url("../icon/fav-icon-white.svg");
 }
 
 /* Buttons */

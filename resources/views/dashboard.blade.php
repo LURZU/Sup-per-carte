@@ -22,7 +22,7 @@
                     <x-buttons.dashboard-button link="card.index" icon="clipboard-list" label="Cartes crées" class="col-lg-6" />
 
                     @if(auth()->user()->hasRole('etudiant'))
-                    <x-buttons.dashboard-button link="card.favcard" icon="clipboard-list" label="Cartes préférées" class="col-lg-6" />
+                    <x-buttons.dashboard-button link="card.favcard" icon="heart" label="Cartes préférées" class="col-lg-6" />
                     @endif
 
                     @if(auth()->user()->hasRole('admin'))
