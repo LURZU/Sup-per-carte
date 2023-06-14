@@ -29,33 +29,7 @@
 
 
         </div>
-<<<<<<< HEAD
-        @if(auth()->user()->hasRole('admin'))
-        
-        <div class="list-group list-group-flush px-2 p-2 fs-5 pt-5 text-decoration-none">
-            <a href="{{ route('dashboard') }}" class="text-decoration-none text-uppercase text-white mt-3 hover-bg my-4 @yield('active_dashboard')"><i class="fa-solid fa-house m-2"></i><span>{{ __('SUP\'PER CARTE') }}</span></a>
-            <a href="{{ route('dashboard') }}" class="text-decoration-none text-uppercase text-white hover-bg my-3"><i class="fa-solid fa-table-cells-large m-2"></i>{{ __('Tableau de bord') }}</a>
-            <a href="{{ route('parameters') }}" class="text-decoration-none text-white @yield('active_parameters')"><i class="fa-solid fa-gear m-2 my-2 "></i>{{ __('Paramètres') }}</a>
-            <a href="{{ route('admin.data') }}" class="text-decoration-none text-white @yield('active_app')"><i class="fa-solid fa-database m-2 my-2 "></i>{{ __('Gestion de l\'application') }}</a>
-            <a href="{{ route('dashboard') }}" class="text-decoration-none text-white @yield('active_stats')"><i class="fa-solid fa-chart-pie m-2 my-2"></i>{{ __('Statistique étudiant') }}</a>
-            <a href="{{ route('card.index') }}" class="text-decoration-none text-white @yield('active_card')"><i class="fa-solid fa-clipboard-list m-2 my-2"></i>{{ __('Carte créées') }}</a>
-            <a href="{{ route('admin.profil.index') }}" class="text-decoration-none text-white @yield('active_profil')"><i class="fa-solid fa-user-plus m-2"></i>{{ __('Profils étudiant, Enseignant') }}</a>
-            <!-- Add more links here -->
-        </div>
-        @elseif(auth()->user()->hasRole('etudiant'))
-        <div class="list-group list-group-flush px-2 p-2 fs-5 pt-5 text-decoration-none">
-            <a href="{{ route('dashboard') }}" class="text-decoration-none text-uppercase text-white mt-3 hover-bg my-4 @yield('active_dashboard')"><i class="fa-solid fa-house m-2"></i><span>{{ __('SUP\'PER CARTE') }}</span></a>
-            <a href="{{ route('dashboard') }}" class="text-decoration-none text-uppercase text-white hover-bg my-3"><i class="fa-solid fa-table-cells-large m-2"></i>{{ __('Tableau de bord') }}</a>
-            <a href="{{ route('parameters') }}" class="text-decoration-none text-white @yield('active_parameters')"><i class="fa-solid fa-gear m-2 my-2 "></i>{{ __('Paramètres') }}</a>
-            <a href="{{ route('dashboard') }}" class="text-decoration-none text-white @yield('active_stats')"><i class="fa-solid fa-chart-pie m-2 my-2"></i>{{ __('Statistiques') }}</a>
-            <a href="{{ route('card.index') }}" class="text-decoration-none text-white @yield('active_card')"><i class="fa-solid fa-clipboard-list m-2 my-2"></i>{{ __('Cartes créées') }}</a>
-            <a href="{{ route('card.favcard') }}" class="text-decoration-none text-white @yield('active_favcard')"><i class="fa-solid fa-heart m-2 my-2"></i>{{ __('Cartes préférées') }}</a>
-            
-            <!-- Add more links here -->
-        </div>
-        @elseif(auth()->user()->hasRole('enseignant'))
-=======
->>>>>>> 08b01d964905b2c34015dbf6714f0041cd2aeb76
+      
 
         <div class="d-flex justify-content-center align-items-center my-3" >
 
