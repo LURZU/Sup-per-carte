@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\User\Student\StatController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Card\CardController;
 use App\Http\Controllers\Card\CardListController;
@@ -52,7 +53,7 @@ Route::middleware('auth')->group(function () {
     //parameters (Student, enseignant, admin)
     Route::get('/parameters', [ProfileController::class, 'parameters'])->name('parameters');
 
-     // Global route for all of user (admin, prof, student)
+     // Global route for all users (admin, prof, student)
      Route::get('/card/create', [CardController::class, 'create'])->name('card.create');
      Route::post('/card/create', [CardController::class, 'store'])->name('card.store');
      Route::get('/card', [CardListController::class, 'showAll'])->name('card.index');
@@ -96,6 +97,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/matiere/{matiere}/edit', [MatiereController::class, 'edit'])->name('admin.matiere.edit');
     Route::post('/admin/matiere/{matiere}/edit', [MatiereController::class, 'update'])->name('admin.matiere.update');
     Route::delete('/admin/matiere/{matiere}/del', [MatiereController::class, 'destroy'])->name('admin.matiere.destroy');
+
+    // Disabled to prevent error until construction
+    Route::get('/stats', [StatController::class, 'index'])->name('stats.index');
 
     //Route for livewire
 });

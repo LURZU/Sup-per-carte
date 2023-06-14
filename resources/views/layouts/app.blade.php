@@ -21,8 +21,14 @@
     <!-- Inclusion de Popper.js (nécessaire pour certains composants JavaScript de Bootstrap comme les tooltips et popovers) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
 
+    <!-- Fonts  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
     <!-- Scripts -->
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/responsive.css') }}" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
@@ -39,33 +45,38 @@
     </style>
 </head>
 <body class="font-sans antialiased h-100" style="height: 100vh!important;">
-    <div class="header shadow-sm justify-content-between">
-    <div class="burger-menu icon nav-icon-5  mt-4">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
+    <div class="row mx-0 p-2 header shadow-sm d-flex justify-content-between align-content-center">
+        <div class="col-2 burger-menu icon nav-icon-5">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="col-8 d-flex justify-content-center align-content-center">
+            <img src="{{ asset('image/SuP-Perform-logo-dark.svg') }}" class="mx-auto disable-desktop w-75">
+        </div>
 
-      <x-application-logo style="width: 200px" class="justify-content-center mt-3 disable-desktop" />
 
-    <div class="d-inline" style="width: 28px; height: 32px;">
-        <button class="btn btn-secondary dropdown-toggle disablebg position-absolute" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="right: 25px; top: 20px">
-            <i class="fa-regular fa-user fa-2xl" style="color: #333333"></i>
-        </button>
-        <ul class="dropdown-menu">
-            <li class="text-center mb-2">Bonjour <b>{{auth()->user()->name}}</b>,</li>
-            <li> <a class="dropdown-item text-center py-2" href="{{ route('profile.edit')}}">Profile</a></li>
-            <li> <a class="dropdown-item text-center" href=""> 
-                <form action="{{ route('logout') }}" method="POST" >
-                @csrf
-                @method('POST')
-                    <button type="submit"  class="dropdown-item text-center" style="background-color: transparent;">Déconnexion</button>
-            </form></a></li>
-        </ul>
-    </div>  
-    </div>
+{{--      <x-application-logo style="width: 200px" class="justify-content-center mt-3 disable-desktop" />--}}
+
+        <div class="col-2 d-flex justify-content-center align-content-center">
+            <button class="btn btn-secondary dropdown-toggle disablebg p-0" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="">
+                <i class="fa-regular fa-user fa-2xl" style="color: #333333"></i>
+            </button>
+            <ul class="dropdown-menu">
+                <li class="text-center mb-2">Bonjour <b>{{auth()->user()->name}}</b>,</li>
+                <li> <a class="dropdown-item text-center py-2" href="{{ route('profile.edit')}}">Profile</a></li>
+                <li> <a class="dropdown-item text-center" href="">
+                    <form action="{{ route('logout') }}" method="POST" >
+                    @csrf
+                    @method('POST')
+                        <button type="submit"  class="dropdown-item text-center" style="background-color: transparent;">Déconnexion</button>
+                </form></a></li>
+            </ul>
+        </div>
+        </div>
+
     <div class="d-flex h-100" id="wrapper">
-   
+
         @include('layouts.navigation')
         <!-- Page Heading -->
         <div id="page-content-wrapper" class="w-100" style="overflow: auto;">
@@ -81,7 +92,7 @@
                     <i class="fa-solid fa-table-cells-large fa-2xl mr-3"></i>
                     <h2 class="fs-3 mb-0 ms-2">@yield('title')</h2>
                 </div>
-                
+
                 <!-- Page Content -->
                 <main class="">
                     {{ $slot }}
@@ -95,7 +106,7 @@
             $('#sidebar-wrapper').slideToggle();
         });
         const icons = document.querySelectorAll('.icon');
-        icons.forEach (icon => {  
+        icons.forEach (icon => {
         icon.addEventListener('click', (event) => {
             icon.classList.toggle("open");
         });

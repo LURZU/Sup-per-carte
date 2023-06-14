@@ -9,11 +9,29 @@
 	font-weight: normal;
 	font-style: normal;
 }
+
+/** GLOBAL **/
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 16px;
+}
+
+a, a:hover {
+    text-decoration: none;
+}
+
+.df-custom-rounded {
+    border-radius: 8px;
+}
 /************************************/
 
 .active {
     background-color: #606060;
-    color: white;   
+    color: white;
     border-radius: 8px;
     padding-top: 5px;
     padding-bottom: 5px;
@@ -56,7 +74,7 @@
     width: 300px;
 }
 
-.btn-principal:hover  { 
+.btn-principal:hover  {
     background-color: white;
     color: #333333;
 }
@@ -73,7 +91,7 @@
     width: 300px;
 }
 
-.btn-principal.inverse:hover  { 
+.btn-principal.inverse:hover  {
     background-color: #333333;
     color: white;
 }
@@ -91,7 +109,7 @@
 
 .custom-table {
     background-color: #F0F0F0;
-    color: #333333; 
+    color: #333333;
 }
 
 .custom-table th, .custom-table td {
@@ -108,7 +126,7 @@
 /* Path: views/admin/users/create */
 
 .light-grey-background {
-    background-color: #f2f2f2; 
+    background-color: #f2f2f2;
     border-radius: 8px;
     border: 0px;
 }
@@ -116,7 +134,7 @@
 .btn-custom-grey {
     background-color: #808080; /* ou la couleur que vous voulez */
     color: #ffffff; /* couleur du texte sur le bouton */
-} 
+}
 
 .select {
     border-radius: 8px !important;
@@ -144,7 +162,7 @@
     position: relative;
     display: inline-block;
   }
-  
+
   .dropdown-content {
     display: none;
     position: absolute;
@@ -154,18 +172,18 @@
     min-width: 200px;
     margin-top: 10px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    
+
     z-index: 1;
   }
 
   .dropdown-content .dropdown-panel {
     padding: 2px 2px;
   }
-  
+
   .dropdown .dropdown-content {
     display: block;
   }
-  
+
   .dropbtn {
     background-color: #4CAF50;
     color: white;
@@ -174,14 +192,14 @@
     border: none;
     cursor: pointer;
   }
-  
+
   .dropbtn:hover {
     background-color: #3e8e41;
   }
 
 
 
-  
+
 
 /************************************/
 
@@ -191,7 +209,7 @@
 .card-body .nav-tabs .nav-link {
     color : #333333;
     text-transform: uppercase;
-  
+
 }
 
 .card-body .nav-tabs .nav-link.active {
@@ -236,76 +254,7 @@
 
 /************************************/
 
-/****** Reponsive ******/
 
-@media (max-width: 750px) {
-    .modal-content {
-        width: 100%;
-    }
-}
-
-/* Styles for screens smaller than 1000px */
-@media (max-width: 999px) {
-    /* Hide sidebar and show burger menu */
-    #sidebar-wrapper {
-        display: none;
-        position: absolute;
-        top: 0;
-        z-index: 10;
-        background-color: #333333;
-    }
-    .burger-menu {
-        display: block;
-    }
-    .reduce-mobile {
-        width: 75%;
-        margin-top: 0px!important;
-    }
-    .disable-padding-mobile {
-        padding-left: 10px!important;
-        padding-right: 10px!important;
-    }
-    .disable-margin-mobile {
-        margin-left: 0px!important;
-        margin-right: 0px!important;
-    }
-    .response-mobile {
-        width: 100%!important;
-    }
-    .my-reduce-mobile {
-        margin-top: 30px!important;
-        margin-bottom: 30px!important;
-    }
-    .mobile-w-15 {
-        width: 15%!important;
-    }
-    .mobile-d-block {
-        display: block!important;
-    }
-    .w-100-mobile {
-        width: 100%!important;
-    }
-    .mb-2-mobile {
-        margin-bottom: 2rem!important;
-    }
-    .mb-1-mobile {
-        margin-bottom: 1rem!important;
-    }
-}
-
-/* Styles for screens larger than or equal to 1000px */
-@media (min-width: 1000px) {
-    /* Show sidebar and hide burger menu */
-    #sidebar-wrapper {
-        display: block;
-    }
-    .disable-desktop {
-        display: none;
-    }
-    .burger-menu {
-        display: none!important;
-    }
-}
 
 /* nav-icon-5 */
 .nav-icon-5{
@@ -334,19 +283,21 @@
     top:13px;
     left: 0px;
     opacity:1;
+      background-image: url("../icon/burger-middle-icon-dark.svg");
+      background-color: transparent;
   }
   .nav-icon-5 span:nth-child(3){
     bottom:0px;
     left: 0px;
   }
   .nav-icon-5:not(.open):hover span:nth-child(1){
-    transform: rotate(-3deg) scaleY(1.1);
+    transform: rotate(0deg) scaleY(1.1);
   }
   .nav-icon-5:not(.open):hover span:nth-child(2){
-    transform: rotate(3deg) scaleY(1.1);
+    transform: rotate(0deg) scaleY(1.1);
   }
   .nav-icon-5:not(.open):hover span:nth-child(3){
-    transform: rotate(-4deg) scaleY(1.1);
+    transform: rotate(0deg) scaleY(1.1);
   }
   .nav-icon-5.open span:nth-child(1){
     transform: rotate(45deg);
@@ -387,7 +338,7 @@
     padding: 10px 24px;
 }
 
-.btn-custom-border-grey:after { 
+.btn-custom-border-grey:after {
     font-family: 'ElegantIcons';
     content: "\45";
     position: relative;
@@ -415,3 +366,96 @@
 }
 
 /**************************************************/
+
+/* TODO: order this on css sub-files? */
+/* Fontawesome icons overwrites */
+
+.fa-table-cells-large:before, .fa-th-large:before {
+    content: url("../icon/dashboard-icon-dark.svg");
+}
+
+.fa-table-cells-large.white-icon:before, .fa-th-large.white-icon:before {
+    content: url("../icon/dashboard-icon-white.svg");
+}
+
+.fa-cog:before, .fa-gear:before {
+    content: url("../icon/setting-icon-dark.svg");
+}
+
+.fa-cog.white-icon:before, .fa-gear.white-icon:before {
+    content: url("../icon/setting-icon-white.svg");
+}
+
+.fa-chart-pie:before, .fa-pie-chart:before {
+    content: url("../icon/stats-icon-dark.svg");
+}
+
+.fa-chart-pie.white-icon:before, .fa-pie-chart.white-icon:before {
+    content: url("../icon/stats-icon-white.svg");
+}
+
+.fa-clipboard-list:before {
+    content: url("../icon/card-icon-dark.svg");
+}
+
+.fa-clipboard-list.white-icon:before {
+    content: url("../icon/card-icon-white.svg");
+}
+
+.fa-user-plus:before {
+    content: url("../icon/profiles-icon-dark.svg");
+}
+.fa-user-plus.white-icon:before {
+    content: url("../icon/profiles-icon-white.svg");
+}
+
+.fa-user:before {
+    content: url("../icon/profile-icon-dark.svg");
+}
+.fa-user.white-icon:before {
+    content: url("../icon/profiles-icon-white.svg");
+}
+
+.fa-heart:before {
+    content: url("../icon/fav-icon-dark.svg");
+}
+
+.fa-heart.white-icon:before {
+    content: url("../icon/fav-icon-white.svg");
+}
+
+/* Buttons */
+
+.dashboard-btn {
+    display: flex;
+    justify-content: center;
+    align-content: center !important;
+    color: #333333;
+    transition: all 300ms ease;
+    flex-wrap: wrap;
+    height: 330px;
+}
+
+.dashboard-btn:hover {
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.05)!important;
+}
+
+/* Colors for Bootstrap */
+.dashboard-col-2 {
+    background-color: #212529;
+    transition: all 300ms ease;
+}
+
+.dashboard-col-2:hover {
+    background-color: white;
+}
+
+.dashboard-col-2 a {
+    color: white;
+    box-shadow: none !important;
+    height: 100%;
+}
+
+.dashboard-col-2 a:hover {
+    color: #212529;
+}
