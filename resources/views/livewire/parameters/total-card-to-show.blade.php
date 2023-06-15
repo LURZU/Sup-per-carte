@@ -11,6 +11,6 @@
             </div>
         </div>
         <div>
-            <a href="#" class="df-block-link">Modifier les cartes créées</a>
+            <a href="{{ route('card.index') }}" class="df-block-link">Modifier les cartes créées</a>
         </div>
 </div>

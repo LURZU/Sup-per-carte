@@ -1,4 +1,18 @@
 console.log('app.js chargé');
+
+/* Burger menu */
+$('.burger-menu').click(function() {
+    $('#sidebar-wrapper').slideToggle();
+});
+const icons = document.querySelectorAll('.icon');
+icons.forEach (icon => {
+    icon.addEventListener('click', (event) => {
+        icon.classList.toggle("open");
+    });
+});
+
+
+/* Formations */
 $('body').on('click', '.btn.formations', function(e) {
     if($('body .collapse.formations').hasClass('show')) {
         $('body .collapse.formations').removeClass('show');
@@ -11,6 +25,7 @@ $('body').on('click', '.btn.formations', function(e) {
     }
 });
 
+/* Matières */
 $('body').on('click', '.btn.matieres', function(e) {
     if($('body .collapse.matieres').hasClass('show')) {
         $('body .collapse.matieres').removeClass('show');
@@ -23,6 +38,7 @@ $('body').on('click', '.btn.matieres', function(e) {
     }
 });
 
+/* Chapitres */
 $('body').on('click', '.btn.chapitres', function(e) {
     if($('body .collapse.chapitres').hasClass('show')) {
         $('body .collapse.chapitres').removeClass('show');
@@ -35,6 +51,7 @@ $('body').on('click', '.btn.chapitres', function(e) {
     }
 });
 
+/* Niveaux */
 $('body').on('click', '.btn.niveaux', function(e) {
     if($('body .collapse.niveaux').hasClass('show')) {
         $('body .collapse.niveaux').removeClass('show');
@@ -47,6 +64,7 @@ $('body').on('click', '.btn.niveaux', function(e) {
     }
 });
 
+/* Cartes */
 // For tabs in card list
 $(document).ready(function(){
     $(".nav-tabs a").click(function(){
@@ -55,7 +73,6 @@ $(document).ready(function(){
 });
 
 // For card filter
-
 $('body').on('click','#apply-filters', function() {
     var selectedFormation = [];
     $('#formationsCheckboxes input[type=checkbox]').each(function() {

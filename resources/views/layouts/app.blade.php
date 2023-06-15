@@ -101,16 +101,5 @@
         </div>
     </div>
     @livewireScripts
-    <script>
-        $('.burger-menu').click(function() {
-            $('#sidebar-wrapper').slideToggle();
-        });
-        const icons = document.querySelectorAll('.icon');
-        icons.forEach (icon => {
-        icon.addEventListener('click', (event) => {
-            icon.classList.toggle("open");
-        });
-        });
-    </script>
 </body>
 </html>

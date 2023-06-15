@@ -10,4 +10,12 @@
         <livewire:parameters.total-card-to-show :user="$user" />
     </x-content.block>
 
+    <x-content.block title="{{'Le paquet de cartes'}}">
+{{--        TODO--}}
+    </x-content.block>
+
+    <x-content.block title="{{'Réglages système'}}">
+        {{--        TODO--}}
+    </x-content.block>
+
 @endsection

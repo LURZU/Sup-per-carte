@@ -27,6 +27,15 @@ class FilterCard extends Component
     public $showDropdsown = false;
     public $showDropdown = false;
 
+    public function mount($list_card_all) {
+        $this->list_card_all = $list_card_all;
+        $this->cards_save = $list_card_all;
+        $this->formations = Formation::all();
+        $this->matieres = Matiere::all();
+        $this->chapitres = Chapitre::all();
+        $this->niveaux = CardLevel::all();
+    }
+
     //Pour toggle les sous dropdown
     public function toggleDropdown()
     {
@@ -55,10 +64,10 @@ class FilterCard extends Component
             } else {
                 $this->list_card_all = [];
             }
-           
+
         } else if(!empty($this->selectedFormations) || !empty($this->selectedMatieres) || !empty($this->selectedChapitres) || !empty($this->selectedNiveaux)) {
-            
-        } 
+
+        }
 
         if($this->role == 'default') {
             $this->list_card_all = $this->cards_save;
@@ -73,6 +82,7 @@ class FilterCard extends Component
         } elseif($this->sorting === 'default'){
             $this->list_card_all =  $this->list_card_all->sortByDesc('created_at');
         }
+//        dd($this->list_card_all);
         return view('livewire.card.filter-card', [
             'list_card_all' =>  $this->list_card_all,
             'formations' => Formation::all(),
@@ -94,21 +104,21 @@ class FilterCard extends Component
                 return in_array($card->formation_id, $this->selectedFormations);
             });
         }
-      
+
         if(!empty($this->selectedMatieres)) {
 
             $this->list_card_all = $this->list_card_all->filter(function ($card) {
                 return in_array($card->matiere_id, $this->selectedMatieres);
             });
-           
+
         }
-    
+
         if(!empty($this->selectedChapitres)) {
             $this->list_card_all = $this->list_card_all->filter(function ($card) {
                 return in_array($card->chapitre_id, $this->selectedChapitres);
             });
         }
-    
+
         if(!empty($this->selectedNiveaux)) {
             $this->list_card_all = $this->list_card_all->filter(function ($card) {
                 return in_array($card->niveau_id, $this->selectedNiveaux);
@@ -129,21 +139,21 @@ class FilterCard extends Component
                 return in_array($card->formation_id, $this->selectedFormations);
             });
         }
-      
+
         if(!empty($this->selectedMatieres)) {
 
             $this->list_card_all = $this->list_card_all->filter(function ($card) {
                 return in_array($card->matiere_id, $this->selectedMatieres);
             });
-           
+
         }
-    
+
         if(!empty($this->selectedChapitres)) {
             $this->list_card_all = $this->list_card_all->filter(function ($card) {
                 return in_array($card->chapitre_id, $this->selectedChapitres);
             });
         }
-    
+
         if(!empty($this->selectedNiveaux)) {
             $this->list_card_all = $this->list_card_all->filter(function ($card) {
                 return in_array($card->niveau_id, $this->selectedNiveaux);
@@ -153,15 +163,15 @@ class FilterCard extends Component
         // Apply filter on the render
         $this->render();
     }
-    
-    
+
+
 
     //can redifine the matiere, chapter and level of card when filter is apply
     public function setCardProperty($filter) {
         $level = new CardLevel();
         $matiere = new Matiere();
         $chapitre = new Chapitre();
-   
+
         $filter = $chapitre->getChapitre($filter);
         $filter = $level->getLevel($filter);
         $filter =  $matiere->getMatiere($filter);
@@ -170,14 +180,7 @@ class FilterCard extends Component
     }
 
 
-    public function mount($list_card_all) {
-        $this->list_card_all = $list_card_all;
-        $this->cards_save = $list_card_all;
-        $this->formations = Formation::all();
-        $this->matieres = Matiere::all();
-        $this->chapitres = Chapitre::all();
-        $this->niveaux = CardLevel::all();
-    }
+
 
 
     public function updated($propertyName)

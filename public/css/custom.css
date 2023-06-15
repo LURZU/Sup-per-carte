@@ -35,6 +35,19 @@ a, a:hover {
 .df-mb-2rem {
     margin-bottom: 2rem;
 }
+
+.df-w-75vw {
+    width: 75vw;
+}
+
+/* No scroll bar */
+.df-no-scrollbar {
+    overflow-y: hidden;
+    width: 100%;
+}
+.df-no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
 /************************************/
 
 .active {
