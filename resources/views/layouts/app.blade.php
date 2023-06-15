@@ -87,8 +87,8 @@
                     </div>
                 </header>
             @endif
-            <div class="px-5 w-100 disable-padding-mobile">
-                <div class="d-flex align-items-center my-5 ml-4 my-reduce-mobile @yield('display_title_h1')">
+            <div class="px-0 px-md-5 w-100">
+                <div class="d-flex align-items-center my-5 px-3 ml-4 my-reduce-mobile @yield('display_title_h1')">
                     <i class="fa-solid fa-table-cells-large fa-2xl mr-3"></i>
                     <h2 class="fs-3 mb-0 ms-2">@yield('title')</h2>
                 </div>

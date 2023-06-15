@@ -24,8 +24,16 @@ a, a:hover {
     text-decoration: none;
 }
 
-.df-custom-rounded {
+.df-custom-rounded-8 {
     border-radius: 8px;
+}
+
+.df-custom-rounded-16 {
+    border-radius: 16px;
+}
+
+.df-mb-2rem {
+    margin-bottom: 2rem;
 }
 /************************************/
 
@@ -458,4 +466,26 @@ a, a:hover {
 
 .dashboard-col-2 a:hover {
     color: #212529;
+}
+
+/* Blocks */
+
+.fs-30 {
+    font-size: 30px;
+}
+
+.df-block-title {
+    font-size: 18px;
+    font-weight: normal;
+    line-height: 24px;
+    text-transform: uppercase;
+    border-bottom: solid 1px #D5D5D5;
+}
+
+a.df-block-link {
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 18px;
+    text-decoration: underline;
+    color: inherit;
 }

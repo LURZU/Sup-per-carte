@@ -5,9 +5,9 @@
 @section('active_parameters', 'active')
 
 @section('content')
-<div>
-    <h3>Paramètres</h3>
-    @livewire('parameters.total-card-to-show', ['user' => $user])
-   
-</div>
+
+    <x-content.block title="{{'Nombre total de cartes'}}">
+        <livewire:parameters.total-card-to-show :user="$user" />
+    </x-content.block>
+
 @endsection
