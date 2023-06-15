@@ -86,7 +86,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/profil/create', [ProfilController::class, 'create'])->name('admin.profil.create');
     Route::post('/admin/profil/create', [ProfilController::class, 'store'])->name('admin.profil.store');
     Route::get('/admin/profil/{user}/edit', [ProfilController::class, 'edit'])->name('admin.profil.edit');
-    Route::post('/admin/profil/{user}/edit', [ProfilController::class, 'update'])->name('admin.profil.update');
+    Route::put('/admin/profil/{user}/edit', [ProfilController::class, 'update'])->name('admin.profil.update');
     Route::delete('/admin/profil/{user}/del', [ProfilController::class, 'destroy'])->name('admin.profil.destroy');
 
     Route::get('/admin/formation', [FormationController::class, 'index'])->name('admin.formation.index');

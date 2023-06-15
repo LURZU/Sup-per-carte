@@ -115,7 +115,12 @@ class ProfilController extends Controller
             return view('admin.users.edit', ['user' => $user, 'roles' => $list_roles, 'matieres' => $matiere_ids]);
         }
 
-        $user->school_id = $user->schools()->first()->id;
+        if($user->hasRole('admin')) {
+            return view('admin.users.edit',['user' => $user, 'schools' => Schools::all()]);
+        } else {
+            $user->school_id = $user->schools()->first()->id;
+        }
+        
 
 
         return view('admin.users.edit',['user' => $user, 'schools' => Schools::all()]);
@@ -123,14 +128,17 @@ class ProfilController extends Controller
 
     public function update(ProfileUpdateRequest $request, User $user)
     {
-
+       dd($request->all());
         // Valider les données du formulaire
         $data = $request->validated();
         $user = new User($data);
 
         $user->name = $request->input('name');
         //FIXME: can't update user because of error on form: The email has already been taken.
-        $user->email = $request->input('email');
+        if($user->email !== $request->input('email') ) {
+            $user->email = $request->input('email');
+        }
+    
 
         $user->save();
 

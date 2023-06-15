@@ -10,7 +10,7 @@
                     <form method="POST" action="">
                         @csrf
                         @if($user->id)
-                      
+                        @method('PUT')
                         <div class="form-group row">
                             <h3 for="role_id" class="fs-5 mb-3" >{{ __('Type de profil') }}</h3>
                             <div class="col-md-6">

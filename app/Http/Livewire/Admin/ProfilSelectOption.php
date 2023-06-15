@@ -41,9 +41,6 @@ class ProfilSelectOption extends Component
                 $selectedRole = $role;
             }
         }
-
-       
-        
     }
 
     public function mount($user, $matieresTab) {
