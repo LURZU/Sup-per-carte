@@ -240,6 +240,15 @@ a, a:hover {
     border-radius: 0px;
 }
 
+.card-header {
+    font-size: 14px;
+    font-weight: normal;
+    color: #606060;
+}
+.card-header .card-number {
+    color: #333333;
+}
+
 .modal {
     display: none;
     position: fixed;
@@ -443,6 +452,16 @@ a, a:hover {
 
 .fa-heart.white-icon:before {
     content: url("../icon/fav-icon-white.svg");
+}
+
+.dashboard-col-2 .fa-solid, .fas {
+    content: url("../icon/plus-circle-create-card.svg");
+    margin-left: 10px;
+}
+
+.dropdown-toggle::after {
+    content: url("../icon/arrow-drop-down.svg");
+    border-top: none;
 }
 
 /* Buttons */

@@ -14,7 +14,7 @@ class FilterCard extends Component
     public $list_card_all;
     public $role = '';
     public $sorting = 'default';
-    protected $listeners = ['applyFilters'];
+    protected $listeners = ['applyFilters', 'resetFilters'];
     public $cards_save = [];
     public $formations = [];
     public $matieres = [];
@@ -34,6 +34,13 @@ class FilterCard extends Component
         $this->matieres = Matiere::all();
         $this->chapitres = Chapitre::all();
         $this->niveaux = CardLevel::all();
+    }
+
+    public function resetFilters()
+    {
+
+        $this->reset(['sorting']);
+
     }
 
     //Pour toggle les sous dropdown
@@ -178,10 +185,6 @@ class FilterCard extends Component
 
         return $filter;
     }
-
-
-
-
 
     public function updated($propertyName)
     {

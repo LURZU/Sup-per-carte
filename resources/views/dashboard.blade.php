@@ -32,8 +32,8 @@
                 </div>
             </div>
 
-            <div class="col-12 col-lg-4 px-0 px-lg-2">
-                <x-buttons.dashboard-button link="card.index" icon="plus-circle" label="Créer une carte" class="col-lg-12 h-100 dashboard-col-2" />
+            <div class="col-12 col-lg-4 px-3">
+                <x-buttons.dashboard-button link="card.index" icon="plus-circle" label="Je crée une carte" class="h-100 dashboard-col-2" />
             </div>
 
         </div>

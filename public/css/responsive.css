@@ -9,21 +9,19 @@
         width: 100%;
     }
 
-    .dashboard-col-2 {
-        /*background-color: inherit;*/
-    }
-
     .dashboard-btn {
         height: 80px;
+    }
+
+    .dashboard-col-2 a {
+        display: flex;
+        flex-direction: row-reverse;
+        align-items: center;
     }
 
     .dashboard-col-2 .dashboard-btn {
         box-shadow: 0 0.5rem 1rem rgba(0,0,0,.15) !important;
         padding: .5rem 0 !important;
-    }
-
-    .dashboard-col-2 a {
-        /*color: inherit;*/
     }
 }
 

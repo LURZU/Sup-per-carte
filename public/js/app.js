@@ -1,102 +1,87 @@
-console.log('app.js chargé');
+$('document').ready(function () {
 
-/* Burger menu */
-$('.burger-menu').click(function() {
-    $('#sidebar-wrapper').slideToggle();
-});
-const icons = document.querySelectorAll('.icon');
-icons.forEach (icon => {
-    icon.addEventListener('click', (event) => {
-        icon.classList.toggle("open");
+    $('.burger-menu').click(function () {
+        $('#sidebar-wrapper').slideToggle();
     });
-});
+    const icons = document.querySelectorAll('.icon');
+    icons.forEach(icon => {
+        icon.addEventListener('click', (event) => {
+            icon.classList.toggle("open");
+        });
+    });
 
+    /* Formations */
+    $('body').on('click', '.btn.formations', function (e) {
+        cardsFiltersToggleDropDown('formations');
+    });
 
-/* Formations */
-$('body').on('click', '.btn.formations', function(e) {
-    if($('body .collapse.formations').hasClass('show')) {
-        $('body .collapse.formations').removeClass('show');
-        $('body .btn.formations i').removeClass('fa-chevron-up')
-        $('body .btn.formations i').addClass('fa-chevron-down')
-    } else {
-        $('body .collapse.formations').addClass('show')
-        $('body .btn.formations i').removeClass('fa-chevron-down')
-        $('body .btn.formations i').addClass('fa-chevron-up')
+    /* Matières */
+    $('body').on('click', '.btn.matieres', function (e) {
+        cardsFiltersToggleDropDown('matieres');
+    });
+
+    /* Chapitres */
+    $('body').on('click', '.btn.chapitres', function (e) {
+        cardsFiltersToggleDropDown('chapitres');
+    });
+
+    /* Niveaux */
+    $('body').on('click', '.btn.niveaux', function (e) {
+        cardsFiltersToggleDropDown('niveaux');
+    });
+
+    /**
+     * Function for filter dropdown
+     * @param btn
+     */
+    function cardsFiltersToggleDropDown(btn) {
+        let collapse = $('body .collapse.' + btn);
+        let icon = $('body .btn.' + btn + ' i');
+        if (collapse.hasClass('show')) {
+            collapse.removeClass('show');
+            icon.removeClass('fa-chevron-up')
+            icon.addClass('fa-chevron-down')
+        } else {
+            collapse.addClass('show')
+            icon.removeClass('fa-chevron-down')
+            icon.addClass('fa-chevron-up')
+        }
     }
-});
-
-/* Matières */
-$('body').on('click', '.btn.matieres', function(e) {
-    if($('body .collapse.matieres').hasClass('show')) {
-        $('body .collapse.matieres').removeClass('show');
-        $('body .btn.matieres i').removeClass('fa-chevron-up')
-        $('body .btn.matieres i').addClass('fa-chevron-down')
-    } else {
-        $('body .collapse.matieres').addClass('show')
-        $('body .btn.matieres i').removeClass('fa-chevron-down')
-        $('body .btn.matieres i').addClass('fa-chevron-up')
-    }
-});
-
-/* Chapitres */
-$('body').on('click', '.btn.chapitres', function(e) {
-    if($('body .collapse.chapitres').hasClass('show')) {
-        $('body .collapse.chapitres').removeClass('show');
-        $('body .btn.chapitres i').removeClass('fa-chevron-up')
-        $('body .btn.chapitres i').addClass('fa-chevron-down')
-    } else {
-        $('body .collapse.chapitres').addClass('show')
-        $('body .btn.chapitres i').removeClass('fa-chevron-down')
-        $('body .btn.chapitres i').addClass('fa-chevron-up')
-    }
-});
-
-/* Niveaux */
-$('body').on('click', '.btn.niveaux', function(e) {
-    if($('body .collapse.niveaux').hasClass('show')) {
-        $('body .collapse.niveaux').removeClass('show');
-        $('body .btn.niveaux i').removeClass('fa-chevron-up')
-        $('body .btn.niveaux i').addClass('fa-chevron-down')
-    } else {
-        $('body .collapse.niveaux').addClass('show')
-        $('body .btn.niveaux i').removeClass('fa-chevron-down')
-        $('body .btn.niveaux i').addClass('fa-chevron-up')
-    }
-});
 
 /* Cartes */
 // For tabs in card list
-$(document).ready(function(){
-    $(".nav-tabs a").click(function(){
+    $(".nav-tabs a").click(function () {
         $(this).tab('show');
     });
+
 });
 
+
 // For card filter
-$('body').on('click','#apply-filters', function() {
-    var selectedFormation = [];
-    $('#formationsCheckboxes input[type=checkbox]').each(function() {
+$('body').on('click', '#apply-filters', function () {
+    let selectedFormation = [];
+    $('#formationsCheckboxes input[type=checkbox]').each(function () {
         if ($(this).is(":checked")) {
             selectedFormation.push($(this).val());
         }
     });
 
-    var selectedMatiere = [];
-    $('#matieresCheckboxes input[type=checkbox]').each(function() {
+    let selectedMatiere = [];
+    $('#matieresCheckboxes input[type=checkbox]').each(function () {
         if ($(this).is(":checked")) {
             selectedMatiere.push($(this).val());
         }
     });
 
-    var selectedChapitre = [];
-    $('#chapitresCheckboxes input[type=checkbox]').each(function() {
+    let selectedChapitre = [];
+    $('#chapitresCheckboxes input[type=checkbox]').each(function () {
         if ($(this).is(":checked")) {
             selectedChapitre.push($(this).val());
         }
     });
 
-    var selectedNiveau = [];
-    $('#niveauxCheckboxes input[type=checkbox]').each(function() {
+    let selectedNiveau = [];
+    $('#niveauxCheckboxes input[type=checkbox]').each(function () {
         if ($(this).is(":checked")) {
             selectedNiveau.push($(this).val());
         }
@@ -104,6 +89,10 @@ $('body').on('click','#apply-filters', function() {
 
     window.livewire.emit('applyFilters', selectedFormation, selectedMatiere, selectedChapitre, selectedNiveau);
 });
+
+
+
+
 
 
 
