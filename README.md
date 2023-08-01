@@ -13,7 +13,7 @@ This project was built using the following technologies:
 Laravel is a free, open-source PHP web framework, created by Taylor Otwell and intended for the development of web applications following the model–view–controller (MVC) architectural pattern and based on Symfony.
 
 ### Livewire
-![Livewire Logo]([your_livewire_logo_url_here](https://laravel-livewire.com/))
+![Livewire Logo](https://th.bing.com/th/id/R.738656faed42db7f72e2ac0068886808?rik=ePdq1WB7kGHrlw&pid=ImgRaw&r=0)
 
 Livewire is a full-stack framework for Laravel that makes building dynamic interfaces simple, without leaving the comfort of Laravel.
 
