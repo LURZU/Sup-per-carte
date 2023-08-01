@@ -1,6 +1,7 @@
 @extends('admin.base')
 @section('active_app', 'active')
 @section('content')
+@section('title', 'Matieres')
     
     @if(session('success'))
     <div class="alert alert-success">{{ session('success') }}</div>
@@ -37,7 +38,7 @@
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger">Supprimer</button>
                                             </form>
-                                            <!-- Ajoutez d'autres options de modification si nécessaire -->
+                
                                         </td>
                                     </tr>
                                 @endforeach

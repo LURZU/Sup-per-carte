@@ -33,7 +33,7 @@
 
         <div class="d-flex justify-content-center align-items-center my-3" >
 
-                <a class="btn btn-primary bg-white text-dark border-0 w-100 mx-3 py-3" href="{{route('card.create')}}">Créer une carte<i class="fas fa-plus-circle ms-2 "></i></a>
+                <a class="btn btn-primary bg-white text-dark border-0 w-100 mx-3 py-3" href="{{route('card.create')}}">Créer une carte<i class="fa-solid fa-circle-plus ms-2" style="color: #333;"></i></a>
         </div>
         <div class="mt-3">
             <form action="{{ route('logout') }}" method="POST" >

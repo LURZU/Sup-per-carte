@@ -11,7 +11,9 @@ class CardRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        if(auth()->user()) {
+            return true;
+        }
     }
 
     /**
@@ -38,7 +40,22 @@ class CardRequest extends FormRequest
         ];
     }
 
-    public function prepareForValidation() { 
+    public function messages(): array
+    {
+    return [
+        'email.unique' => 'L\'email existe déjà en base de donnée ',
+        'question.min' => 'La question doit contenir au moins 8 caractères',
+        'response.min' => 'La réponse doit contenir au moins 8 caractères',
+        'matiere_id.required' => 'La matière est obligatoire',
+        'card_chapitre_id.required' => 'Le chapitre est obligatoire',
+        'card_level_id.required' => 'Le niveau est obligatoire',
+        'card_semestre_id.required' => 'Le semestre est obligatoire',
+        'question_img_url.image' => 'Le fichier doit être une image',
+        'response_img_url.image' => 'Le fichier doit être une image',
+    ];
+    }
+
+    public function prepareForValidation(): void { 
         $this->merge([
             'question' => $this->question,
             'response' => $this->response,

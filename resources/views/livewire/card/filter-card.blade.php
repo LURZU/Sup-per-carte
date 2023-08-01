@@ -1,5 +1,4 @@
 @if (auth()->user())
-
         <div>
             <div class="card-filters-container px-3">
                 @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('enseignant'))
@@ -35,7 +34,8 @@
                     </div>
 
                     <div class="dropdown mx-2">
-                        <button class="btn btn-light dropdown-toggle bg-white border rounded d-flex align-content-center flex-nowrap" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button class="btn btn-light dropdown-toggle bg-white border rounded d-flex align-content-center flex-nowrap" type="button" 
+                        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Trier par
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">

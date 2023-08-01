@@ -31,10 +31,6 @@ class Matiere extends Model
         return $this->belongsToMany(User::class, 'matiere_user', 'user_id', 'matiere_id');
     }
 
-    public function cards()
-    {
-       
-    }
 
     public function getMatiere($list_card_all) {
         

@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Card;
 use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
+use App\Models\CardLevel;
 
 class CardTest extends TestCase
 {
@@ -104,7 +105,27 @@ class CardTest extends TestCase
             'validated_by' => null,
             'user_id' => $user->id,
         ]);
+    }
+
+    public function test_card_creation_fails_with_invalid_data(): void
+    {
+        $this->withoutMiddleware();
+        $user = User::factory()->create();
+        $user->assignRole('etudiant');
+        Auth::login($user);
+    
+
+        unset($cardData['user_id']);
+        unset($cardData['question']);  // Enlève une donnée essentielle pour que le test échoue
+    
+        $response = $this->post('/card/create', $cardData);
+    
+        // Vérifie que le système a renvoyé une erreur
+        $response->assertSessionHasErrors();
+    }
+
 
     
-    }
+    
+
 }

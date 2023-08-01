@@ -27,8 +27,6 @@ class AccessCardTest extends TestCase
     public function test_if_student_cant_access_to_all_card_list(): void
     {
         // create a user with the 'student' role
-        
-        // (I assume that you have a method to assign a role to the user)
         $user = User::factory()->create()->assignRole('etudiant');
 
         // login as the created user
@@ -44,7 +42,6 @@ class AccessCardTest extends TestCase
     {
         // create a user with the 'student' role
         
-        // (I assume that you have a method to assign a role to the user)
         $user = User::factory()->create()->assignRole('enseignant');
 
         // login as the created user

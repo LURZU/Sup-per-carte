@@ -17,42 +17,59 @@ use App\Models\CardSemestre;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Carbon;
 
 class CardController extends Controller
 {
-    //function to create card with value of level, semestre and matiere send in the view
+    //method to create card with value of level, semestre and matiere send in the view
     public function create(): View | RedirectResponse{
         //Verify if the number of public card is less than the number of public card in the deck of the admin
         if(User::find(1)->total_card_toshow > Card::where('public', true)->get()->count()) {
             $user = auth()->user();
             $card = new Card();
-            $cardLevels = CardLevel::all();
-            $semestres = CardSemestre::all();
-         
+        
             //formation and matieres is define in livewire component DynamicMatiereSelectUnique for card create
             if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('enseignant')) { 
-                $allUser = User::all();
-                $formations = Formation::all(); 
-                
-                return view('student.card.create', ['user' => $user,'formations' => $formations, 'allUser' => $allUser, 'card' => $card, 'cardLevels' => $cardLevels, 'semestres' => $semestres, 'matiereId' => null, 'chapitreId' => null, 'formationId' => null, 'cardLevelId' => null]);
+                return view('student.card.create', [
+                    'user' => $user,
+                    'formations' => Formation::all(), 
+                    'allUser' => User::all(), 
+                    'card' => $card, 
+                    'cardLevels' => CardLevel::all(), 
+                    'semestres' => CardSemestre::all(), 
+                    'matiereId' => null, 
+                    'chapitreId' => null, 
+                    'formationId' => null, 
+                    'cardLevelId' => null
+                ]);
             } else if(auth()->user()->hasRole('etudiant')) {
-                return view('student.card.create', ['user' => $user, 'card' => $card, 'cardLevels' => $cardLevels, 'semestres' => $semestres, 'matiereId' => null, 'chapitreId' => auth()->user()->formation_id,  'formationId' => null, 'cardLevelId' => null]);
+                return view('student.card.create', [
+                    'user' => $user, 
+                    'card' => $card, 
+                    'cardLevels' => CardLevel::all(), 
+                    'semestres' => CardSemestre::all(), 
+                    'matiereId' => null, 
+                    'chapitreId' => null,  
+                    'formationId' => null, 
+                    'cardLevelId' => null
+                ]);
+            } else {
+                return redirect()->route('dashboard')->with('error', 'Vous n\'avez pas les droits pour créer une carte, veuillez-nous contactez pour plus d\'informations');
             }
         } else {
             return redirect()->route('dashboard')->with('error', 'Le nombre maximum de carte créer a été atteint, veuillez demander à l\'admin d\'augmenter la limite');
         }
-       
     }
 
-    //function to store card in the database information wich has upadate or create
+    //method to store card in the database information wich has upadate or create
     public function store(CardRequest $request): RedirectResponse
     {   
-    
         $data = $request->validated();
         $card = new Card($data);
         //set the value of created_by and user_id if admin is the connected user
         if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('enseignant')) {
             if(is_array($request->input('created_by'))){
+                //an admin can create a card for another user, to assign an id and name we need to explode the value of created_by
                 $parts = explode(':', $request->input('created_by'));
                 $id = $parts[1];
                 $name = $parts[0];
@@ -60,26 +77,30 @@ class CardController extends Controller
                 $id = auth()->id();
                 $name = auth()->user()->name;
             }
+            //set the value wich are not verify by the request
             $card->created_by = $name;
             $card->user_id = $id;
             $card->formation_id = $request->input('formation_id');
             $card->public = true;
             $card->validated_by = User::find(auth()->id())->name;
         } elseif(auth()->user()->hasRole('etudiant')) {
-            
+            //set the value wich are not verify by the request
             $card->formation_id = User::find(auth()->id())->formation_id;
             $card->created_by = User::find(auth()->id())->name;
             $card->user_id = User::find(auth()->id())->id;
             $card->public = false;
             $card->validated_by = null;
+        } else {
+            return redirect()->route('dashboard')->with('error', 'Vous n\'avez pas les droits pour créer une carte, veuillez-nous contactez pour plus d\'informations');
         }
+        $dateFolder = Carbon::now()->format('Ym');
         if ($request->hasFile('question_img_url')) {
-            $questionImagePath = $request->file('question_img_url')->store('img/card', 'public');
+            $questionImagePath = $request->file('question_img_url')->store('img/card'.$dateFolder, 'public');
             $card->question_img_url = $questionImagePath;
         }
     
         if ($request->hasFile('response_img_url')) {
-            $responseImagePath = $request->file('response_img_url')->store('img/card', 'public');
+            $responseImagePath = $request->file('response_img_url')->store('img/card/'.$dateFolder, 'public');
             $card->response_img_url = $responseImagePath;
         }
         $card->save();
@@ -105,13 +126,14 @@ class CardController extends Controller
             $card->created_by = $name;
             $card->user_id = $id;
         } 
+        $dateFolder = Carbon::now()->format('Ym');
         if ($request->hasFile('question_img_url')) {
             // Delete the old image if it exists
             if ($card->question_img_url) {
                 Storage::disk('public')->delete($card->question_img_url);
             }
-        
-            $questionImagePath = $request->file('question_img_url')->store('img/card', 'public');
+            
+            $questionImagePath = $request->file('question_img_url')->store('img/card'.$dateFolder, 'public');
             $card->question_img_url = $questionImagePath;
             unset($data['question_img_url']);  // Remove the key from the data array
         }
@@ -122,15 +144,13 @@ class CardController extends Controller
                 Storage::disk('public')->delete($card->response_img_url);
             }
         
-            $responseImagePath = $request->file('response_img_url')->store('img/card', 'public');
+            $responseImagePath = $request->file('response_img_url')->store('img/card'.$dateFolder, 'public');
             $card->response_img_url = $responseImagePath;
             unset($data['response_img_url']);  // Remove the key from the data array
         }
         
         $card->update($data);
         $card->save();
-        
-        
     
         return redirect()->route('card.index')->with('success', 'Votre carte a été modifiée avec succès.');
     }

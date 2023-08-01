@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id(); 
             $table->foreignId('matiere_id')->reference('id')->on('matiere');
             $table->foreignId('formation_id')->nullable()->reference('id')->on('formation');
-            $table->string('question', 1000);
+            $table->string('question', 1000);       
             $table->string('response', 1000);
             $table->string('question_img_url')->nullable();
             $table->string('response_img_url')->nullable();

@@ -38,12 +38,10 @@ class FilterCard extends Component
 
     public function resetFilters()
     {
-
         $this->reset(['sorting']);
-
     }
 
-    //Pour toggle les sous dropdown
+    //To toggle dropdown select input 
     public function toggleDropdown()
     {
         $this->showDropdown = !$this->showDropdown;
@@ -113,7 +111,6 @@ class FilterCard extends Component
         }
 
         if(!empty($this->selectedMatieres)) {
-
             $this->list_card_all = $this->list_card_all->filter(function ($card) {
                 return in_array($card->matiere_id, $this->selectedMatieres);
             });

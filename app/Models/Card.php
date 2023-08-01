@@ -44,7 +44,6 @@ class Card extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-
     public function statusCard()
     {
         return $this->belongsTo(StatusCard::class);
@@ -79,7 +78,6 @@ class Card extends Model
             }
         }
         return $list_unmaster_card;
-
     }
 
     public function getCardsWithoutStatus($list_all_cards)
@@ -99,9 +97,9 @@ class Card extends Model
     }
 
     public function getCardRequest($cards, $request) {
-
+        //Turn into collection my array of cards
         $cards = collect($cards);
-
+        //get user request
         $requestedLevels = $request->input('card_level_id');
         $requestedChapter = $request->input('card_chapitre_id');
         //use filter to get the card that respond to the request of the user

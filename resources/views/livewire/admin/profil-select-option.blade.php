@@ -28,7 +28,8 @@
                             <div class="col-md-6">
                                 @foreach ($roles as $role)
                                     <div class="form-check form-check-inline me-5">
-                                        <input wire:model="selectedTypeProfil" wire:change="updateFormOption" class="form-check-input radio-input" type="radio" name="role_id" id="roles{{ $role->id }}" value="{{ $role->id }}" >
+                                        <input wire:model="selectedTypeProfil" wire:change="updateFormOption" class="form-check-input radio-input" type="radio" 
+                                        name="role_id" id="roles{{ $role->id }}" value="{{ $role->id }}" >
                                         <label class="form-check-label" for="roles{{ $role->id }}">{{ $role->name }}</label>
                                     </div>
                                 @endforeach

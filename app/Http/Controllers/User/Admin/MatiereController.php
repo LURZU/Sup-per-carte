@@ -31,7 +31,6 @@ class MatiereController extends Controller
         return view('admin.matiere.create', ['matieres' => new Matiere()]);
     }
 
-
     public function edit(Matiere $matiere): View
     {
         return view('admin.matiere.edit', ['matieres' => $matiere]);
@@ -45,7 +44,7 @@ class MatiereController extends Controller
 
         $matiere->update($request->all());
 
-        return redirect()->route('admin.matiere.index')->with('success', 'Matiere updated successfully.');
+        return redirect()->route('admin.matiere.index')->with('success', 'Mise à jour de la matière.');
     }
 
 
